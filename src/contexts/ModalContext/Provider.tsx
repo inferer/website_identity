@@ -46,6 +46,7 @@ const ModalProvider: React.FC<any> = ({ children }) => {
   };
   
   useEffect(() => {
+    console.log(isOpen, 111111)
     if (isOpen) {
       document.body.style.overflow = 'hidden'
     } else {
@@ -71,7 +72,7 @@ const ModalProvider: React.FC<any> = ({ children }) => {
       <div className={`fixed top-0 left-0 flex justify-center items-center
         ${isOpen ? 'w-full h-full' : 'w-0 h-0'}
         ${isOpen ? ' opacity-100' : ' opacity-0'}
-      `} style={{zIndex: 999, transition: 'opacity ease-in 0.15s'}}>
+      `} style={{zIndex: 999, position: 'fixed', transition: 'opacity ease-in 0.15s'}}>
         <div
           className="absolute top-0 left-0 w-full h-full flex justify-center items-center"
           onClick={handleOverlayDismiss} >

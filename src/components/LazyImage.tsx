@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from 'react-intersection-observer';
 
-const LazyImage = ({ src, className, ...others}) => {
+export interface LazyImageProps {
+  src: string,
+  className?: string,
+  others?: {[key: string]: string}
+}
+
+const LazyImage: React.FC<LazyImageProps> = ({ src, className, ...others}) => {
   const [imgSrc, setImgSrc] = useState('')
   const { ref: inViewRef, inView, entry } = useInView({});
   useEffect(() => {
