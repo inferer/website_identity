@@ -134,6 +134,9 @@ body {
   color: #3F4664;
   font-family: DM Sans;
   font-size: 20px;
+  &.search {
+    width: 670px;
+  }
 
   &::placeholder {
     color: rgba(63, 70, 100, 0.50);
@@ -174,6 +177,48 @@ body {
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.06);
+}
+
+.asset-line {
+  width: 200px;
+  height: 1px;
+  transform: rotate(-90deg);
+  flex-shrink: 0;
+  opacity: 0.2;
+  background: var(--1, linear-gradient(90deg, #3F8BE6 0%, #1C98E8 100%));
+}
+
+.basic-gradient {
+  background: linear-gradient(0deg, rgba(63, 150, 255, 0.10) 0%, rgba(63, 150, 255, 0.10) 100%), #FFF;
+}
+
+.basic-nft-gradient {
+  background: linear-gradient(135deg, #EC80E2 0%, #FF6447 100%);
+}
+
+.basic-nft-gradient2 {
+  background: linear-gradient(135deg, rgba(236, 128, 226, 0.10) 0%, rgba(255, 100, 71, 0.10) 100%), #FFF;
+}
+.label-data-bg-1 {
+  background: linear-gradient(180deg, rgba(255, 220, 97, 0.05) 0%, rgba(250, 181, 45, 0.05) 100%), #FFF;
+}
+.label-data-bg-2 {
+  background: linear-gradient(127deg, rgba(53, 85, 255, 0.05) 15.65%, rgba(161, 87, 255, 0.05) 77.85%), #FFF;
+}
+.label-data-bg-3 {
+  background: linear-gradient(133deg, rgba(67, 106, 254, 0.05) 18.39%, rgba(1, 196, 255, 0.05) 70.71%);
+}
+.label-data-bg-3 {
+  background: linear-gradient(133deg, rgba(67, 106, 254, 0.05) 18.39%, rgba(1, 196, 255, 0.05) 70.71%);
+}
+.label-data-bg-4 {
+  background: linear-gradient(275deg, rgba(246, 59, 71, 0.05) 0%, rgba(255, 126, 53, 0.05) 100%);
+}
+.label-data-bg-5 {
+  background: linear-gradient(133deg, rgba(255, 139, 2, 0.05) 18.39%, rgba(255, 201, 3, 0.05) 70.71%);
+}
+.label-data-bg-6 {
+  background: linear-gradient(270deg, rgba(214, 64, 184, 0.05) 0%, rgba(251, 106, 171, 0.05) 100%);
 }
 
 

@@ -14,6 +14,15 @@ const HomePage = () => {
   const handleInputBlur = () => {
     setInputFocus(false)
   }
+  const handleSearch = () => {
+    
+  }
+  const handleInputKeyUp = (event: React.KeyboardEvent) => {
+    console.log(event)
+    if (event.key === 'Enter') {
+
+    }
+  }
 
   return (
     <div>
@@ -30,8 +39,14 @@ const HomePage = () => {
               
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
+                onKeyUp={handleInputKeyUp}
               />
-              <LazyImage src="/images/home/search.png" className="w-[24px] h-[24px] absolute top-[20px] right-[25px]" />
+              <div className=" absolute top-[20px] right-[25px]"
+                onClick={handleSearch}
+              >
+                <LazyImage src="/images/home/search.png" className="w-[24px] h-[24px]" />
+              </div>
+              
             </div>
             {/* <div className="mt-3">
               <Recommend />

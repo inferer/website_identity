@@ -46,7 +46,6 @@ const ModalProvider: React.FC<any> = ({ children }) => {
   };
   
   useEffect(() => {
-    console.log(isOpen, 111111)
     if (isOpen) {
       document.body.style.overflow = 'hidden'
     } else {
