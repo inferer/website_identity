@@ -1,5 +1,6 @@
 import LazyImage from "@/components/LazyImage"
 import SubTitle, { SubTitle2 } from "./SubTitle"
+import RadarChart from "./RadarChart"
 
 export const LabelDataItem: React.FC<any> = ({
   index
@@ -67,10 +68,13 @@ const LabelData: React.FC<any> = () => {
       <div className="mt-[90px]">
         <SubTitle2 text="Avatar" icon="/images/search/label.png" />
       </div>
+      <div className="flex justify-center py-[50px]">
+        <RadarChart />
+      </div>
       <div className="mt-[90px]">
         <SubTitle2 text="Profile" icon="/images/search/label.png" />
       </div>
-      <div className="mt-[68px] grid grid-cols-2">
+      <div className="mt-[68px] grid grid-cols-2 gap-x-[168px]">
         {
           [1, 2, 3, 4, 5, 6].map((item, index) => {
             return (

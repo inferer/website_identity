@@ -5,6 +5,8 @@ import { useState } from "react"
 import SubTitle, { SubTitle2, SubTitle3, Text1 } from "./components/SubTitle"
 import BasicItem, { BasicNftItem } from "./components/BasicItem"
 import LabelData from "./components/LabelData"
+import H5Footer from "@/components/h5/H5Footer"
+
 
 const SearchPage = () => {
   const [inputFocus, setInputFocus] = useState(false)
@@ -320,6 +322,7 @@ const SearchPage = () => {
         </div>
         <LabelData />
       </Wrap>
+      <H5Footer white={true} />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import '@/styles/globals.css'
+import '@/styles/search.scss'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Providers from '@/contexts/Providers'

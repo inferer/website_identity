@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <canvas style="width: 1000px; height: 1000px;" id="canvas">
+
+  </canvas>
+  
+<script>
+  var context = document.querySelector('#canvas').getContext('2d')
+var options = {
+  title: {
+    text: 'Basic Radar Chart'
+  },
+  legend: {
+    data: ['Allocated Budget', 'Actual Spending']
+  },
+  radar: {
+    // shape: 'circle',
+    indicator: [
+      { name: 'Sales', max: 6500 },
+      { name: 'Administration', max: 16000 },
+      { name: 'Information Technology', max: 30000 },
+      { name: 'Customer Support', max: 38000 },
+      { name: 'Development', max: 51000 },
+      { name: 'Marketing', max: 25000 }
+    ]
+  },
+  series: [
+    {
+      name: 'Budget vs spending',
+      type: 'radar',
+      data: [
+        {
+          value: [4100, 3000, 10000, 35000, 50000, 18000],
+          name: 'Allocated Budget'
+        },
+        {
+          value: [5000, 14000, 28000, 26000, 41000, 21000],
+          name: 'Actual Spending'
+        }
+      ]
+    }
+  ]
+};
+    //options数据来自于百度Echarts官方示例库
+start(options);
+ 
+ /**
+ * 绘制图表
+ */
+ function start(options) {
+    drawBg(options);
+    drawData(options);//绘制雷达图
+    drawText(options);//绘制文字
+ }
+  
+ function drawBg(options) {
+  
+    let length = options.radar.indicator.length;
+    console.log(length)
+    let angleStep = -2 * Math.PI / length;
+    context.strokeStyle="#b2b2b2";
+    context.lineWidth = 1;
+    //调整坐标系
+    //移动中心点
+    context.translate(100,100);
+    //将x轴旋转至竖直向上
+    context.rotate(-90 * 2 * Math.PI / 360);
+    //每次以不同旋转半径绘制多个由大到小的图形
+    for(let r = 100; r > 0 ; r -=40){
+        //移动至第一个绘图点
+        context.save();
+        context.beginPath();
+        context.moveTo(r,0);
+        
+        //转动坐标系绘制所有点
+         for(let i = 0; i < length; i++){
+            context.rotate(angleStep);
+            context.lineTo(r,0);
+         }
+        context.closePath();
+        context.stroke();
+        //明暗色替换填充，此处从大到小切换颜色覆盖式绘制即可
+        context.fillStyle = Math.round(r / 40) % 2 ? 'white':'#eaeaea';
+        context.fill();
+        context.restore();
+    }
+ }
+  
+ /**
+ * 绘制数据
+ */
+ function drawData(options) {
+   //解构赋值拿到数据关键点
+   let {radar:{indicator:indicators},series:[{data:data}]} = options;
+   let colors = ['#c43e3a','#364c5a'];
+   let length = indicators.length;
+   let angleStep = -2 * Math.PI / length;
+  
+   for(let i = 0; i < data.length; i++){
+       
+       context.save();
+       context.beginPath();
+       context.moveTo(100 * data[i].value[0] / indicators[0].max,0);
+    
+       //遍历每组数据
+       for(let j = 1; j < data[i].value.length; j++){
+           context.rotate(angleStep);
+           context.lineTo(100 * data[i].value[j] / indicators[j].max,0);
+       }
+       context.restore();
+       context.lineTo(100 * data[i].value[0] / indicators[0].max,0);
+       context.strokeStyle = colors[i];
+       context.lineWidth = 2;
+       context.stroke();
+   }
+   context.restore();
+ }
+  
+ //绘制文字
+ function drawText(options) {
+   let {radar:{indicator:indicators}} = options;
+   let length = indicators.length;
+   let angleStep = 2 * Math.PI / length;
+   let r = 220;
+   context.fillStyle = 'black';
+   context.font = "14px bold 黑体";
+   context.textAlign = 'center';
+   context.rotate(90 * Math.PI * 2 / 360);
+   for(let i = 0; i < indicators.length; i++){
+     let curAngle = -90*2*Math.PI/360 - angleStep*i;
+       //根据方向调整文字的对齐点
+     let cos = Math.cos(curAngle);
+     if (Math.abs(cos) < 10e-4) {
+        context.textAlign = 'center';
+     }else if(cos > 0){
+        context.textAlign = 'left';
+     }else{
+        context.textAlign = 'right';
+     }
+     console.log(indicators[i].name, Math.cos(curAngle))
+      context.fillText(indicators[i].name, r * Math.cos(curAngle), r * Math.sin(curAngle));
+   }
+  }
+  </script>
+</body>
+</html>

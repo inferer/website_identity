@@ -1,12 +1,15 @@
 /** @type {import('next').NextConfig} */
 
-console.log(process.env.NODE_ENV)
+const path = require('path')
 
 const isDev = process.env.NODE_ENV === 'development'
 const nextConfig = {
   reactStrictMode: false,
   experimental: {
     scrollRestoration: true,
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
   },
   async rewrites() {
     return [
