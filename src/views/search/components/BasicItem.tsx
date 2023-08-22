@@ -1,5 +1,6 @@
 import LazyImage from "@/components/LazyImage"
 import { Text1 } from "./SubTitle"
+import CopyClipboard from "@/components/CopyClipboard"
 
 export const SubTitle: React.FC<{
   text: string
@@ -30,12 +31,25 @@ export const BasicNftItem: React.FC<{
       </div>
       <div className="basic-nft-gradient2 px-[40px] py-[20px]">
         <div className="flex justify-center items-baseline">
-            <div className="text-[#ED7FDD] text-[64px] font-dbold">2323</div>
+            <div className="text-[#ED7FDD] text-[64px] font-dbold">{ data.count }</div>
             <div className="text-[rgba(63,70,100,0.60)] font-dmedium text-[16px] ml-2">contacts</div>
         </div>
-        <div className=" font-dnormal text-[16px] text-[rgba(63,70,100,0.60)] mt-[76px]">
+        <div className=" font-dnormal text-[16px] text-[rgba(63,70,100,0.60)] mt-[66px]">
           <div className="mb-[10px]">(Showing top5)</div>
-          <div className="flex items-center mb-[12px]">
+          {
+            data.interactedAddress.map((item: any) => {
+              return (
+                <div key={item.interact_address} className="flex items-center mb-[12px]">
+                  <div>{item.interact_address}</div>
+                  <CopyClipboard text={item.interact_address} >
+                    <LazyImage src="/images/search/copy.png" className="w-4 h-4 ml-1 shrink-0 cursor-pointer" />
+                  </CopyClipboard>
+                </div>
+              )
+            })
+          }
+          
+          {/* <div className="flex items-center mb-[12px]">
             <div>0x231d3559aa848bf10366fb9868590f01d34bf240</div>
             <LazyImage src="/images/search/copy.png" className="w-4 h-4 ml-1" />
           </div>
@@ -50,11 +64,7 @@ export const BasicNftItem: React.FC<{
           <div className="flex items-center mb-[12px]">
             <div>0x231d3559aa848bf10366fb9868590f01d34bf240</div>
             <LazyImage src="/images/search/copy.png" className="w-4 h-4 ml-1" />
-          </div>
-          <div className="flex items-center mb-[12px]">
-            <div>0x231d3559aa848bf10366fb9868590f01d34bf240</div>
-            <LazyImage src="/images/search/copy.png" className="w-4 h-4 ml-1" />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
@@ -83,7 +93,7 @@ const BasicItem: React.FC<{
               <SubTitle text="Mint" />
             </div>
             <div className="mt-2">
-              <Text1 text="0" />
+              <Text1 text={data.mint} />
             </div>
           </div>
           <div className="">
@@ -91,7 +101,7 @@ const BasicItem: React.FC<{
               <SubTitle text="Burn" />
             </div>
             <div className="mt-2">
-              <Text1 text="0" />
+              <Text1 text={data.burn} />
             </div>
           </div>
         </div>
@@ -101,7 +111,7 @@ const BasicItem: React.FC<{
               <SubTitle text="Send" />
             </div>
             <div className="mt-2">
-              <Text1 text="224" />
+              <Text1 text={data.send} />
             </div>
           </div>
           <div className="">
@@ -109,7 +119,7 @@ const BasicItem: React.FC<{
               <SubTitle text="Receive" />
             </div>
             <div className="mt-2">
-              <Text1 text="204" />
+              <Text1 text={data.receive} />
             </div>
           </div>
         </div>

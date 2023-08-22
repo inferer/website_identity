@@ -1,3 +1,5 @@
+import moment from "moment"
+import Web3 from "web3"
 
 export function formatAddress(address: string = '') {
   return address.slice(0, 6) + '...' + address.slice(-4)
@@ -49,6 +51,42 @@ export function transformTime(timestamp: number) {
   return addZero(h) + ':' + addZero(m) + ' ' + addZero(M) + "/" + addZero(d) + ' ' + y;
 }
 
+export function formatTime(timestamp: number) {
+  return moment(new Date(timestamp)).format('DD/MM/YYYY, HH:mm A')
+}
+
 export function openBrowser(url: string) {
   window.open(url, '_blank');
+}
+
+export function getCoinName(chain_id: string) {
+  let coinName = '';
+  if (chain_id === '1') {
+    coinName = 'ETH';
+  } else if (chain_id === '137') {
+    coinName = 'MATIC';
+  }
+
+  return coinName;
+}
+
+export function getChainLogo(chain_id: string) {
+  let chainLogo = '';
+  if (chain_id === '1') {
+    chainLogo = '/images/search/eth.png';
+  } else if (chain_id === '137') {
+    chainLogo = '/images/search/pol.png';
+  }
+
+  return chainLogo;
+}
+
+export function toChecksumAddress(address: string) {
+  if (!address) return false
+  try {
+    return Web3.utils.toChecksumAddress(address);
+  } catch (err) {
+    return false
+  }
+  
 }

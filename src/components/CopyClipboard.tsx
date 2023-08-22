@@ -46,11 +46,11 @@ const CopyClipboard: React.FC<CopyClipboardProps> = ({ children, text, onSuccess
       open={openHover}
       title={tipText}
     >
-      <span 
+      <span
         onClick={e => copyText(e)} 
         onMouseEnter={() => hoverShow(true)}
         onMouseLeave={() => hoverShow(false)}
-        className="">
+        className=" shrink-0">
         {children}
       </span>
     </Tooltip>

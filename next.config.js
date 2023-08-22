@@ -16,7 +16,7 @@ const nextConfig = {
       {
         source: '/api/:path*',
         // destination: `http://49.234.51.249:8792/api/:path*`
-        destination: isDev ? `http://49.234.51.249:8792/api/:path*` : `https://api7.inferer.xyz/api/:path*`
+        destination: isDev ? `http://49.234.51.249:13882/api/:path*` : `https://api7.inferer.xyz/api/:path*`
       },
       {
         source: '/plugin/:path*',

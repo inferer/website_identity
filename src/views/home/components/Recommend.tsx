@@ -1,5 +1,6 @@
 import LazyImage from "@/components/LazyImage"
-import { useMemo } from "react"
+import { useSearchStore } from "@/state"
+import { useEffect, useMemo } from "react"
 
 export const RecommendTag: React.FC<{
   type: string
@@ -41,40 +42,69 @@ export const RecommendUser: React.FC<{
 
 export const RecommendItem: React.FC<{
  children: React.ReactNode,
- address: string
+ address: string,
+ onClick?: () => void
 }> = ({
  children,
- address
+ address,
+ onClick
 }) => {
   return (
-    <div className="flex items-center py-[10px] px-[12px] hover:bg-[rgba(78,170,182,0.04)] cursor-pointer">
+    <div className="flex items-center py-[9px] px-[12px] hover:bg-[rgba(78,170,182,0.04)] cursor-pointer"
+      
+    >
       { children }
-      <div className="text-[16px] text-[rgba(63,70,100,0.60)] font-dnormal ml-4">{ address }</div>
+      <div className="text-[16px] text-[rgba(63,70,100,0.60)] font-dnormal ml-4"
+        onClick={e => {
+          e.stopPropagation()
+          onClick && onClick()
+        }}
+      >{ address }</div>
     </div>
   )
 }
 
 
-const Recommend = () => {
+const Recommend: React.FC<{
+  onClick?: (type: string, addr: string) => void
+}> = ({
+  onClick
+}) => {
+  const recentlyData = useSearchStore(state => state.recentlyData)
+  const getRecentlyData = useSearchStore(state => state.getRecentlyData)
+
+  useEffect(() => {
+    getRecentlyData()
+  }, [])
+
   return (
     <div className="px-3 py-6 recommend-wrap">
-      <div className="mb-[14px]">
-        <div className=" px-3 font-dnormal text-[20px] text-[#3F4664] mb-[10px]">Recently</div>
-        <div>
-          <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-            <RecommendUser type="User" />
-          </RecommendItem>
-          <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-            <RecommendUser type="User" />
-          </RecommendItem>
-          <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-            <RecommendUser type="User" />
-          </RecommendItem>
-          <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-            <RecommendUser type="User" />
-          </RecommendItem>
+      {
+        recentlyData.length > 0 && 
+        <div className="mb-[14px]">
+          <div className=" px-3 font-dnormal text-[20px] text-[#3F4664] mb-[10px]">Recently</div>
+          <div>
+            {
+              recentlyData.map(addr => {
+                return (
+                  <RecommendItem key={addr} address={addr}
+                    onClick={() => {
+                      onClick && onClick('user', addr)
+                    }}
+                  >
+                    <RecommendUser type="User" />
+                  </RecommendItem>
+                )
+              })
+            }
+            {/* <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
+              <RecommendUser type="User" />
+            </RecommendItem> */}
+
+          </div>
         </div>
-      </div>
+      }
+      
       <div>
         <div className=" px-3 font-dnormal text-[20px] text-[#3F4664] mb-[10px]">Recommend</div>
         <div>

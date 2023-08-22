@@ -25,10 +25,7 @@ var option = {
     indicator: [
       { name: 'Sales', max: 100 },
       { name: 'Administration', max: 100 },
-      { name: 'Information Technology', max: 100 },
-      { name: 'Customer Support', max: 100 },
-      { name: 'Development', max: 100 },
-      { name: 'Marketing', max: 100 }
+      { name: 'Information Technology', max: 100 }
     ]
   },
   series: [
@@ -44,10 +41,7 @@ var option2 = {
     indicator: [
       { name: 'Sales', max: 100 },
       { name: 'Administration', max: 100 },
-      { name: 'Information Technology', max: 100 },
-      { name: 'Customer Support', max: 100 },
-      { name: 'Development', max: 100 },
-      { name: 'Marketing', max: 100 }
+      { name: 'Information Technology', max: 100 }
     ],
     axisName: {
       show: false
@@ -56,7 +50,7 @@ var option2 = {
       show: false
     },
     center: ['50%', '50%'],
-    radius: 230,
+    radius: [130, 230],
     splitArea: {
       areaStyle: {
         color: '#fff'
@@ -66,7 +60,8 @@ var option2 = {
       lineStyle: {
         color: 'rgba(110, 98, 255, 0.3)'
       }
-    }
+    },
+    splitNumber: 2,
   },
   series: [
     {
@@ -90,7 +85,7 @@ var option2 = {
   ]
 };
 
-const RadarChart: React.FC<any> = ({
+const RadarChart3: React.FC<any> = ({
   data
 }) => {
   const [labelList, setLabelList] = useState<any[]>([
@@ -127,16 +122,15 @@ const RadarChart: React.FC<any> = ({
 
 
   return (
-    <div className='radar-chart-wrap relative'>
+    <div className='radar-chart-wrap relative flex justify-center items-center radar-label-nums'>
       <div id="radarchart" className="w-[600px] h-[600px]">
 
       </div>
       <div id="radarchart2" className="w-[600px] h-[600px] absolute left-0 top-0">
 
       </div>
-      <div className=' absolute left-[50%] top-[50%] -ml-[81px] -mt-[94px] z-10'>
-        <LazyImage src='/images/search/pol6.png' className='w-[161px]' />
-        <LazyImage src='/images/search/pol_user.png' className='w-[77px] absolute left-[42px] top-[51px]' />
+      <div className='w-[90px] h-[90px] bg-white rounded-full absolute left-[50%] top-[50%] -ml-[45px] -mt-[45px] z-10 flex justify-center items-center'>
+        <LazyImage src='/images/search/pol_user.png' className='w-[52px]' />
       </div>
       {
         labelList.map((item, index) => {
@@ -162,4 +156,4 @@ const RadarChart: React.FC<any> = ({
   )
 }
 
-export default RadarChart
+export default RadarChart3
