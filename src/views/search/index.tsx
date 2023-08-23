@@ -409,7 +409,7 @@ const SearchPage = () => {
               </div>
               
             </div>
-            <LabelData data={labelData2.slice(0, 3)} />
+            <LabelData data={labelData2} />
           </div>
         }
         

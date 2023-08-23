@@ -27,6 +27,7 @@ export const levelInfo = {
 } as any
 
 const useSearchStore = create<SearchState>()((set, get) => ({
+  recommendUsers: [],
   recentlyData: [],
   fromPage: '',
   searchItemList: [],
@@ -103,6 +104,12 @@ const useSearchStore = create<SearchState>()((set, get) => ({
     set({
       recentlyData
     })
+  },
+  getRecommendUsers: async () => {
+    const res = await fetcher('/api/identity/getRecommend')
+    if (res.status === 200) {
+      set({ recommendUsers: res.data.users || []})
+    }
   }
 }))
 

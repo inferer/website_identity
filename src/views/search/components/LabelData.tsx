@@ -5,6 +5,8 @@ import { Key } from "react"
 import RadarChart1 from "./RadarChart1"
 import RadarChart2 from "./RadarChart2"
 import RadarChart3 from "./RadarChart3"
+import RadarChart4 from "./RadarChart4"
+import RadarChart5 from "./RadarChart5"
 
 export const LabelDataItem: React.FC<any> = ({
   index,
@@ -99,6 +101,12 @@ const LabelData: React.FC<any> = ({
         }
         {
           data.length === 3 && <RadarChart3 data={data} />
+        }
+        {
+          data.length === 4 && <RadarChart4 data={data} />
+        }
+        {
+          data.length === 5 && <RadarChart5 data={data} />
         }
         {
           data.length === 6 && <RadarChart data={data} />

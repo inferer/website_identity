@@ -78,49 +78,49 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.Art-gradient {
+.art-gradient {
   background: linear-gradient(180deg, #FF6060 0%, #FF2E2E 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.Sport-gradient {
+.sport-gradient {
   background: var(--1, linear-gradient(127deg, #3555FF 15.65%, #A157FF 77.85%));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.Social-gradient {
+.social-gradient {
   background: linear-gradient(164deg, #09F7F9 0%, #0038F5 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.Game-gradient {
+.game-gradient {
   background: var(--5, linear-gradient(270deg, #D640B8 0%, #FB6AAB 100%));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.Finance-gradient {
+.finance-gradient {
   background: linear-gradient(180deg, #FFA235 0%, #FF6C2E 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.Art-bg {
+.art-bg {
   background: linear-gradient(275deg, rgba(246, 59, 71, 0.10) 0%, rgba(255, 126, 53, 0.10) 100%);
 }
-.Sport-bg {
+.sport-bg {
   background: linear-gradient(127deg, rgba(53, 85, 255, 0.10) 15.65%, rgba(161, 87, 255, 0.10) 77.85%);
 }
-.Social-bg {
+.social-bg {
   background: linear-gradient(164deg, rgba(9, 247, 249, 0.10) 0%, rgba(0, 56, 245, 0.10) 100%);
 }
-.Game-bg {
+.game-bg {
   background: linear-gradient(270deg, rgba(214, 64, 184, 0.10) 0%, rgba(251, 106, 171, 0.10) 100%);
 }
-.Finance-bg {
+.finance-bg {
   background: linear-gradient(180deg, rgba(255, 162, 53, 0.10) 0%, rgba(255, 108, 46, 0.10) 100%);
 }
 .search-input {

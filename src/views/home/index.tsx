@@ -1,7 +1,7 @@
 import LazyImage from "@/components/LazyImage"
 import Wrap from "@/components/Wrap"
 import PageHeader from "@/components/pc/PageHeader"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { message } from 'antd';
 import Recommend from "./components/Recommend"
 import { useSearchStore } from "@/state"
@@ -19,7 +19,8 @@ const HomePage = () => {
   const [inputValue, setInputValue] = useState('')
   const [searchIng, setSearchIng] = useState(false)
 
-  const handleInputClick = () => {
+  const handleInputClick = (e: any) => {
+    e.stopPropagation()
     setInputClick(true)
   }
 
@@ -59,6 +60,17 @@ const HomePage = () => {
     handleSearch(address)
   }
 
+  useEffect(() => {
+    const handleDocumentClick = () => {
+      setInputClick(false)
+    }
+    document.addEventListener('click', handleDocumentClick)
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick)
+    }
+  }, [])
+
   return (
     <div>
       {contextHolder}
@@ -81,7 +93,10 @@ const HomePage = () => {
                 }}
               />
               <div className=" absolute top-[20px] right-[25px]"
-                onClick={e => handleSearch()}
+                onClick={e => {
+                  e.stopPropagation()
+                  handleSearch()
+                }}
               >
                 <LazyImage src="/images/home/search.png" className="w-[24px] h-[24px] cursor-pointer" />
               </div>

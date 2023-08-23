@@ -25,7 +25,9 @@ var option = {
     indicator: [
       { name: 'Sales', max: 100 },
       { name: 'Administration', max: 100 },
-      { name: 'Information Technology', max: 100 }
+      { name: 'Information Technology', max: 100 },
+      { name: 'Customer Support', max: 100 },
+      { name: 'Development', max: 100 },
     ]
   },
   series: [
@@ -41,7 +43,9 @@ var option2 = {
     indicator: [
       { name: 'Sales', max: 100 },
       { name: 'Administration', max: 100 },
-      { name: 'Information Technology', max: 100 }
+      { name: 'Information Technology', max: 100 },
+      { name: 'Customer Support', max: 100 },
+      { name: 'Development', max: 100 },
     ],
     axisName: {
       show: false
@@ -50,7 +54,6 @@ var option2 = {
       show: false
     },
     center: ['50%', '50%'],
-    radius: [130, 230],
     splitArea: {
       areaStyle: {
         color: '#fff'
@@ -61,6 +64,7 @@ var option2 = {
         color: 'rgba(110, 98, 255, 0.3)'
       }
     },
+    radius: [130, 230],
     splitNumber: 2,
   },
   series: [
@@ -85,7 +89,7 @@ var option2 = {
   ]
 };
 
-const RadarChart3: React.FC<any> = ({
+const RadarChart: React.FC<any> = ({
   data
 }) => {
   const [labelList, setLabelList] = useState<any[]>([
@@ -122,15 +126,18 @@ const RadarChart3: React.FC<any> = ({
 
 
   return (
-    <div className='radar-chart-wrap relative flex justify-center items-center radar-label-num3'>
+    <div className='radar-chart-wrap relative radar-label-num5'>
       <div id="radarchart" className="w-[600px] h-[600px]">
 
       </div>
       <div id="radarchart2" className="w-[600px] h-[600px] absolute left-0 top-0">
 
       </div>
-      <div className='w-[90px] h-[90px] bg-white rounded-full absolute left-[50%] top-[50%] -ml-[45px] -mt-[45px] z-10 flex justify-center items-center'>
-        <LazyImage src='/images/search/pol_user.png' className='w-[52px]' />
+      <div className=' absolute left-[50%] top-[50%] -ml-[77px] -mt-[79px] z-10'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="152" height="144" viewBox="0 0 152 144" fill="none">
+          <path d="M76.0259 0.654297L151.298 55.3427L122.547 143.83L29.505 143.83L0.753563 55.3427L76.0259 0.654297Z" fill="white"/>
+        </svg>
+        <LazyImage src='/images/search/pol_user.png' className='w-[77px] absolute left-[38px] top-[38px]' />
       </div>
       {
         labelList.map((item, index) => {
@@ -139,8 +146,8 @@ const RadarChart3: React.FC<any> = ({
               <div className={`label-circle label-circle-${index + 1}`}></div>
               <div className={` font-fbold text-[24px] label-bg label-bg-${index + 1}`}
                 style={{
-                  left: index === 0 || index === 3 ? '50%' : 'none',
-                  marginLeft: index === 0 || index === 3 ? -`${item.labelWidth / 2}` : 'none',
+                  left: index === 0 ? '50%' : 'none',
+                  marginLeft: index === 0 ? -`${item.labelWidth / 2}` : 'none',
                   width: item.labelWidth
                 }}
               >
@@ -156,4 +163,4 @@ const RadarChart3: React.FC<any> = ({
   )
 }
 
-export default RadarChart3
+export default RadarChart

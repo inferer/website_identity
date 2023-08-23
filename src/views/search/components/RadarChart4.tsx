@@ -24,6 +24,7 @@ var option = {
     },
     indicator: [
       { name: 'Sales', max: 100 },
+      { name: 'Sales1', max: 100 },
       { name: 'Administration', max: 100 },
       { name: 'Information Technology', max: 100 }
     ]
@@ -40,6 +41,7 @@ var option2 = {
     // @ts-ignore
     indicator: [
       { name: 'Sales', max: 100 },
+      { name: 'Sales1', max: 100 },
       { name: 'Administration', max: 100 },
       { name: 'Information Technology', max: 100 }
     ],
@@ -85,7 +87,7 @@ var option2 = {
   ]
 };
 
-const RadarChart3: React.FC<any> = ({
+const RadarChart4: React.FC<any> = ({
   data
 }) => {
   const [labelList, setLabelList] = useState<any[]>([
@@ -122,7 +124,7 @@ const RadarChart3: React.FC<any> = ({
 
 
   return (
-    <div className='radar-chart-wrap relative flex justify-center items-center radar-label-num3'>
+    <div className='radar-chart-wrap relative flex justify-center items-center radar-label-num4'>
       <div id="radarchart" className="w-[600px] h-[600px]">
 
       </div>
@@ -139,8 +141,8 @@ const RadarChart3: React.FC<any> = ({
               <div className={`label-circle label-circle-${index + 1}`}></div>
               <div className={` font-fbold text-[24px] label-bg label-bg-${index + 1}`}
                 style={{
-                  left: index === 0 || index === 3 ? '50%' : 'none',
-                  marginLeft: index === 0 || index === 3 ? -`${item.labelWidth / 2}` : 'none',
+                  left: index === 0 || index === 2 ? '50%' : 'none',
+                  marginLeft: index === 0 || index === 2 ? -`${item.labelWidth / 2}` : 'none',
                   width: item.labelWidth
                 }}
               >
@@ -156,4 +158,4 @@ const RadarChart3: React.FC<any> = ({
   )
 }
 
-export default RadarChart3
+export default RadarChart4

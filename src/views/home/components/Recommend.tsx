@@ -20,7 +20,7 @@ export const RecommendTag: React.FC<{
   return (
     <div className={`w-[94px] flex items-center px-[6px] py-[2px] rounded ${bgColor}`}>
       <LazyImage src={typeIcon} className="w-5 h-5" />
-      <div className={`ml-1 text-[16px] font-dnormal ${typeColor}`}>{type}</div>
+      <div className={`ml-1 text-[16px] font-dnormal capitalize ${typeColor}`}>{type}</div>
     </div>
   )
 }
@@ -71,12 +71,14 @@ const Recommend: React.FC<{
   onClick
 }) => {
   const recentlyData = useSearchStore(state => state.recentlyData)
+  const recommendUsers = useSearchStore(state => state.recommendUsers)
   const getRecentlyData = useSearchStore(state => state.getRecentlyData)
+  const getRecommendUsers = useSearchStore(state => state.getRecommendUsers)
 
   useEffect(() => {
     getRecentlyData()
+    getRecommendUsers()
   }, [])
-
   return (
     <div className="px-3 py-6 recommend-wrap">
       {
@@ -104,27 +106,41 @@ const Recommend: React.FC<{
           </div>
         </div>
       }
-      
-      <div>
-        <div className=" px-3 font-dnormal text-[20px] text-[#3F4664] mb-[10px]">Recommend</div>
+      {
+        recommendUsers.length > 0 &&
         <div>
-          <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-            <RecommendTag type="Art" />
-          </RecommendItem>
-          <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-            <RecommendTag type="Sport" />
-          </RecommendItem>
-          <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-            <RecommendTag type="Social" />
-          </RecommendItem>
-          <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-            <RecommendTag type="Game" />
-          </RecommendItem>
-          <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-            <RecommendTag type="Finance" />
-          </RecommendItem>
+          <div className=" px-3 font-dnormal text-[20px] text-[#3F4664] mb-[10px]">Recommend</div>
+          <div>
+            {
+              recommendUsers.map(item => {
+                return (
+                  <RecommendItem key={item.address} address={item.address}
+                    onClick={() => {
+                      onClick && onClick('recommend', item.address)
+                    }}
+                  >
+                    <RecommendTag type={item.category} />
+                  </RecommendItem>
+                )
+              })
+            }
+            
+            {/* <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
+              <RecommendTag type="Sport" />
+            </RecommendItem>
+            <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
+              <RecommendTag type="Social" />
+            </RecommendItem>
+            <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
+              <RecommendTag type="Game" />
+            </RecommendItem>
+            <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
+              <RecommendTag type="Finance" />
+            </RecommendItem> */}
+          </div>
         </div>
-      </div>
+      }
+      
     </div>
   )
 }

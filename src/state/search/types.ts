@@ -27,7 +27,10 @@ export interface ISearchItem {
   "value_p80": number,
 }
 
-
+export interface IRecommendUser {
+  category: string,
+  address: string
+}
 
 
 export interface SearchState {
@@ -36,9 +39,11 @@ export interface SearchState {
   activityData: { [key: string]: any },
   labelData: { [key: string]: any }[],
   searchItemList: ISearchItem[],
+  recommendUsers: IRecommendUser[],
   searchByAddress: (address: string) => void,
   setFromPage: (address: string) => void,
   setRecentlyData: (address: string) => void,
   getRecentlyData: () => void,
+  getRecommendUsers: () => void,
 }
 
