@@ -4,6 +4,13 @@ import { ISearchItem, SearchState } from './types'
 import { formatTime, getChainLogo, getCoinName, num2Month } from '@/utils'
 import storage from '@/utils/storage'
 
+const getImageUrl = (url: string) => {
+  if (url.indexOf('ipfs:') > -1) {
+    return `https://ipfs.io/ipfs/${url.slice(7)}`
+  }
+  return url
+}
+
 const initActivityData = {
   poap: { mint: 0, burn: 0, send: 0, receive: 0},
   nftInteractors: { mint: 0, burn: 0, send: 0, receive: 0},
@@ -47,7 +54,12 @@ const useSearchStore = create<SearchState>()((set, get) => ({
         count: identityInfo['NFT Interactor'] ? identityInfo['NFT Interactor']['Interacted Count'] || 0 : 0,
         interactedAddress: identityInfo['NFT Interactor'] ? identityInfo['NFT Interactor']['Top 5 Interacted Address'] || [] : []
       }
-      tempData.nftAsset = identityInfo['NFT List'] || []
+      tempData.nftAsset = (identityInfo['NFT List'] || []).map((item: any) => {
+        return {
+          ...item,
+          image: getImageUrl(item.image)
+        }
+      })
       const newData = (res2.data.data || []).map((item: ISearchItem) => {
         tempData.poap.mint += Number(item.poap_mint_cnt)
         tempData.poap.burn += Number(item.poap_burn_cnt)
