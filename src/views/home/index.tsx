@@ -44,7 +44,9 @@ const HomePage = () => {
       await searchByAddress(newAddress)
       setRecentlyData(newAddress)
       router.push({ pathname: `/search/${newAddress}` })
-      setSearchIng(false)
+      setTimeout(() => {
+        setSearchIng(false)
+      }, 500)
       return
     }
     messageApi.error('Invalid address')
