@@ -22,31 +22,31 @@ body {
 }
 @font-face {
   font-family: Poppins;
-  src: url('/fonts/Poppins-Regular.ttf');
+  src: url('https://website-1315068501.cos.ap-nanjing.myqcloud.com/Poppins-Regular.ttf');
 }
 @font-face {
   font-family: Poppins-Medium;
-  src: url('/fonts/Poppins-Medium.ttf');
+  src: url('https://website-1315068501.cos.ap-nanjing.myqcloud.com/Poppins-Medium.ttf');
 }
 @font-face {
   font-family: Poppins-Bold;
-  src: url('/fonts/Poppins-Bold.ttf');
+  src: url('https://website-1315068501.cos.ap-nanjing.myqcloud.com/Poppins-Bold.ttf');
 }
 @font-face {
   font-family: Poppins-ExtraLight;
-  src: url('/fonts/Poppins-ExtraLight.ttf');
+  src: url('https://website-1315068501.cos.ap-nanjing.myqcloud.com/Poppins-ExtraLight.ttf');
 }
 @font-face {
   font-family: DMSans-Bold;
-  src: url('/fonts/DMSans-Bold.ttf');
+  src: url('https://website-1315068501.cos.ap-nanjing.myqcloud.com/DMSans-Bold.ttf');
 }
 @font-face {
   font-family: DMSans-Medium;
-  src: url('/fonts/DMSans-Medium.ttf');
+  src: url('https://website-1315068501.cos.ap-nanjing.myqcloud.com/DMSans-Medium.ttf');
 }
 @font-face {
   font-family: DMSans-Regular;
-  src: url('/fonts/DMSans-Regular.ttf');
+  src: url('https://website-1315068501.cos.ap-nanjing.myqcloud.com/DMSans-Regular.ttf');
 }
 
 .font-fnormal{

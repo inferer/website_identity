@@ -11,7 +11,7 @@ const PageHeader = () => {
           router.push({ pathname: '/' })
         }}
       >
-        <LazyImage src="/logo.png" className="w-[32px] h-[32px] cursor-pointer" />
+        <LazyImage src="/images/home/logo.png" className="w-[32px] h-[32px] cursor-pointer" />
       </div>
       
     </div>

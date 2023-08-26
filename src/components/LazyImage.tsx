@@ -7,12 +7,14 @@ export interface LazyImageProps {
   others?: {[key: string]: string}
 }
 
+const isDev = process.env.NODE_ENV === 'development'
+
 const LazyImage: React.FC<LazyImageProps> = ({ src, className, ...others}) => {
   const [imgSrc, setImgSrc] = useState('')
   const { ref: inViewRef, inView, entry } = useInView({});
   useEffect(() => {
     if (inView && !imgSrc) {
-      setImgSrc(src)
+      setImgSrc(isDev ? src : `https://website-1315068501.cos.ap-nanjing.myqcloud.com/website_identity${src}`)
     }
     
   }, [inView])
