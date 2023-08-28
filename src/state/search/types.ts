@@ -44,7 +44,7 @@ export interface SearchState {
   searchByAddress: (address: string) => void,
   setFromPage: (address: string) => void,
   setRecentlyData: (address: string) => void,
-  getRecentlyData: (address: string) => void,
+  getRecentlyData: () => void,
   getRecommendUsers: () => void,
 }
 
