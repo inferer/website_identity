@@ -4,7 +4,7 @@ import { ISearchItem, SearchState } from './types'
 import { formatTime, getChainLogo, getCoinName, num2Month } from '@/utils'
 import storage from '@/utils/storage'
 
-const getImageUrl = (url: string) => {
+const getImageUrl = (url: string = '') => {
   if (url.indexOf('ipfs:') > -1) {
     return `https://ipfs.io/ipfs/${url.slice(7)}`
   }
@@ -96,6 +96,10 @@ const useSearchStore = create<SearchState>()((set, get) => ({
       set({ labelData: labelData })
     }
 
+  },
+  getActivityData: async (address: string) => {
+    const res = await fetcher('/api/identity/getActivityInfo', { address })
+    console.log(res)
   },
 
   setRecentlyData: async (address: string) => {
