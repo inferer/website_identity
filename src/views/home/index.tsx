@@ -108,7 +108,7 @@ const HomePage = () => {
                 <Recommend />
               </div> */}
             {
-              inputClick && !searchIng && 
+              inputClick && !searchIng && inputValue.length <= 0 && 
               <div className="mt-3">
                 <Recommend
                   onClick={handleRecommendClick}

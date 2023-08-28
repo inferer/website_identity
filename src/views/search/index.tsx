@@ -17,6 +17,7 @@ const SearchPage = () => {
   const router = useRouter()
   const fromPage = useSearchStore(state => state.fromPage)
   const searchByAddress = useSearchStore(state => state.searchByAddress)
+  const getActivityData = useSearchStore(state => state.getActivityData)
   const searchItemList = useSearchStore(state => state.searchItemList)
   const activityData = useSearchStore(state => state.activityData)
   const labelData2 = useSearchStore(state => state.labelData)
@@ -25,7 +26,8 @@ const SearchPage = () => {
   const [inputValue, setInputValue] = useState('')
   const [searchIng, setSearchIng] = useState(false)
 
-  const handleInputFocus = () => {
+  const handleInputFocus = (event: any) => {
+    event.target.select()
     setInputFocus(true)
   }
   const handleInputBlur = () => {
@@ -46,6 +48,7 @@ const SearchPage = () => {
       await searchByAddress(newAddress)
       setRecentlyData(newAddress)
       setSearchIng(false)
+      getActivityData(newAddress)
       return
     }
     messageApi.error('Invalid address')
@@ -79,6 +82,7 @@ const SearchPage = () => {
                 onChange={e => {
                   setInputValue(e.target.value)
                 }}
+                disabled={searchIng}
               />
               <div className=" absolute top-[20px] right-[25px]"
                 onClick={() => handleSearch2()}
@@ -409,7 +413,10 @@ const SearchPage = () => {
               </div>
               
             </div>
-            <LabelData data={labelData2} />
+            {
+              labelData2.length > 0 && <LabelData data={labelData2} />
+            }
+            
           </div>
         }
         

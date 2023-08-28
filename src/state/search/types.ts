@@ -34,6 +34,7 @@ export interface IRecommendUser {
 
 
 export interface SearchState {
+  [x: string]: any;
   recentlyData: string[],
   fromPage: string,
   activityData: { [key: string]: any },
@@ -43,7 +44,7 @@ export interface SearchState {
   searchByAddress: (address: string) => void,
   setFromPage: (address: string) => void,
   setRecentlyData: (address: string) => void,
-  getRecentlyData: () => void,
+  getRecentlyData: (address: string) => void,
   getRecommendUsers: () => void,
 }
 
