@@ -65,7 +65,7 @@ let tempKeys = [...uploadKeys]
 const uploadFile = (pathItem) => {
   return new Promise((resolve) => {
     const uploadKey = `website_identity/${pathItem.split("/public/")[1]}`;
-    if ((uploadKeys || []).find(key => uploadKey)) {
+    if ((uploadKeys || []).find(key => key === uploadKey)) {
       console.log(`${uploadKey} 已上传到CDN！`);
       resolve(true)
       return
