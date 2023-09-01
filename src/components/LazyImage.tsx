@@ -20,7 +20,7 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, className, ...others}) => {
   }, [inView])
 
   return (
-    <img ref={inViewRef} src={imgSrc} className={ `transition-all ${!imgSrc ? 'opacity-0 ' : 'opacity-100 '} ${className}` } { ...others } alt="" />
+    <img referrerPolicy="no-referrer" ref={inViewRef} src={imgSrc} className={ `transition-all ${!imgSrc ? 'opacity-0 ' : 'opacity-100 '} ${className}` } { ...others } alt="" />
   )
 }
 

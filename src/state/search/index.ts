@@ -99,7 +99,15 @@ const useSearchStore = create<SearchState>()((set, get) => ({
   },
   getActivityData: async (address: string) => {
     const res = await fetcher('/api/identity/getActivityInfo', { address })
-    console.log(res)
+    if (res.status === 200) {
+      const data = res.data || {}
+      const tempData = { ...get().activityData }
+      tempData.poap = data.poapInfo
+      tempData.galxeOat = data.galxeOatInfo
+      tempData.taskOnOat = data.taskonOatInfo
+
+      set({ activityData: tempData })
+    }
   },
 
   setRecentlyData: async (address: string) => {

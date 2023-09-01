@@ -66,8 +66,10 @@ export const RecommendItem: React.FC<{
 
 
 const Recommend: React.FC<{
+  inputValue: string,
   onClick?: (type: string, addr: string) => void
 }> = ({
+  inputValue,
   onClick
 }) => {
   const recentlyData = useSearchStore(state => state.recentlyData)
@@ -79,15 +81,30 @@ const Recommend: React.FC<{
     getRecentlyData()
     getRecommendUsers()
   }, [])
+
+  const filterRecentlyData = useMemo(() => {
+    if (!inputValue) return recentlyData
+    return recentlyData.filter(addr => addr.indexOf(inputValue) > -1)
+  }, [recentlyData, inputValue])
+
+  const filterRecommendUsers = useMemo(() => {
+    if (!inputValue) return recommendUsers
+    return recommendUsers.filter(user => user.address.indexOf(inputValue) > -1)
+  }, [recommendUsers, inputValue])
+
+  if (filterRecentlyData.length === 0 && filterRecommendUsers.length === 0) {
+    return null
+  }
+
   return (
-    <div className="px-3 py-6 recommend-wrap">
+    <div className="px-3 py-[20px] recommend-wrap">
       {
-        recentlyData.length > 0 && 
+        filterRecentlyData.length > 0 && 
         <div className="mb-[14px]">
           <div className=" px-3 font-dnormal text-[20px] text-[#3F4664] mb-[10px]">Recently</div>
           <div>
             {
-              recentlyData.map(addr => {
+              filterRecentlyData.map(addr => {
                 return (
                   <RecommendItem key={addr} address={addr}
                     onClick={() => {
@@ -107,12 +124,12 @@ const Recommend: React.FC<{
         </div>
       }
       {
-        recommendUsers.length > 0 &&
+        filterRecommendUsers.length > 0 &&
         <div>
           <div className=" px-3 font-dnormal text-[20px] text-[#3F4664] mb-[10px]">Recommend</div>
           <div>
             {
-              recommendUsers.map(item => {
+              filterRecommendUsers.map(item => {
                 return (
                   <RecommendItem key={item.address} address={item.address}
                     onClick={() => {

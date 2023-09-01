@@ -64,6 +64,9 @@ const SearchPage = () => {
     if (router.query.address && router.query.address[0] && !fromPage) {
       handleSearch(router.query.address[0])
     }
+    if (router.query.address && router.query.address[0]) {
+      setInputValue(router.query.address[0])
+    }
   }, [router, fromPage])
 
   return (
@@ -76,6 +79,7 @@ const SearchPage = () => {
           <div>
             <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
               <input className="search-input search outline-none pl-6 pr-[74px] font-dnormal w-[670px]" placeholder="Search address identity"
+                value={inputValue}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
                 onKeyUp={handleInputKeyUp}

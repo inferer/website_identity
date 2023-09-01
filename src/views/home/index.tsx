@@ -59,6 +59,7 @@ const HomePage = () => {
   }
 
   const handleRecommendClick = async (type: string, address: string) => {
+    setInputValue(address)
     handleSearch(address)
   }
 
@@ -86,6 +87,7 @@ const HomePage = () => {
           <div>
             <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
               <input className="search-input outline-none pl-6 pr-[74px] font-dnormal" placeholder="Search address identity"
+                value={inputValue}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
                 onKeyUp={handleInputKeyUp}
@@ -108,9 +110,10 @@ const HomePage = () => {
                 <Recommend />
               </div> */}
             {
-              inputClick && !searchIng && inputValue.length <= 0 && 
+              inputClick && !searchIng && 
               <div className="mt-3">
                 <Recommend
+                  inputValue={inputValue}
                   onClick={handleRecommendClick}
                 />
               </div>

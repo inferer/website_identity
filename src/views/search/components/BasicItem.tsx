@@ -93,7 +93,7 @@ const BasicItem: React.FC<{
               <SubTitle text="Mint" />
             </div>
             <div className="mt-2">
-              <Text1 text={data.mint} />
+              <Text1 text={data.mint || '0'} />
             </div>
           </div>
           <div className="">
@@ -101,7 +101,7 @@ const BasicItem: React.FC<{
               <SubTitle text="Burn" />
             </div>
             <div className="mt-2">
-              <Text1 text={data.burn} />
+              <Text1 text={data.burn || '0'} />
             </div>
           </div>
         </div>
@@ -111,7 +111,7 @@ const BasicItem: React.FC<{
               <SubTitle text="Send" />
             </div>
             <div className="mt-2">
-              <Text1 text={data.send} />
+              <Text1 text={data.send || '0'} />
             </div>
           </div>
           <div className="">
@@ -119,7 +119,7 @@ const BasicItem: React.FC<{
               <SubTitle text="Receive" />
             </div>
             <div className="mt-2">
-              <Text1 text={data.receive} />
+              <Text1 text={data.receive || '0'} />
             </div>
           </div>
         </div>
