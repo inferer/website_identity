@@ -17,7 +17,7 @@ export const LabelDataItem: React.FC<any> = ({
   return (
     <div className={` relative w-[486px] h-[337px] text-[#3F4664] rounded-lg ${bgColor}`}>
       <LazyImage src={tipIcon} className="w-[36px] h-[36px] absolute left-[16px] -top-[18px]" />
-      <div className="text-[#3F4664] text-[20px] font-dbold text-center pt-8">{itemData.label_show_name || itemData.label_name}</div>
+      <div className="text-[#3F4664] text-[20px] font-dbold text-center pt-8">{itemData.label_show_name || itemData.label_show_name}</div>
       <div className="px-10 mt-[30px]">
         <div>
           <div className="flex items-center">

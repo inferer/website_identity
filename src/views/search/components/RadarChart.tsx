@@ -117,8 +117,8 @@ const RadarChart: React.FC<any> = ({
 
       const tempList = data.map((item: any) => {
         return {
-          label: item.label_name,
-          labelWidth: item.label_name.length * 15 + 48
+          label: item.label_show_name,
+          labelWidth: item.label_show_name.length * 15 + 48
         }
       })
       setLabelList(tempList)

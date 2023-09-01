@@ -27,7 +27,7 @@ const RadarChart1: React.FC<any> = ({
         <div className={` font-fbold text-[24px] label-num-1-bg`}
         >
           <div className='label-text'>
-            {data[0].label_name}
+            {data[0].label_show_name}
           </div>
         </div>
       </div>
