@@ -35,6 +35,7 @@ export interface IRecommendUser {
 
 export interface SearchState {
   [x: string]: any;
+  identityInfo: any,
   recentlyData: string[],
   fromPage: string,
   activityData: { [key: string]: any },

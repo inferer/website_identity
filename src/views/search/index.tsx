@@ -8,9 +8,9 @@ import BasicItem, { BasicNftItem } from "./components/BasicItem"
 import LabelData from "./components/LabelData"
 import H5Footer from "@/components/h5/H5Footer"
 import { useRouter } from "next/router"
-import { useSearchStore } from '@/state'
+import { useSearchStore, useUserStore } from '@/state'
 import { toChecksumAddress } from "@/utils";
-
+import LevelScore from "./components/LevelScore";
 
 const SearchPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -20,6 +20,7 @@ const SearchPage = () => {
   const getActivityData = useSearchStore(state => state.getActivityData)
   const searchItemList = useSearchStore(state => state.searchItemList)
   const activityData = useSearchStore(state => state.activityData)
+  const identityInfo = useSearchStore(state => state.identityInfo)
   const labelData2 = useSearchStore(state => state.labelData)
   const setRecentlyData = useSearchStore(state => state.setRecentlyData)
   const [inputFocus, setInputFocus] = useState(false)
@@ -112,12 +113,7 @@ const SearchPage = () => {
               <LazyImage src="/images/search/ticket.png" className="w-[20px] h-[20px]" />
               <div className="text-[rgba(22,31,49,0.60)] text-[20px] ml-[5px]">Search identity ticket</div>
             </div>
-            <div className="flex justify-center">
-              <div className="gradient1 font-dbold text-[180px] mt-[110px] leading-normal relative">
-                { Number(activityData.levelScore).toFixed(1) }
-                <LazyImage src="/images/search/collect.png" className="w-[20px] h-[20px] absolute bottom-[64px] -right-[30px] cursor-pointer" />
-              </div>
-            </div>
+            <LevelScore levelScore={activityData.levelScore} identityInfo={identityInfo} />
             <div className="mt-[170px] mb-[90px]">
               <SubTitle text="Ticket" />
             </div>

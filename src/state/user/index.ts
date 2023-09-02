@@ -27,9 +27,20 @@ const useUserStore = create<UserState>()((set, get) => ({
     }
   },
   collectNftColl: async (data) => {
-    console.log(data)
     const userId = get().userId
     const res = await poster(`/api/trends/collectNft`, { ...data, userid: userId })
+    return res
+  },
+  collectTicket: async (data) => {
+    const res = await poster(`/api/identity/collectTicket`, { ...data })
+    return res
+  },
+  cancelCollectTicket: async (data) => {
+    const res = await poster(`/api/identity/cancelCollectTicket`, { ...data })
+    return res
+  },
+  getTicketInfo: async (data) => {
+    const res = await fetcher(`/api/identity/getTicket`, { ...data })
     return res
   }
   

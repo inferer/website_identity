@@ -14,14 +14,18 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/:path*',
+        source: '/api/identity/:path*',
         // destination: `http://49.234.51.249:8792/api/:path*`
-        destination: isDev ? `http://49.234.51.249:13882/api/:path*` : `http://49.234.51.249:13882/api/:path*`
+        destination: isDev ? `http://49.234.51.249:13882/api/identity/:path*` : `http://49.234.51.249:13882/api/identity/:path*`
+      },
+      {
+        source: '/api/trends/:path*',
+        // destination: `http://49.234.51.249:8792/api/:path*`
+        destination: isDev ? `http://49.234.51.249:8792/api/trends/:path*` : `https://api7.inferer.xyz/api/trends/:path*`
       },
       {
         source: '/plugin/:path*',
-        destination: `http://49.234.51.249:8792/plugin/:path*`
-        // destination: isDev ? `http://49.234.51.249:8792/plugin/:path*` : `https://api7.inferer.xyz/plugin/:path*`
+        destination: isDev ? `http://49.234.51.249:8792/plugin/:path*` : `https://api7.inferer.xyz/plugin/:path*`
       },
     ]
   },

@@ -17,6 +17,7 @@ const initActivityData = {
   galxeOat: { mint: 0, burn: 0, send: 0, receive: 0},
   taskOnOat: { mint: 0, burn: 0, send: 0, receive: 0},
   levelScore: 0,
+  level: '',
   nftInteractedAddress: {
     count: 0,
     interactedAddress: []
@@ -34,6 +35,7 @@ export const levelInfo = {
 } as any
 
 const useSearchStore = create<SearchState>()((set, get) => ({
+  identityInfo: {},
   recommendUsers: [],
   recentlyData: [],
   fromPage: '',
@@ -49,7 +51,7 @@ const useSearchStore = create<SearchState>()((set, get) => ({
     if (res2.status === 200) {
       const identityInfo = res2.data.identityInfo || {}
       tempData.levelScore = identityInfo.level ? levelInfo[identityInfo.level.toLowerCase()] : 0
-
+      tempData.level = identityInfo.level
       tempData.nftInteractedAddress = {
         count: identityInfo['NFT Interactor'] ? identityInfo['NFT Interactor']['Interacted Count'] || 0 : 0,
         interactedAddress: identityInfo['NFT Interactor'] ? identityInfo['NFT Interactor']['Top 5 Interacted Address'] || [] : []
@@ -94,6 +96,7 @@ const useSearchStore = create<SearchState>()((set, get) => ({
       set({ searchItemList: newData })
       set({ activityData: tempData })
       set({ labelData: labelData })
+      set({ identityInfo: identityInfo })
     }
 
   },

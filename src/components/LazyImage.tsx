@@ -17,7 +17,22 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, className, ...others}) => {
       setImgSrc(isDev ? src : `https://website-1315068501.cos.ap-nanjing.myqcloud.com/website_identity${src}`)
     }
     
-  }, [inView])
+  }, [inView, src])
+
+  return (
+    <img referrerPolicy="no-referrer" ref={inViewRef} src={imgSrc} className={ `transition-all ${!imgSrc ? 'opacity-0 ' : 'opacity-100 '} ${className}` } { ...others } alt="" />
+  )
+}
+
+export const LazyImage2: React.FC<LazyImageProps> = ({ src, className, ...others}) => {
+  const [imgSrc, setImgSrc] = useState('')
+  const { ref: inViewRef, inView, entry } = useInView({});
+  useEffect(() => {
+    if (inView) {
+      setImgSrc(isDev ? src : `https://website-1315068501.cos.ap-nanjing.myqcloud.com/website_identity${src}`)
+    }
+    
+  }, [inView, src])
 
   return (
     <img referrerPolicy="no-referrer" ref={inViewRef} src={imgSrc} className={ `transition-all ${!imgSrc ? 'opacity-0 ' : 'opacity-100 '} ${className}` } { ...others } alt="" />
