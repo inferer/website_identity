@@ -137,6 +137,12 @@ const useSearchStore = create<SearchState>()((set, get) => ({
     if (res.status === 200) {
       set({ recommendUsers: res.data.users || []})
     }
+  },
+  isGlobalSearching: false,
+  setSearchingGlobal: (flag?: boolean) => {
+    set({
+      isGlobalSearching: flag
+    })
   }
 }))
 

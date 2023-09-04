@@ -7,6 +7,7 @@ import Recommend from "./components/Recommend"
 import { useSearchStore } from "@/state"
 import { useRouter } from "next/router"
 import { toChecksumAddress } from "@/utils"
+import Link from "next/link";
 
 const HomePage = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -14,10 +15,12 @@ const HomePage = () => {
   const searchByAddress = useSearchStore(state => state.searchByAddress)
   const setFromPage = useSearchStore(state => state.setFromPage)
   const setRecentlyData = useSearchStore(state => state.setRecentlyData)
+  const setSearchingGlobal = useSearchStore(state => state.setSearchingGlobal)
   const [inputFocus, setInputFocus] = useState(false)
   const [inputClick, setInputClick] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [searchIng, setSearchIng] = useState(false)
+  const [starting, setStarting] = useState(true)
 
   const handleInputClick = (e: any) => {
     e.stopPropagation()
@@ -38,12 +41,17 @@ const HomePage = () => {
     let newAddress = toChecksumAddress(searchAddress)
     if (newAddress) {
       newAddress = newAddress.toLowerCase()
+      setSearchingGlobal(true)
+      setStarting(true)
       setSearchIng(true)
       setInputClick(false)
       setFromPage('HOME')
       await searchByAddress(newAddress)
       setRecentlyData(newAddress)
       router.push({ pathname: `/search/${newAddress}` })
+      setTimeout(() => {
+        setStarting(false)
+      }, 300)
       setTimeout(() => {
         setSearchIng(false)
       }, 500)
@@ -79,53 +87,56 @@ const HomePage = () => {
       {contextHolder}
       <PageHeader />
       <Wrap>
-        <div className="flex justify-center pt-[116px]">
-          <LazyImage src="/images/home/logo2.png" className="w-[51px] h-[59px]" />
-          <div className=" font-fmedium text-[36px] ml-5 gradient1">Explore the Identity</div>
-        </div>
-        <div className="flex justify-center mt-[116px]">
-          <div>
-            <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
-              <input className="search-input outline-none pl-6 pr-[74px] font-dnormal" placeholder="Search address identity"
-                value={inputValue}
-                onFocus={handleInputFocus}
-                onBlur={handleInputBlur}
-                onKeyUp={handleInputKeyUp}
-                onClick={handleInputClick}
-                onChange={e => {
-                  setInputValue(e.target.value)
-                }}
-              />
-              <div className=" absolute top-[20px] right-[25px]"
-                onClick={e => {
-                  e.stopPropagation()
-                  handleSearch()
-                }}
-              >
-                <LazyImage src="/images/home/search.png" className="w-[24px] h-[24px] cursor-pointer" />
+        {/* <div className={` transition-all duration-500 ${!starting ? ' scale-[0.75]' : ''} `}> */}
+        <div className={``}>
+          <div className="flex justify-center pt-[116px]">
+            <LazyImage src="/images/home/logo2.png" className="w-[51px] h-[59px]" />
+            <div className=" font-fmedium text-[36px] ml-5 gradient1">Explore the Identity</div>
+          </div>
+          <div className="flex justify-center mt-[116px]">
+            <div>
+              <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
+                <input className="search-input outline-none pl-6 pr-[74px] font-dnormal" placeholder="Search address identity"
+                  value={inputValue}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
+                  onKeyUp={handleInputKeyUp}
+                  onClick={handleInputClick}
+                  onChange={e => {
+                    setInputValue(e.target.value)
+                  }}
+                />
+                <div className=" absolute top-[20px] right-[25px]"
+                  onClick={e => {
+                    e.stopPropagation()
+                    handleSearch()
+                  }}
+                >
+                  <LazyImage src="/images/home/search.png" className="w-[24px] h-[24px] cursor-pointer" />
+                </div>
+                
               </div>
+              {/* <div className="mt-3">
+                  <Recommend />
+                </div> */}
+              {
+                inputClick && !searchIng && 
+                <div className="mt-3">
+                  <Recommend
+                    inputValue={inputValue}
+                    onClick={handleRecommendClick}
+                  />
+                </div>
+              }
+              
+              {
+                searchIng && 
+                <div className="mt-[72px] flex justify-center min-h-[600px]">
+                  <LazyImage src="/images/home/loading.gif" className="w-[400px] h-[300px]" />
+                </div>
+              }
               
             </div>
-            {/* <div className="mt-3">
-                <Recommend />
-              </div> */}
-            {
-              inputClick && !searchIng && 
-              <div className="mt-3">
-                <Recommend
-                  inputValue={inputValue}
-                  onClick={handleRecommendClick}
-                />
-              </div>
-            }
-            
-            {
-              searchIng && 
-              <div className="mt-[72px] flex justify-center min-h-[600px]">
-                <LazyImage src="/images/home/loading.gif" className="w-[400px] h-[300px]" />
-              </div>
-            }
-            
           </div>
         </div>
       </Wrap>

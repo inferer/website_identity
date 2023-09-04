@@ -23,6 +23,8 @@ const SearchPage = () => {
   const identityInfo = useSearchStore(state => state.identityInfo)
   const labelData2 = useSearchStore(state => state.labelData)
   const setRecentlyData = useSearchStore(state => state.setRecentlyData)
+  const isGlobalSearching = useSearchStore(state => state.isGlobalSearching)
+  const setSearchingGlobal = useSearchStore(state => state.setSearchingGlobal)
   const [inputFocus, setInputFocus] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [searchIng, setSearchIng] = useState(false)
@@ -62,6 +64,12 @@ const SearchPage = () => {
   }
 
   useEffect(() => {
+    if (fromPage === 'HOME') {
+      setSearchingGlobal(false)
+    }
+  }, [fromPage])
+
+  useEffect(() => {
     if (router.query.address && router.query.address[0] && !fromPage) {
       handleSearch(router.query.address[0])
     }
@@ -75,11 +83,11 @@ const SearchPage = () => {
       {contextHolder}
       <PageHeader />
       <Wrap>
-        <div className="flex items-center pt-[77px]">
+        <div className={`flex items-center pt-[77px] transition-all duration-300 scale-90 opacity-0 ${!isGlobalSearching ? ' scale-[1] opacity-100' : ''}`}>
           <LazyImage src="/images/home/logo2.png" className="w-[48px] h-[48px] mr-[27px]" />
           <div>
             <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
-              <input className="search-input search outline-none pl-6 pr-[74px] font-dnormal w-[670px]" placeholder="Search address identity"
+              <input className="search-input search-input2 search outline-none pl-6 pr-[74px] font-dnormal" placeholder="Search address identity"
                 value={inputValue}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
@@ -106,6 +114,9 @@ const SearchPage = () => {
             <LazyImage src="/images/home/loading.gif" className="w-[400px] h-[300px]" />
           </div>
         }
+        <div className={`relative transition-all duration-300 translate-y-[160px] opacity-0 ${!isGlobalSearching ? ' translate-y-[0px] opacity-100' : ''}`}>
+
+        
         {
           !searchIng && 
           <div>
@@ -419,6 +430,7 @@ const SearchPage = () => {
             
           </div>
         }
+        </div>
         
       </Wrap>
       <H5Footer white={true} />

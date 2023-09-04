@@ -47,5 +47,7 @@ export interface SearchState {
   setRecentlyData: (address: string) => void,
   getRecentlyData: () => void,
   getRecommendUsers: () => void,
+  isGlobalSearching: boolean,
+  setSearchingGlobal: (flag?: boolean) => void
 }
 
