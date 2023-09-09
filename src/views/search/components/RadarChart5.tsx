@@ -98,7 +98,7 @@ const RadarChart: React.FC<any> = ({
   useEffect(() => {
     if (data.length > 0) {
       const valueList = data.map((item: any) => {
-        return item.label_degree + 40
+        return item.label_degree
       })
       var chartDom = document.getElementById('radarchart');
       if (chartDom) {

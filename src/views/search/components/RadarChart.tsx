@@ -100,8 +100,9 @@ const RadarChart: React.FC<any> = ({
   ])
   useEffect(() => {
     if (data.length > 0) {
-      const valueList = data.map((item: any) => {
-        return item.label_degree
+      const newData = data.sort((a: any, b: any) => a.label_relevance - b.label_relevance).slice(-6)
+      const valueList = newData.map((item: any) => {
+        return item.label_relevance
       })
       var chartDom = document.getElementById('radarchart');
       if (chartDom) {
@@ -115,7 +116,7 @@ const RadarChart: React.FC<any> = ({
         myChart2.setOption(option);
       }
 
-      const tempList = data.map((item: any) => {
+      const tempList = newData.map((item: any) => {
         return {
           label: item.label_show_name,
           labelWidth: item.label_show_name.length * 15 + 48

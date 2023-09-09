@@ -12,8 +12,9 @@ export const LabelDataItem: React.FC<any> = ({
   index,
   itemData
 }) => {
-  const bgColor = `label-data-bg-${index}`
-  const tipIcon = `/images/search/label-${index}.png`
+  const newIndex = index - (Math.floor(index / 7) * 6)
+  const bgColor = `label-data-bg-${newIndex}`
+  const tipIcon = `/images/search/label-${newIndex}.png`
   return (
     <div className={` relative w-[486px] h-[337px] text-[#3F4664] rounded-lg ${bgColor}`}>
       <LazyImage src={tipIcon} className="w-[36px] h-[36px] absolute left-[16px] -top-[18px]" />
@@ -109,7 +110,7 @@ const LabelData: React.FC<any> = ({
           data.length === 5 && <RadarChart5 data={data} />
         }
         {
-          data.length === 6 && <RadarChart data={data} />
+          data.length >= 6 && <RadarChart data={data} />
         }
         
       </div>

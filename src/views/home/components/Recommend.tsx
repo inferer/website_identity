@@ -77,9 +77,20 @@ const Recommend: React.FC<{
   const getRecentlyData = useSearchStore(state => state.getRecentlyData)
   const getRecommendUsers = useSearchStore(state => state.getRecommendUsers)
 
+  const handleKeyup = (event: any) => {
+    console.log(event)
+  }
+
   useEffect(() => {
     getRecentlyData()
     getRecommendUsers()
+
+    document.addEventListener('keyup', handleKeyup)
+
+    return () => {
+      document.removeEventListener('keyup', handleKeyup)
+    }
+
   }, [])
 
   const filterRecentlyData = useMemo(() => {
@@ -97,7 +108,11 @@ const Recommend: React.FC<{
   }
 
   return (
-    <div className="px-3 py-[20px] recommend-wrap">
+    <div className="px-3 py-[20px] recommend-wrap"
+      onClick={e => {
+        e.stopPropagation()
+      }}
+    >
       {
         filterRecentlyData.length > 0 && 
         <div className="mb-[14px]">

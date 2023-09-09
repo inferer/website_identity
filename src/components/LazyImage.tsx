@@ -24,6 +24,21 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, className, ...others}) => {
   )
 }
 
+export const LazyImage3: React.FC<LazyImageProps> = ({ src, className, ...others}) => {
+  const [imgSrc, setImgSrc] = useState('')
+  const { ref: inViewRef, inView, entry } = useInView({});
+  useEffect(() => {
+    if (inView && !imgSrc) {
+      setImgSrc(src)
+    }
+    
+  }, [inView, src])
+
+  return (
+    <img referrerPolicy="no-referrer" ref={inViewRef} src={imgSrc} className={ `transition-all ${!imgSrc ? 'opacity-0 ' : 'opacity-100 '} ${className}` } { ...others } alt="" />
+  )
+}
+
 export const LazyImage2: React.FC<LazyImageProps> = ({ src, className, ...others}) => {
   const [imgSrc, setImgSrc] = useState('')
   const { ref: inViewRef, inView, entry } = useInView({});

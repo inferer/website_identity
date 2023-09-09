@@ -21,6 +21,7 @@ const HomePage = () => {
   const [inputValue, setInputValue] = useState('')
   const [searchIng, setSearchIng] = useState(false)
   const [starting, setStarting] = useState(true)
+  const [startMove, setStartmove] = useState(false)
 
   const handleInputClick = (e: any) => {
     e.stopPropagation()
@@ -34,14 +35,17 @@ const HomePage = () => {
     setInputFocus(false)
   }
   const handleSearch = async (address?: string) => {
+
     if (searchIng) {
       return
     }
+
     const searchAddress = address || inputValue
     let newAddress = toChecksumAddress(searchAddress)
     if (newAddress) {
       newAddress = newAddress.toLowerCase()
-      setSearchingGlobal(true)
+      setStartmove(true)
+      // setSearchingGlobal(true)
       setStarting(true)
       setSearchIng(true)
       setInputClick(false)
@@ -50,11 +54,11 @@ const HomePage = () => {
       setRecentlyData(newAddress)
       router.push({ pathname: `/search/${newAddress}` })
       setTimeout(() => {
-        setStarting(false)
-      }, 300)
-      setTimeout(() => {
         setSearchIng(false)
       }, 500)
+      setTimeout(() => {
+        setStartmove(false)
+      }, 2000)
       return
     }
     messageApi.error('Invalid address')
@@ -88,12 +92,12 @@ const HomePage = () => {
       <PageHeader />
       <Wrap>
         {/* <div className={` transition-all duration-500 ${!starting ? ' scale-[0.75]' : ''} `}> */}
-        <div className={``}>
-          <div className="flex justify-center pt-[116px]">
-            <LazyImage src="/images/home/logo2.png" className="w-[51px] h-[59px]" />
-            <div className=" font-fmedium text-[36px] ml-5 gradient1">Explore the Identity</div>
+        <div className={` relative`}>
+          <div className={`absolute flex transition-all duration-300 ${startMove ? 'top-[87px] left-0 ml-0' : 'top-[161px] left-[50%] -ml-[208px]'} `}>
+            <LazyImage src="/images/home/logo2.png" className={`${startMove ? 'w-[48px] h-[48px]' : 'w-[51px] h-[59px]'}`} />
+            <div className={`font-fmedium text-[36px] transition-all duration-300 ml-5 gradient1 ${startMove ? ' opacity-0 ' : ' opacity-100 '} `}>Explore the Identity</div>
           </div>
-          <div className="flex justify-center mt-[116px]">
+          <div className={`absolute transition-all duration-300 flex justify-center ${startMove ? ' left-[75px] top-[77px]' : ' left-[180px] top-[336px]'}`}>
             <div>
               <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
                 <input className="search-input outline-none pl-6 pr-[74px] font-dnormal" placeholder="Search address identity"
@@ -102,6 +106,7 @@ const HomePage = () => {
                   onBlur={handleInputBlur}
                   onKeyUp={handleInputKeyUp}
                   onClick={handleInputClick}
+                  disabled={searchIng}
                   onChange={e => {
                     setInputValue(e.target.value)
                   }}
@@ -116,9 +121,6 @@ const HomePage = () => {
                 </div>
                 
               </div>
-              {/* <div className="mt-3">
-                  <Recommend />
-                </div> */}
               {
                 inputClick && !searchIng && 
                 <div className="mt-3">
@@ -129,14 +131,16 @@ const HomePage = () => {
                 </div>
               }
               
-              {
-                searchIng && 
-                <div className="mt-[72px] flex justify-center min-h-[600px]">
-                  <LazyImage src="/images/home/loading.gif" className="w-[400px] h-[300px]" />
-                </div>
-              }
               
             </div>
+          </div>
+          <div className={` absolute top-[150px] left-[400px] transition-all duration-300 delay-200 ${startMove ? ' opacity-100 ' : ' opacity-0 '}`}>
+            {
+              searchIng && 
+              <div className="mt-[72px] flex justify-center min-h-[600px]">
+                <LazyImage src="/images/home/loading.gif" className="w-[400px] h-[300px]" />
+              </div>
+            }
           </div>
         </div>
       </Wrap>

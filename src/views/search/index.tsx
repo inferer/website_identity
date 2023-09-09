@@ -1,4 +1,4 @@
-import LazyImage from "@/components/LazyImage"
+import LazyImage, { LazyImage3 } from "@/components/LazyImage"
 import Wrap from "@/components/Wrap"
 import PageHeader from "@/components/pc/PageHeader"
 import { useEffect, useState } from "react"
@@ -114,7 +114,7 @@ const SearchPage = () => {
             <LazyImage src="/images/home/loading.gif" className="w-[400px] h-[300px]" />
           </div>
         }
-        <div className={`relative transition-all duration-300 translate-y-[160px] opacity-0 ${!isGlobalSearching ? ' translate-y-[0px] opacity-100' : ''}`}>
+        <div className={`relative transition-all duration-300 opacity-0 ${!isGlobalSearching ? 'opacity-100' : ''}`}>
 
         
         {
@@ -168,31 +168,6 @@ const SearchPage = () => {
                   )
                 })
               }
-            
-              {/* <div className="flex items-center mt-[15px]">
-                <div className="flex items-center w-[378px]">
-                  <div className="w-[73px] pl-[30px] shrink-0 ">
-                    <LazyImage src="/images/search/pol.png" className="w-[18px] h-[18px]" />
-                  </div>
-                  <div className="w-full flex items-center">
-                    <div>
-                      <Text1 text="355.5000" />
-                    </div>
-                    <div className=" ml-[8px]">
-                      <Text1 text="MATIC" className="text-[14px]" />
-                    </div>
-                  </div>
-                </div>
-                <div className="w-[301px]">
-                  <Text1 text="117" />
-                </div>
-                <div className="w-[291px]">
-                  <Text1>5/18/2021, 6:21 PM</Text1>
-                </div>
-                <div className="">
-                  <Text1>5/18/2021, 6:21 PM</Text1>
-                </div>
-              </div> */}
             </div>
 
             <div className=" mt-[90px]">
@@ -238,34 +213,6 @@ const SearchPage = () => {
                   )
                 })
               }
-              
-              {/* <div className="flex items-center mt-[15px]">
-                <div className="flex items-center w-[378px]">
-                  <div className="w-[73px] pl-[30px] shrink-0 ">
-                    <LazyImage src="/images/search/pol.png" className="w-[18px] h-[18px]" />
-                  </div>
-                  <div className="w-full flex items-center">
-                    <div>
-                      <Text1 text="355.5000" />
-                    </div>
-                    <div className=" ml-[8px]">
-                      <Text1 text="MATIC" className="text-[14px]" />
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center w-[301px]">
-                  <Text1 text="0" />
-                  <Text1 text="MATIC" className="text-[14px] ml-2" />
-                </div>
-                <div className="flex items-center w-[291px]">
-                  <Text1 text="0" />
-                  <Text1 text="MATIC" className="text-[14px] ml-2" />
-                </div>
-                <div className="flex items-center">
-                  <Text1 text="0" />
-                  <Text1 text="MATIC" className="text-[14px] ml-2" />
-                </div>
-              </div> */}
             </div>
             <div className=" mt-[90px]">
               <div>
@@ -278,38 +225,13 @@ const SearchPage = () => {
                       return (
                         <div key={nft.image} className="py-[23px] pr-[73px]">
                           <div className=" relative">
-                            <LazyImage src={nft.image} className="w-[60px] h-[60px] rounded-[9px]" />
+                            <LazyImage3 src={nft.image} className="w-[60px] h-[60px] rounded-[9px]" />
                             <LazyImage src="/images/search/eth.png" className="w-[18px] h-[18px] absolute bottom-0 right-0 z-10" />
                           </div>
                         </div>
                       )
                     })
                   }
-                  
-                  {/* <div className="py-[23px] pr-[73px]">
-                    <div className=" relative">
-                      <LazyImage src="/images/search/demo.png" className="w-[60px] h-[60px] rounded-[9px]" />
-                      <LazyImage src="/images/search/eth.png" className="w-[18px] h-[18px] absolute bottom-0 right-0 z-10" />
-                    </div>
-                  </div>
-                  <div className="py-[23px] pr-[73px]">
-                    <div className=" relative">
-                      <LazyImage src="/images/search/demo.png" className="w-[60px] h-[60px] rounded-[9px]" />
-                      <LazyImage src="/images/search/eth.png" className="w-[18px] h-[18px] absolute bottom-0 right-0 z-10" />
-                    </div>
-                  </div>
-                  <div className="py-[23px] pr-[73px]">
-                    <div className=" relative">
-                      <LazyImage src="/images/search/demo.png" className="w-[60px] h-[60px] rounded-[9px]" />
-                      <LazyImage src="/images/search/eth.png" className="w-[18px] h-[18px] absolute bottom-0 right-0 z-10" />
-                    </div>
-                  </div>
-                  <div className="py-[23px] pr-[73px]">
-                    <div className=" relative">
-                      <LazyImage src="/images/search/demo.png" className="w-[60px] h-[60px] rounded-[9px]" />
-                      <LazyImage src="/images/search/eth.png" className="w-[18px] h-[18px] absolute bottom-0 right-0 z-10" />
-                    </div>
-                  </div> */}
                   {
                     activityData.nftAsset.length > 5 && 
                       <div className="py-[23px] pr-[73px]">
@@ -348,16 +270,6 @@ const SearchPage = () => {
                         )
                       })
                     }
-                    
-                    {/* <div className="flex items-center mt-[18px]">
-                      <div className="pl-[0px] w-[304px] flex items-center">
-                        <LazyImage src="/images/search/pol.png" className="w-[18px] h-[18px] mr-[30px]" />
-                        <Text1>0</Text1>
-                      </div>
-                      <div className="pl-[20px]">
-                        <Text1>224</Text1>
-                      </div>
-                    </div> */}
                   </div>
                   <div className="mt-10">
                     <div className="flex">
@@ -383,16 +295,6 @@ const SearchPage = () => {
                         )
                       })
                     }
-                    
-                    {/* <div className="flex items-center mt-[18px]">
-                      <div className="pl-[0px] w-[304px] flex items-center">
-                        <LazyImage src="/images/search/pol.png" className="w-[18px] h-[18px] mr-[30px]" />
-                        <Text1>0</Text1>
-                      </div>
-                      <div className="pl-[20px]">
-                        <Text1>112</Text1>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
               </div>

@@ -94,7 +94,7 @@ const RadarChart3: React.FC<any> = ({
   useEffect(() => {
     if (data.length > 0) {
       const valueList = data.map((item: any) => {
-        return item.label_degree + 40
+        return item.label_relevance
       })
       var chartDom = document.getElementById('radarchart');
       if (chartDom) {
