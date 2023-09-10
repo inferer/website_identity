@@ -62,7 +62,7 @@ const LevelScore: React.FC<{
         collect_address: router.query.address[0],
         chainid: '1',
         ticket_id: '',
-        ticket_level: identityInfo.level,
+        ticket_level: identityInfo.level || 'Poor',
         ticket: JSON.stringify(identityInfo)
       })
       if (res.status === 200 && res.data.id > -1) {

@@ -1,6 +1,6 @@
 import LazyImage from "@/components/LazyImage"
 import { useSearchStore } from "@/state"
-import { useEffect, useMemo } from "react"
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from "react"
 
 export const RecommendTag: React.FC<{
   type: string
@@ -64,22 +64,147 @@ export const RecommendItem: React.FC<{
   )
 }
 
+export const RecommendItem2: React.FC<{
+  itemData: any,
+  arrowIndex: number,
+  index: number,
+  onClick?: (type: string) => void
+ }> = ({
+  itemData,
+  arrowIndex,
+  index,
+  onClick
+ }) => {
+  const isActive = useMemo(() => {
+    return index === arrowIndex
+  }, [index, arrowIndex, itemData])
+  return (
+    <>
+      {
+        itemData.type === 'text' && <div className={`px-3 font-dnormal text-[20px] text-[#3F4664] mb-[10px] ${itemData.value === 'Recommend' ? 'mt-[14px]': ''}`}>{itemData.value}</div>
+      }
+      {
+        (itemData.type === 'recently' || itemData.type === 'recommend') && 
+        <div className={`flex items-center py-[9px] px-[12px] hover:bg-[rgba(78,170,182,0.04)] cursor-pointer ${isActive ? 'bg-[rgba(78,170,182,0.04)]' : ''} `}
+        
+        >
+          {
+            itemData.type === 'recently' ? <RecommendUser type="User" /> : <RecommendTag type={itemData.category} />
+          }
+          
+          <div className="text-[16px] text-[rgba(63,70,100,0.60)] font-dnormal ml-4"
+            onClick={e => {
+              e.stopPropagation()
+              onClick && onClick('user')
+            }}
+          >{ itemData.address }</div>
+        </div>
+      }
+      
+    </>
+     
+   )
+ }
 
-const Recommend: React.FC<{
+let globalIndex = 0
+let globalListLength = 0
+
+const Recommend = ({
+  inputValue,
+  onClick,
+  onArrowChange,
+  onFiLterChange
+}: {
   inputValue: string,
   onClick?: (type: string, addr: string) => void
-}> = ({
-  inputValue,
-  onClick
-}) => {
+  onArrowChange?: (index: number) => void
+  onFiLterChange?: (data: any[]) => void
+}, ref: any) => {
   const recentlyData = useSearchStore(state => state.recentlyData)
   const recommendUsers = useSearchStore(state => state.recommendUsers)
   const getRecentlyData = useSearchStore(state => state.getRecentlyData)
   const getRecommendUsers = useSearchStore(state => state.getRecommendUsers)
+  const [arrowIndex, setArrowIndex] = useState(0)
+
+  const [filterList, setFilterList] = useState<any[]>([])
+
+  // useEffect(() => {
+    
+
+  // }, [recentlyData, recommendUsers, inputValue])
 
   const handleKeyup = (event: any) => {
-    console.log(event)
+    event.stopPropagation()
+    // @ts-ignore
+    const filterList = window.globalFilterList
+    if (event.keyCode === 38) {
+      if (globalIndex <= 0) {
+        globalIndex = globalListLength
+      }
+      const filterItem = filterList[globalIndex - 1]
+      if (filterItem && filterItem.type === 'text') {
+        setArrowIndex(globalIndex -= 2)
+      } else {
+        setArrowIndex(globalIndex -= 1)
+      }
+      onArrowChange && onArrowChange(globalIndex)
+    }    
+    if (event.keyCode === 40) {
+      if (globalIndex >= globalListLength - 1) {
+        globalIndex = 0
+      }
+      const filterItem = filterList[globalIndex + 1]
+      if (filterItem && filterItem.type === 'text') {
+        setArrowIndex(globalIndex += 2)
+      } else {
+        setArrowIndex(globalIndex += 1)
+      }
+      onArrowChange && onArrowChange(globalIndex)
+    }
+    
   }
+
+  const handleFilter = useCallback((inputValue: string) => {
+    let filterData: any[] = []
+    let filterData2: any[] = []
+    let filterData3: any[] = []
+    let len = 0
+    if (!inputValue) {
+      filterData = recentlyData.map(addr => ({address: addr, type: 'recently'}))
+    } else {
+      filterData = recentlyData.filter(addr => addr.indexOf(inputValue) > -1).map(addr => ({address: addr, type: 'recently'}))
+    }
+    if (!inputValue) {
+      filterData2 = recommendUsers.map(user => ({...user, type: 'recommend'}))
+    } else {
+      filterData2 = recommendUsers.filter(user => user.address.indexOf(inputValue) > -1).map(user => ({...user, type: 'recommend'}))
+    }
+
+    if (filterData.length > 0) {
+      filterData3.push({
+        type: 'text',
+        value: 'Recently'
+      })
+      filterData3.push(...filterData)
+      len += filterData.length
+    }
+
+    if (filterData2.length > 0) {
+      filterData3.push({
+        type: 'text',
+        value: 'Recommend'
+      })
+      filterData3.push(...filterData2)
+      len += filterData2.length
+    }
+    globalListLength = filterData3.length
+    setArrowIndex(0)
+    globalIndex = 0
+    // @ts-ignore
+    window.globalFilterList = filterData3
+    onFiLterChange && onFiLterChange(filterData3)
+    setFilterList(filterData3)
+  }, [recentlyData, recommendUsers]) 
 
   useEffect(() => {
     getRecentlyData()
@@ -90,20 +215,14 @@ const Recommend: React.FC<{
     return () => {
       document.removeEventListener('keyup', handleKeyup)
     }
-
   }, [])
 
-  const filterRecentlyData = useMemo(() => {
-    if (!inputValue) return recentlyData
-    return recentlyData.filter(addr => addr.indexOf(inputValue) > -1)
-  }, [recentlyData, inputValue])
 
-  const filterRecommendUsers = useMemo(() => {
-    if (!inputValue) return recommendUsers
-    return recommendUsers.filter(user => user.address.indexOf(inputValue) > -1)
-  }, [recommendUsers, inputValue])
+  useImperativeHandle(ref, () => ({
+    handleFilter: (value: string) => handleFilter(value)
+  }))
 
-  if (filterRecentlyData.length === 0 && filterRecommendUsers.length === 0) {
+  if (filterList.length === 0) {
     return null
   }
 
@@ -114,67 +233,23 @@ const Recommend: React.FC<{
       }}
     >
       {
-        filterRecentlyData.length > 0 && 
-        <div className="mb-[14px]">
-          <div className=" px-3 font-dnormal text-[20px] text-[#3F4664] mb-[10px]">Recently</div>
-          <div>
-            {
-              filterRecentlyData.map(addr => {
-                return (
-                  <RecommendItem key={addr} address={addr}
-                    onClick={() => {
-                      onClick && onClick('user', addr)
-                    }}
-                  >
-                    <RecommendUser type="User" />
-                  </RecommendItem>
-                )
-              })
-            }
-            {/* <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-              <RecommendUser type="User" />
-            </RecommendItem> */}
-
-          </div>
-        </div>
-      }
-      {
-        filterRecommendUsers.length > 0 &&
-        <div>
-          <div className=" px-3 font-dnormal text-[20px] text-[#3F4664] mb-[10px]">Recommend</div>
-          <div>
-            {
-              filterRecommendUsers.map(item => {
-                return (
-                  <RecommendItem key={item.address} address={item.address}
-                    onClick={() => {
-                      onClick && onClick('recommend', item.address)
-                    }}
-                  >
-                    <RecommendTag type={item.category} />
-                  </RecommendItem>
-                )
-              })
-            }
-            
-            {/* <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-              <RecommendTag type="Sport" />
-            </RecommendItem>
-            <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-              <RecommendTag type="Social" />
-            </RecommendItem>
-            <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-              <RecommendTag type="Game" />
-            </RecommendItem>
-            <RecommendItem address="0x231d3559aa848bf10366fb9868590f01d34bf240">
-              <RecommendTag type="Finance" />
-            </RecommendItem> */}
-          </div>
-        </div>
+        filterList.map((data, index) => {
+          return (
+            <RecommendItem2 
+              key={(data.address || data.value) + index} 
+              itemData={data} 
+              arrowIndex={arrowIndex}
+              index={index}
+              onClick={(type) => {
+                onClick && onClick(type, data.address)
+              }}
+            />
+          )
+        })
       }
       
     </div>
   )
 }
 
-export default Recommend
+export default forwardRef(Recommend) 

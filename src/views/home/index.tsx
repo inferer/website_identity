@@ -1,7 +1,7 @@
 import LazyImage from "@/components/LazyImage"
 import Wrap from "@/components/Wrap"
 import PageHeader from "@/components/pc/PageHeader"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { message } from 'antd';
 import Recommend from "./components/Recommend"
 import { useSearchStore } from "@/state"
@@ -23,9 +23,17 @@ const HomePage = () => {
   const [starting, setStarting] = useState(true)
   const [startMove, setStartmove] = useState(false)
 
+  const recommendRef = useRef<any>(null)
+
   const handleInputClick = (e: any) => {
     e.stopPropagation()
     setInputClick(true)
+    setTimeout(() => {
+      if (recommendRef.current && !inputValue) {
+        recommendRef.current.handleFilter('')
+      }
+    }, 500)
+    
   }
 
   const handleInputFocus = () => {
@@ -50,6 +58,7 @@ const HomePage = () => {
       setSearchIng(true)
       setInputClick(false)
       setFromPage('HOME')
+      setInputFocus(false)
       await searchByAddress(newAddress)
       setRecentlyData(newAddress)
       router.push({ pathname: `/search/${newAddress}` })
@@ -64,15 +73,37 @@ const HomePage = () => {
     messageApi.error('Invalid address')
     
   }
+
   const handleInputKeyUp = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       handleSearch()
+    } else {
+      // if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp' && event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+      if ((event.key.length === 1 && /^[a-zA-Z0-9]*$/.test(event.key)) || event.key === 'Backspace') {
+        if (recommendRef.current) {
+          recommendRef.current.handleFilter(inputValue)
+        }
+      }
+      
     }
   }
 
   const handleRecommendClick = async (type: string, address: string) => {
     setInputValue(address)
     handleSearch(address)
+  }
+
+  const hanleArrowChange = async (index: number) => {
+    // @ts-ignore
+    const filterList = window.globalFilterList || []
+    const filterItem = filterList[index]
+    if (filterItem && filterItem.address) {
+      setInputValue(filterItem.address)
+    }
+  }
+
+  const handleFilterChange = async (data: any[]) => {
+    
   }
 
   useEffect(() => {
@@ -125,8 +156,11 @@ const HomePage = () => {
                 inputClick && !searchIng && 
                 <div className="mt-3">
                   <Recommend
+                    ref={recommendRef}
                     inputValue={inputValue}
                     onClick={handleRecommendClick}
+                    onArrowChange={hanleArrowChange}
+                    onFiLterChange={handleFilterChange}
                   />
                 </div>
               }
