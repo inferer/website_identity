@@ -83,7 +83,7 @@ const SearchPage = () => {
       {contextHolder}
       <PageHeader />
       <Wrap>
-        <div className={`flex items-center pt-[77px] transition-all duration-300 scale-90 opacity-0 ${!isGlobalSearching ? ' scale-[1] opacity-100' : ''}`}>
+        <div className={`flex items-center pt-[77px] transition-all duration-300 scale-100 opacity-0 ${!isGlobalSearching ? ' scale-[1] opacity-100' : ''}`}>
           <LazyImage src="/images/home/logo2.png" className="w-[48px] h-[48px] mr-[27px]" />
           <div>
             <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
@@ -114,7 +114,7 @@ const SearchPage = () => {
             <LazyImage src="/images/home/loading.gif" className="w-[400px] h-[300px]" />
           </div>
         }
-        <div className={`relative transition-all duration-300 opacity-0 ${!isGlobalSearching ? 'opacity-100' : ''}`}>
+        <div className={`relative transition-all duration-300 opacity-0 top-[100px] ${!isGlobalSearching ? 'opacity-100 top-[0px]' : ''}`}>
 
         
         {

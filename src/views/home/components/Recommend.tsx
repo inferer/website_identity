@@ -86,17 +86,17 @@ export const RecommendItem2: React.FC<{
       {
         (itemData.type === 'recently' || itemData.type === 'recommend') && 
         <div className={`flex items-center py-[9px] px-[12px] hover:bg-[rgba(78,170,182,0.04)] cursor-pointer ${isActive ? 'bg-[rgba(78,170,182,0.04)]' : ''} `}
-        
+          onClick={e => {
+            e.stopPropagation()
+            onClick && onClick('user')
+          }}
         >
           {
             itemData.type === 'recently' ? <RecommendUser type="User" /> : <RecommendTag type={itemData.category} />
           }
           
           <div className="text-[16px] text-[rgba(63,70,100,0.60)] font-dnormal ml-4"
-            onClick={e => {
-              e.stopPropagation()
-              onClick && onClick('user')
-            }}
+            
           >{ itemData.address }</div>
         </div>
       }
