@@ -1,6 +1,6 @@
 import LazyImage from "@/components/LazyImage"
 import { useSearchStore } from "@/state"
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from "react"
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react"
 
 export const RecommendTag: React.FC<{
   type: string
@@ -127,11 +127,7 @@ const Recommend = ({
   const [arrowIndex, setArrowIndex] = useState(0)
 
   const [filterList, setFilterList] = useState<any[]>([])
-
-  // useEffect(() => {
-    
-
-  // }, [recentlyData, recommendUsers, inputValue])
+  const wrapRef = useRef<any>(null)
 
   const handleKeyup = (event: any) => {
     event.stopPropagation()
@@ -160,6 +156,18 @@ const Recommend = ({
         setArrowIndex(globalIndex += 1)
       }
       onArrowChange && onArrowChange(globalIndex)
+    }
+
+    if (event.keyCode === 38 || event.keyCode === 40) {
+      if (globalIndex > 4) {
+        if (wrapRef.current) {
+          wrapRef.current.scrollTop = 200
+        }
+      } else {
+        if (wrapRef.current) {
+          wrapRef.current.scrollTop = 0
+        }
+      }
     }
     
   }
@@ -228,6 +236,7 @@ const Recommend = ({
 
   return (
     <div className="px-3 py-[20px] recommend-wrap"
+      ref={wrapRef}
       onClick={e => {
         e.stopPropagation()
       }}
