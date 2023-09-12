@@ -27,7 +27,7 @@ const POLLING_INTERVAL = 12000
 // const SUPPORTED_CHAIN_ID = [ CHAIN_ID ]
 const SUPPORTED_CHAIN_ID = Object.keys(RPC_URLS_ID).map(key => Number(key))
 
-export const injected = new InjectedConnector({ supportedChainIds: SUPPORTED_CHAIN_ID })
+export const injected = new InjectedConnector({})
 // export const injected = new InjectedConnector({})
 
 const walletconnect = new WalletConnectConnector({

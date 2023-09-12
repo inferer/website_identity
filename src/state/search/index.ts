@@ -133,10 +133,13 @@ const useSearchStore = create<SearchState>()((set, get) => ({
     })
   },
   getRecommendUsers: async () => {
-    const res = await fetcher('/api/identity/getRecommend')
-    if (res.status === 200) {
-      set({ recommendUsers: res.data.users || []})
+    if (get().recommendUsers.length <= 0) {
+      const res = await fetcher('/api/identity/getRecommend')
+      if (res.status === 200) {
+        set({ recommendUsers: res.data.users || []})
+      }
     }
+    
   },
   isGlobalSearching: false,
   setSearchingGlobal: (flag?: boolean) => {

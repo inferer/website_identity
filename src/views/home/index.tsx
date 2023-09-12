@@ -16,6 +16,7 @@ const HomePage = () => {
   const setFromPage = useSearchStore(state => state.setFromPage)
   const setRecentlyData = useSearchStore(state => state.setRecentlyData)
   const setSearchingGlobal = useSearchStore(state => state.setSearchingGlobal)
+  const getRecommendUsers = useSearchStore(state => state.getRecommendUsers)
   const [inputFocus, setInputFocus] = useState(false)
   const [inputClick, setInputClick] = useState(false)
   const [inputValue, setInputValue] = useState('')
@@ -107,6 +108,7 @@ const HomePage = () => {
   }
 
   useEffect(() => {
+    getRecommendUsers()
     const handleDocumentClick = () => {
       setInputClick(false)
     }

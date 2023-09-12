@@ -26,6 +26,7 @@ const SearchPage = () => {
   const setRecentlyData = useSearchStore(state => state.setRecentlyData)
   const isGlobalSearching = useSearchStore(state => state.isGlobalSearching)
   const setSearchingGlobal = useSearchStore(state => state.setSearchingGlobal)
+  const getRecommendUsers = useSearchStore(state => state.getRecommendUsers)
   const [inputFocus, setInputFocus] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [searchIng, setSearchIng] = useState(false)
@@ -50,8 +51,8 @@ const SearchPage = () => {
   const handleInputBlur = () => {
     setInputFocus(false)
   }
-  const handleSearch2 = async () => {
-    router.push({ pathname: `/search/${inputValue}` })
+  const handleSearch2 = async (address?: string) => {
+    router.push({ pathname: `/search/${address || inputValue}` })
   }
   const handleSearch = async (address?: string) => {
     if (searchIng) {
@@ -86,8 +87,8 @@ const SearchPage = () => {
   }
 
   const handleRecommendClick = async (type: string, address: string) => {
-    setInputValue(address)
-    handleSearch2()
+    // setInputValue(address)
+    handleSearch2(address)
   }
 
   const hanleArrowChange = async (index: number) => {
@@ -115,6 +116,7 @@ const SearchPage = () => {
   }, [router, fromPage])
 
   useEffect(() => {
+    getRecommendUsers()
     const handleDocumentClick = () => {
       setInputClick(false)
     }
@@ -279,6 +281,18 @@ const SearchPage = () => {
               </div>
               <div className="mt-10 flex items-center">
                 <div className="pl-[30px] w-[430px] flex flex-wrap">
+                  {
+                    activityData.nftAsset.length === 0 &&
+                      <div className="w-full flex justify-center">
+                        <div>
+                         <LazyImage src="/images/search/nodata.png" className="w-[201px] h-[140px]" />
+                         <div className="text-[rgba(22,31,49,0.60)] font-dnormal text-[16px] mt-4 text-center">No result</div>
+                        </div>
+                        
+                      </div>
+
+                  }
+                  
                   {
                     activityData.nftAsset.slice(0, 5).map((nft: any) => {
                       return (
