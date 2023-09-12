@@ -148,7 +148,7 @@ const Recommend = ({
       onArrowChange && onArrowChange(globalIndex)
     }    
     if (event.keyCode === 40) {
-      if (globalIndex >= globalListLength - 1) {
+      if (globalIndex >= globalListLength) {
         globalIndex = 0
       }
       const filterItem = filterList[globalIndex + 1]

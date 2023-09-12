@@ -1,7 +1,7 @@
 import LazyImage, { LazyImage3 } from "@/components/LazyImage"
 import Wrap from "@/components/Wrap"
 import PageHeader from "@/components/pc/PageHeader"
-import { useEffect, useRef, useState } from "react"
+import { SetStateAction, useEffect, useRef, useState } from "react"
 import { message } from 'antd';
 import SubTitle, { SubTitle2, SubTitle3, Text1 } from "./components/SubTitle"
 import BasicItem, { BasicNftItem } from "./components/BasicItem"
@@ -12,6 +12,8 @@ import { useSearchStore, useUserStore } from '@/state'
 import { toChecksumAddress } from "@/utils";
 import LevelScore from "./components/LevelScore";
 import Recommend from "../home/components/Recommend";
+
+let currentInputValue: SetStateAction<string>
 
 const SearchPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -26,6 +28,7 @@ const SearchPage = () => {
   const setRecentlyData = useSearchStore(state => state.setRecentlyData)
   const isGlobalSearching = useSearchStore(state => state.isGlobalSearching)
   const setSearchingGlobal = useSearchStore(state => state.setSearchingGlobal)
+  const setFromPage = useSearchStore(state => state.setFromPage)
   const getRecommendUsers = useSearchStore(state => state.getRecommendUsers)
   const [inputFocus, setInputFocus] = useState(false)
   const [inputValue, setInputValue] = useState('')
@@ -52,6 +55,13 @@ const SearchPage = () => {
     setInputFocus(false)
   }
   const handleSearch2 = async (address?: string) => {
+    const searchAddress = address || inputValue
+    let newAddress = toChecksumAddress(searchAddress)
+    if (!newAddress) {
+      messageApi.error('Invalid address')
+      return
+    }
+    setFromPage('')
     router.push({ pathname: `/search/${address || inputValue}` })
   }
   const handleSearch = async (address?: string) => {
@@ -81,6 +91,7 @@ const SearchPage = () => {
         if (recommendRef.current) {
           recommendRef.current.handleFilter(inputValue)
         }
+        currentInputValue = inputValue
       }
       
     }
@@ -97,6 +108,8 @@ const SearchPage = () => {
     const filterItem = filterList[index]
     if (filterItem && filterItem.address) {
       setInputValue(filterItem.address)
+    } else {
+      setInputValue(currentInputValue)
     }
   }
 

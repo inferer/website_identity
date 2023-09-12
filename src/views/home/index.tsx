@@ -1,13 +1,15 @@
 import LazyImage from "@/components/LazyImage"
 import Wrap from "@/components/Wrap"
 import PageHeader from "@/components/pc/PageHeader"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { SetStateAction, useCallback, useEffect, useRef, useState } from "react"
 import { message } from 'antd';
 import Recommend from "./components/Recommend"
 import { useSearchStore } from "@/state"
 import { useRouter } from "next/router"
 import { toChecksumAddress } from "@/utils"
 import Link from "next/link";
+
+let currentInputValue: SetStateAction<string>
 
 const HomePage = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -84,9 +86,11 @@ const HomePage = () => {
         if (recommendRef.current) {
           recommendRef.current.handleFilter(inputValue)
         }
+        currentInputValue = inputValue
       }
       
     }
+    
   }
 
   const handleRecommendClick = async (type: string, address: string) => {
@@ -100,6 +104,8 @@ const HomePage = () => {
     const filterItem = filterList[index]
     if (filterItem && filterItem.address) {
       setInputValue(filterItem.address)
+    } else {
+      setInputValue(currentInputValue)
     }
   }
 
