@@ -110,11 +110,13 @@ let globalIndex = 0
 let globalListLength = 0
 
 const Recommend = ({
+  from,
   inputValue,
   onClick,
   onArrowChange,
   onFiLterChange
 }: {
+  from?: string,
   inputValue: string,
   onClick?: (type: string, addr: string) => void
   onArrowChange?: (index: number) => void
@@ -235,7 +237,7 @@ const Recommend = ({
   }
 
   return (
-    <div className="px-3 py-[20px] recommend-wrap"
+    <div className={`px-3 py-[20px] recommend-wrap ${from === 'search' ? 'recommend-wrap-search' : ''}`}
       ref={wrapRef}
       onClick={e => {
         e.stopPropagation()

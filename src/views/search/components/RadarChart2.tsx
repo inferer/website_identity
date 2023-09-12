@@ -25,22 +25,22 @@ const RadarChart2: React.FC<any> = ({
       <div className='flex items-center'>
         <div className=''>
           <svg xmlns="http://www.w3.org/2000/svg" width="347" height="144" viewBox="0 0 347 144" fill="none">
-            <path d="M0 138H188.5V6H347" stroke="url(#paint0_linear_1982_1562)" stroke-width="12"/>
+            <path d="M0 138H188.5V6H347" stroke="url(#paint0_linear_1982_1562)" strokeWidth="12"/>
             <defs>
               <linearGradient id="paint0_linear_1982_1562" x1="4.99999" y1="134" x2="347" y2="138" gradientUnits="userSpaceOnUse">
-                <stop offset="0.00287353" stop-color="#E3E1FF"/>
-                <stop offset="0.44502" stop-color="#E3E1FF"/>
-                <stop offset="1" stop-color="#FEF0F7"/>
+                <stop offset="0.00287353" stopColor="#E3E1FF"/>
+                <stop offset="0.44502" stopColor="#E3E1FF"/>
+                <stop offset="1" stopColor="#FEF0F7"/>
               </linearGradient>
             </defs>
           </svg>
           <svg xmlns="http://www.w3.org/2000/svg" width="347" height="144" viewBox="0 0 347 144" fill="none" className=' relative -top-[12px]'>
-            <path d="M0 6H188.5V138H347" stroke="url(#paint0_linear_1982_1563)" stroke-width="12"/>
+            <path d="M0 6H188.5V138H347" stroke="url(#paint0_linear_1982_1563)" strokeWidth="12"/>
             <defs>
               <linearGradient id="paint0_linear_1982_1563" x1="4.99999" y1="9.99999" x2="347" y2="6" gradientUnits="userSpaceOnUse">
-                <stop offset="0.00287353" stop-color="#E3E1FF"/>
-                <stop offset="0.44502" stop-color="#E3E1FF"/>
-                <stop offset="1" stop-color="#ECF0FF"/>
+                <stop offset="0.00287353" stopColor="#E3E1FF"/>
+                <stop offset="0.44502" stopColor="#E3E1FF"/>
+                <stop offset="1" stopColor="#ECF0FF"/>
               </linearGradient>
             </defs>
           </svg>

@@ -1,7 +1,7 @@
 import LazyImage, { LazyImage3 } from "@/components/LazyImage"
 import Wrap from "@/components/Wrap"
 import PageHeader from "@/components/pc/PageHeader"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { message } from 'antd';
 import SubTitle, { SubTitle2, SubTitle3, Text1 } from "./components/SubTitle"
 import BasicItem, { BasicNftItem } from "./components/BasicItem"
@@ -11,6 +11,7 @@ import { useRouter } from "next/router"
 import { useSearchStore, useUserStore } from '@/state'
 import { toChecksumAddress } from "@/utils";
 import LevelScore from "./components/LevelScore";
+import Recommend from "../home/components/Recommend";
 
 const SearchPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -28,7 +29,20 @@ const SearchPage = () => {
   const [inputFocus, setInputFocus] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [searchIng, setSearchIng] = useState(false)
+  const [inputClick, setInputClick] = useState(false)
 
+  const recommendRef = useRef<any>(null)
+
+  const handleInputClick = (e: any) => {
+    e.stopPropagation()
+    setInputClick(true)
+    setTimeout(() => {
+      if (recommendRef.current) {
+        recommendRef.current.handleFilter('')
+      }
+    }, 500)
+    
+  }
   const handleInputFocus = (event: any) => {
     event.target.select()
     setInputFocus(true)
@@ -59,7 +73,29 @@ const SearchPage = () => {
   }
   const handleInputKeyUp = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      handleSearch()
+      // handleSearch()
+      handleSearch2()
+    } else {
+      if ((event.key.length === 1 && /^[a-zA-Z0-9]*$/.test(event.key)) || event.key === 'Backspace') {
+        if (recommendRef.current) {
+          recommendRef.current.handleFilter(inputValue)
+        }
+      }
+      
+    }
+  }
+
+  const handleRecommendClick = async (type: string, address: string) => {
+    setInputValue(address)
+    handleSearch2()
+  }
+
+  const hanleArrowChange = async (index: number) => {
+    // @ts-ignore
+    const filterList = window.globalFilterList || []
+    const filterItem = filterList[index]
+    if (filterItem && filterItem.address) {
+      setInputValue(filterItem.address)
     }
   }
 
@@ -78,20 +114,32 @@ const SearchPage = () => {
     }
   }, [router, fromPage])
 
+  useEffect(() => {
+    const handleDocumentClick = () => {
+      setInputClick(false)
+    }
+    document.addEventListener('click', handleDocumentClick)
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick)
+    }
+  }, [])
+
   return (
     <div className=" font-dnormal">
       {contextHolder}
       <PageHeader />
       <Wrap>
-        <div className={`flex items-center pt-[77px] transition-all duration-[400ms] scale-100 opacity-0 ${!isGlobalSearching ? ' scale-[1] opacity-100' : ''}`}>
-          <LazyImage src="/images/home/logo2.png" className="w-[48px] h-[48px] mr-[27px]" />
-          <div>
+        <div className={`flex relative z-50 pt-[77px] transition-all duration-[400ms] scale-100 opacity-0 ${!isGlobalSearching ? ' scale-[1] opacity-100' : ''}`}>
+          <LazyImage src="/images/home/logo2.png" className="w-[48px] h-[48px] mr-[27px] mt-3" />
+          <div className="relative">
             <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
               <input className="search-input search-input2 search outline-none pl-6 pr-[74px] font-dnormal" placeholder="Search address identity"
                 value={inputValue}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
                 onKeyUp={handleInputKeyUp}
+                onClick={handleInputClick}
                 onChange={e => {
                   setInputValue(e.target.value)
                 }}
@@ -104,7 +152,18 @@ const SearchPage = () => {
               </div>
               
             </div>
-            
+            {
+              inputClick && !searchIng && 
+              <div className=" absolute top-[80px] left-0 w-full z-50">
+                <Recommend
+                  from="search"
+                  ref={recommendRef}
+                  inputValue={inputValue}
+                  onClick={handleRecommendClick}
+                  onArrowChange={hanleArrowChange}
+                />
+              </div>
+            }
           </div>
         </div>
         <div className=" w-full border-t border-[rgba(22,31,49,0.05);] mt-[30px] mb-[22px]"></div>

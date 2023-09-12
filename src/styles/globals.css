@@ -169,8 +169,9 @@ body {
   background: #FFF;
   box-shadow: 0px 16px 40px 0px rgba(69, 111, 136, 0.08);
   overflow-y: auto;
-
-
+}
+.recommend-wrap.recommend-wrap-search {
+  width: 100%;
 }
 ::-webkit-scrollbar {
   width: 6px;
