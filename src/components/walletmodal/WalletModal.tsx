@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-
+import { message } from 'antd';
 import { ConnectorNames } from "@/utils/web3React";
 import Modal from "../Modal";
 import useActiveWeb3React from "@/hooks/useActiveWeb3React";
@@ -18,10 +18,19 @@ const ConnectItem: React.FC<{ children: React.ReactElement}> = ({ children }) =>
 }
 
 const WalletModal: React.FC<any> = ({ onDismiss }) => {
+  const [messageApi, contextHolder] = message.useMessage();
   const { login, logout } = useAuth()
   const { account } = useActiveWeb3React()
 
   const handleConnect = (type: ConnectorNames) => {
+    // @ts-ignore
+    if (!window.ethereum) {
+      messageApi.error('Please install Metamask wallet first')
+      setTimeout(() => {
+        window.open('https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn', '_blank')
+      }, 1500)
+      return
+    }
     login(type)
   }
 
@@ -34,6 +43,7 @@ const WalletModal: React.FC<any> = ({ onDismiss }) => {
   return (
     <Modal type="primary" title="Connect wallet" onDismiss={onDismiss}>
       <div className="flex flex-col px-[26px] py-[24px] justify-center space-y-[14px]">
+        {contextHolder}
         <div className="text-white ">
         By connecting a wallet, you agree to Terms of Service and Privacy Policy.
         </div>
