@@ -96,6 +96,11 @@ const SearchPage = () => {
       
     }
   }
+  const handleInputPaste = (event: any) => {
+    if (recommendRef.current) {
+      recommendRef.current.handleFilter(event.clipboardData.getData('Text'))
+    }
+  }
 
   const handleRecommendClick = async (type: string, address: string) => {
     // setInputValue(address)
@@ -145,7 +150,7 @@ const SearchPage = () => {
       {contextHolder}
       <PageHeader />
       <Wrap>
-        <div className={`flex relative z-50 pt-[77px] transition-all duration-[400ms] scale-100 opacity-0 ${!isGlobalSearching ? ' scale-[1] opacity-100' : ''}`}>
+        <div className={`flex relative z-50 pt-[77px] transition-all duration-[300ms] scale-100 opacity-0 ${!isGlobalSearching ? ' scale-[1] opacity-100' : ''}`}>
           <LazyImage src="/images/home/logo2.png" className="w-[48px] h-[48px] mr-[27px] mt-3" />
           <div className="relative">
             <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
@@ -155,6 +160,7 @@ const SearchPage = () => {
                 onBlur={handleInputBlur}
                 onKeyUp={handleInputKeyUp}
                 onClick={handleInputClick}
+                onPaste={handleInputPaste}
                 onChange={e => {
                   setInputValue(e.target.value)
                 }}
@@ -188,7 +194,7 @@ const SearchPage = () => {
             <LazyImage src="/images/home/loading.gif" className="w-[400px] h-[300px]" />
           </div>
         }
-        <div className={`relative transition-all duration-[400ms] ${!isGlobalSearching ? 'opacity-100 top-[0px]' : ' opacity-0 top-[100px]'}`}>
+        <div className={`relative transition-all duration-[300ms] ${!isGlobalSearching ? 'opacity-100 top-[0px]' : ' opacity-0 top-[100px]'}`}>
 
         
         {
@@ -305,7 +311,6 @@ const SearchPage = () => {
                       </div>
 
                   }
-                  
                   {
                     activityData.nftAsset.slice(0, 5).map((nft: any) => {
                       return (
@@ -392,23 +397,23 @@ const SearchPage = () => {
               <SubTitle2 text="Basic" icon="/images/search/info.png" />
             </div>
             <div className="flex mt-10 flex-wrap">
-              <div className="mr-[246px]">
-                <BasicItem title="PoAP" icon="/images/search/poap.png" data={activityData.poap} />
+              <div className="mr-[94px]">
+                <BasicItem title="PoAP" icon="/images/search/poap2.png" data={activityData.poap} activityData={activityData} />
               </div>
               <div className="mr-[0px]">
-                <BasicItem title="Galxe OAT" icon="/images/search/oat.png" data={activityData.galxeOat} />
+                <BasicItem title="Galxe OAT" icon="/images/search/poap2.png" data={activityData.galxeOat} activityData={activityData}  />
               </div>
-              <div className="mr-[246px] mt-[110px]">
-                <BasicItem title="NFT interactors" icon="/images/search/nft.png" data={activityData.nftInteractors} />
+              <div className="mr-[94px] mt-[110px]">
+                <BasicItem title="NFT interactors" icon="/images/search/poap2.png" data={activityData.nftInteractors} activityData={activityData}  />
               </div>
               <div className="mt-[110px]">
-                <BasicItem title="TaskON OAT" icon="/images/search/oat.png" data={activityData.taskOnOat} />
+                <BasicItem title="TaskON OAT" icon="/images/search/poap2.png" data={activityData.taskOnOat} activityData={activityData}  />
               </div>
             </div>
             <div className="mt-[84px]">
               <SubTitle2 text="Advance" icon="/images/search/info.png" />
               <div className="mt-[50px]">
-                <BasicNftItem title="NFT interacted addresses" icon="/images/search/nft.png" data={activityData.nftInteractedAddress} />
+                <BasicNftItem title="Contacts" icon="/images/search/nft2.png" data={activityData.nftInteractedAddress} />
               </div>
               
             </div>

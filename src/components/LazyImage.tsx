@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useInView } from 'react-intersection-observer';
 
 export interface LazyImageProps {
@@ -27,6 +27,7 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, className, ...others}) => {
 export const LazyImage3: React.FC<LazyImageProps> = ({ src, className, ...others}) => {
   const [imgSrc, setImgSrc] = useState('')
   const { ref: inViewRef, inView, entry } = useInView({});
+  const imgRef = useRef<any>(null)
   useEffect(() => {
     if (inView && !imgSrc) {
       setImgSrc(src)
@@ -34,8 +35,13 @@ export const LazyImage3: React.FC<LazyImageProps> = ({ src, className, ...others
     
   }, [inView, src])
 
+
   return (
-    <img referrerPolicy="no-referrer" ref={inViewRef} src={imgSrc} className={ `transition-all ${!imgSrc ? 'opacity-0 ' : 'opacity-100 '} ${className}` } { ...others } alt="" />
+    <img referrerPolicy="no-referrer" ref={inViewRef} src={imgSrc} className={ `transition-all ${!imgSrc ? 'opacity-0 ' : 'opacity-100 '} ${className}` } { ...others } alt="" onError={function() {
+      if (imgSrc) {
+        // setImgSrc('https://ipfs.io/ipfs/QmbJueCqTx2uRquib9XzxmJbWFDP9BYwTFGrAzMZnbKjZ6')
+      }
+    }} />
   )
 }
 

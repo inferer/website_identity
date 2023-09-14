@@ -1,4 +1,4 @@
-import LazyImage from "@/components/LazyImage"
+import LazyImage, { LazyImage3 } from "@/components/LazyImage"
 import { Text1 } from "./SubTitle"
 import CopyClipboard from "@/components/CopyClipboard"
 
@@ -24,12 +24,12 @@ export const BasicNftItem: React.FC<{
   data
 }) => {
   return (
-    <div className="w-[486px] h-[481px] rounded-lg overflow-hidden">
-      <div className="flex items-center h-[60px] basic-nft-gradient text-[#fff] text-[26px] font-dbold px-5">
+    <div className="w-[550px] h-[481px] rounded-lg overflow-hidden flex flex-col justify-center items-center">
+      <div className="flex items-center h-[60px] basic-nft-gradient text-[#161F31] text-[26px] font-dbold px-5 w-full">
         <LazyImage src={icon} className="w-[22px] mr-[6px]" />
         {title}
       </div>
-      <div className="basic-nft-gradient2 px-[40px] py-[20px]">
+      <div className="basic-nft-gradient2 px-[40px] py-[20px] w-[549px]">
         <div className="flex justify-center items-baseline">
             <div className="text-[#ED7FDD] text-[64px] font-dbold">{ data.count }</div>
             <div className="text-[rgba(63,70,100,0.60)] font-dmedium text-[16px] ml-2">contacts</div>
@@ -48,23 +48,6 @@ export const BasicNftItem: React.FC<{
               )
             })
           }
-          
-          {/* <div className="flex items-center mb-[12px]">
-            <div>0x231d3559aa848bf10366fb9868590f01d34bf240</div>
-            <LazyImage src="/images/search/copy.png" className="w-4 h-4 ml-1" />
-          </div>
-          <div className="flex items-center mb-[12px]">
-            <div>0x231d3559aa848bf10366fb9868590f01d34bf240</div>
-            <LazyImage src="/images/search/copy.png" className="w-4 h-4 ml-1" />
-          </div>
-          <div className="flex items-center mb-[12px]">
-            <div>0x231d3559aa848bf10366fb9868590f01d34bf240</div>
-            <LazyImage src="/images/search/copy.png" className="w-4 h-4 ml-1" />
-          </div>
-          <div className="flex items-center mb-[12px]">
-            <div>0x231d3559aa848bf10366fb9868590f01d34bf240</div>
-            <LazyImage src="/images/search/copy.png" className="w-4 h-4 ml-1" />
-          </div> */}
         </div>
       </div>
     </div>
@@ -74,55 +57,101 @@ export const BasicNftItem: React.FC<{
 const BasicItem: React.FC<{
   title: string,
   icon: string,
-  data: any
+  data: any,
+  activityData: any
 }> = ({
   title,
   icon,
-  data
+  data,
+  activityData
 }) => {
   return (
-    <div className="w-[400px] h-[265px] rounded-lg overflow-hidden">
-      <div className="flex items-center h-[60px] bg-[#3F96FF] text-[#fff] text-[26px] font-dbold px-5">
+    <div className="w-[550px] rounded-lg overflow-hidden flex flex-col justify-center items-center">
+      <div className="flex items-center h-[60px] text-[#161F31] text-[26px] font-dbold px-5 basic-title w-full">
         <LazyImage src={icon} className="w-[22px] mr-[6px]" />
         {title}
       </div>
-      <div className="h-[205px] basic-gradient px-[60px] py-[25px]">
-        <div className="flex items-center">
-          <div className="w-[206px]">
-            <div>
-              <SubTitle text="Mint" />
+      <div className="h-[461px] px-[10px] py-[25px] basice-wrap w-[548px]">
+        <div className="flex flex-wrap">
+          {
+            activityData.nftAsset && activityData.nftAsset.length === 0 &&
+              <div className="w-full flex justify-center">
+                <div>
+                  <LazyImage src="/images/search/nodata.png" className="w-[201px] h-[140px]" />
+                  <div className="text-[rgba(22,31,49,0.60)] font-dnormal text-[16px] mt-4 text-center">No result</div>
+                </div>
+              </div>
+
+          }
+          {
+            activityData.nftAsset && activityData.nftAsset.slice(0, 5).map((nft: any) => {
+              return (
+                <div key={nft.image} className="py-[23px] px-[32px]">
+                  <div className=" relative flex justify-center flex-col items-center">
+                    <LazyImage3 src={nft.image} className="w-[60px] h-[60px] rounded-[9px]" />
+                    <div className="text-[rgba(63,70,100,0.90)] text-[16px] font-dnormal mt-[10px] max-w-[110px] line-clamp-1">
+                      {nft.name}
+                    </div>
+                  </div>
+                </div>
+              )
+            })
+          }
+          {
+            activityData.nftAsset && activityData.nftAsset.length > 5 && 
+              <div className="py-[23px] px-[32px]">
+                <div className="w-[110px] h-[110px] flex justify-center items-center text-[#161F31] font-dmedium text-[20px]">
+                  +{activityData.nftAsset.length - 5}
+                </div>
+              </div>
+          }
+          
+        </div>
+        <div className="pt-[25px] pb-[30px] px-[32px]">
+          <LazyImage src="/images/search/line2.png" className="w-[466px] h-[1px]" />
+        </div>
+        <div className=" flex justify-between items-center px-[64px]">
+          <div className="flex flex-col flex-1">
+            <div className="flex justify-between items-center">
+              <div>
+                <SubTitle text="Send" />
+              </div>
+              <div className="mt-2">
+                <Text1 text={data.send || '0'} />
+              </div>
             </div>
-            <div className="mt-2">
-              <Text1 text={data.mint || '0'} />
+            <div className="flex justify-between items-center">
+              <div>
+                <SubTitle text="Receive" />
+              </div>
+              <div className="mt-2">
+                <Text1 text={data.receive || '0'} />
+              </div>
             </div>
           </div>
-          <div className="">
-            <div>
-              <SubTitle text="Burn" />
+          <div className="px-[45px]">
+            <LazyImage src="/images/search/line2.png" className="w-[1px] h-[36px]" />
+          </div>
+          <div className="flex flex-col flex-1">
+            <div className="flex justify-between items-center">
+              <div>
+                <SubTitle text="Mint" />
+              </div>
+              <div className="mt-2">
+                <Text1 text={data.mint || '0'} />
+              </div>
             </div>
-            <div className="mt-2">
-              <Text1 text={data.burn || '0'} />
+            <div className="flex justify-between items-center">
+              <div>
+                <SubTitle text="Burn" />
+              </div>
+              <div className="mt-2">
+                <Text1 text={data.burn || '0'} />
+              </div>
             </div>
           </div>
         </div>
-        <div className="flex items-center mt-[30px]">
-          <div className="w-[206px]">
-            <div>
-              <SubTitle text="Send" />
-            </div>
-            <div className="mt-2">
-              <Text1 text={data.send || '0'} />
-            </div>
-          </div>
-          <div className="">
-            <div>
-              <SubTitle text="Receive" />
-            </div>
-            <div className="mt-2">
-              <Text1 text={data.receive || '0'} />
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   )

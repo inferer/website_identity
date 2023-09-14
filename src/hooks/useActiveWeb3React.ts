@@ -7,7 +7,7 @@ import { RPC_URLS_ID } from '@/utils/web3React'
 
 const RPC_URL = RPC_URLS_ID[1]
 
-export const bscRpcProvider = new StaticJsonRpcProvider(RPC_URL)
+// export const bscRpcProvider = new StaticJsonRpcProvider(RPC_URL)
 
 /**
  * Provides a web3 provider with or without user's signer
@@ -17,7 +17,8 @@ const useActiveWeb3React = (): Web3ReactContextInterface<Web3Provider> => {
   const { library, chainId, account, ...web3React } = useWeb3React()
   
   return { 
-    library: library ?? bscRpcProvider, 
+    // library: library ?? bscRpcProvider, 
+    library: library, 
     chainId: chainId ?? 97, 
     account: account ?? '',
     ...web3React 

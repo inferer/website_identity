@@ -12,7 +12,10 @@ export const LabelDataItem: React.FC<any> = ({
   index,
   itemData
 }) => {
-  const newIndex = index - (Math.floor(index / 7) * 6)
+  let newIndex = index - (Math.floor(index / 7) * 6)
+  if (newIndex === 7) {
+    newIndex = 1
+  }
   const bgColor = `label-data-bg-${newIndex}`
   const tipIcon = `/images/search/label-${newIndex}.png`
   return (

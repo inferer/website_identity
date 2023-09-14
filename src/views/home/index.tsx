@@ -92,6 +92,11 @@ const HomePage = () => {
     }
     
   }
+  const handleInputPaste = (event: any) => {
+    if (recommendRef.current) {
+      recommendRef.current.handleFilter(event.clipboardData.getData('Text'))
+    }
+  }
 
   const handleRecommendClick = async (type: string, address: string) => {
     setInputValue(address)
@@ -136,19 +141,20 @@ const HomePage = () => {
       <Wrap>
         {/* <div className={` transition-all duration-500 ${!starting ? ' scale-[0.75]' : ''} `}> */}
         <div className={` relative`}>
-          <div className={`absolute flex transition-all duration-[400ms] ${startMove ? 'top-[87px] left-0 ml-0' : 'top-[161px] left-[50%] -ml-[208px]'} `}>
+          <div className={`absolute flex transition-all duration-[300ms] ${startMove ? 'top-[87px] left-0 ml-0' : 'top-[161px] left-[50%] -ml-[208px]'} `}>
             <LazyImage src="/images/home/logo2.png" className={`${startMove ? 'w-[48px] h-[48px]' : 'w-[51px] h-[59px]'}`} />
-            <div className={`font-fmedium text-[36px] transition-all duration-[400ms] ml-5 gradient1 ${startMove ? ' opacity-0 ' : ' opacity-100 '} `}>Explore the Identity</div>
+            <div className={`font-fmedium text-[36px] transition-all duration-[300ms] ml-5 gradient1 ${startMove ? ' opacity-0 ' : ' opacity-100 '} `}>Explore the Identity</div>
           </div>
-          <div className={`absolute transition-all duration-[400ms] flex justify-center ${startMove ? ' left-[75px] top-[77px]' : ' left-[180px] top-[336px]'}`}>
+          <div className={`absolute transition-all duration-[300ms] flex justify-center ${startMove ? ' left-[75px] top-[77px]' : ' left-[180px] top-[336px]'}`}>
             <div>
               <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
-                <input className="search-input outline-none pl-6 pr-[74px] font-dnormal" placeholder="Search address identity"
+                <input className={`search-input transition-all duration-[300ms] outline-none pl-6 pr-[74px] font-dnormal ${startMove ? 'search' : ''}`} placeholder="Search address identity"
                   value={inputValue}
                   onFocus={handleInputFocus}
                   onBlur={handleInputBlur}
                   onKeyUp={handleInputKeyUp}
                   onClick={handleInputClick}
+                  onPaste={handleInputPaste}
                   disabled={searchIng}
                   onChange={e => {
                     setInputValue(e.target.value)
@@ -180,7 +186,7 @@ const HomePage = () => {
               
             </div>
           </div>
-          <div className={` absolute top-[150px] left-[400px] transition-all duration-[400ms] delay-200 ${startMove ? ' opacity-100 ' : ' opacity-0 '}`}>
+          <div className={` absolute top-[150px] left-[400px] transition-all duration-[300ms] delay-200 ${startMove ? ' opacity-100 ' : ' opacity-0 '}`}>
             {
               searchIng && 
               <div className="mt-[72px] flex justify-center min-h-[600px]">

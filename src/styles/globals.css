@@ -136,22 +136,21 @@ body {
   color: #3F4664;
   font-family: DM Sans;
   font-size: 20px;
-  &.search {
-    width: 670px;
-  }
+}
+.search-input.search {
+  width: 670px;
+}
 
-  &::placeholder {
-    color: rgba(63, 70, 100, 0.50);
-    font-family: DM Sans;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-  &::selection {
-    background-color: #dfedf0;
-  }
-  
+.search-input::placeholder {
+  color: rgba(63, 70, 100, 0.50);
+  font-family: DM Sans;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.search-input::selection {
+  background-color: #dfedf0;
 }
 .search-wrap {
   padding: 1px;
@@ -194,13 +193,30 @@ body {
 .basic-gradient {
   background: linear-gradient(0deg, rgba(63, 150, 255, 0.10) 0%, rgba(63, 150, 255, 0.10) 100%), #FFF;
 }
+.basic-title {
+  border-radius: 8px 8px 0px 0px;
+  background: linear-gradient(91deg, rgba(63, 150, 255, 0.10) 11.12%, rgba(46, 141, 255, 0.04) 89.59%);
+}
+.basice-wrap {
+  background-color: #FFF;
+  border-radius: 0px 0px 8px 8px;
+  border-right: 1px solid rgba(63,139,230,0.3);
+  border-bottom: 1px solid rgba(63,139,230,0.3);
+  border-left: 1px solid rgba(63,139,230,0.3);
+  background: #FFF;
+}
 
 .basic-nft-gradient {
-  background: linear-gradient(135deg, #EC80E2 0%, #FF6447 100%);
+  background: linear-gradient(91deg, rgba(236, 128, 226, 0.10) 0%, rgba(255, 100, 71, 0.10) 100%);
+  border-radius: 8px 8px 0px 0px;
 }
 
 .basic-nft-gradient2 {
-  background: linear-gradient(135deg, rgba(236, 128, 226, 0.10) 0%, rgba(255, 100, 71, 0.10) 100%), #FFF;
+  background: #FFF;
+  border-radius: 0px 0px 8px 8px;
+  border-right: 1px solid rgba(236, 128, 226, 0.50);
+  border-bottom: 1px solid rgba(236, 128, 226, 0.50);
+  border-left: 1px solid rgba(236, 128, 226, 0.50);
 }
 .label-data-bg-1 {
   background: linear-gradient(180deg, rgba(255, 220, 97, 0.05) 0%, rgba(250, 181, 45, 0.05) 100%), #FFF;

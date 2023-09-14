@@ -49,7 +49,7 @@ export const Text1: React.FC<{
   children
 }) => {
   return (
-    <div className={` text-[#3F8BE6] font-dbold text-[16px] ${className}`}>
+    <div className={` text-[#346DFF] font-dbold text-[16px] ${className}`}>
       { children || text }
     </div>
   )
