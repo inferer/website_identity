@@ -122,7 +122,7 @@ const SearchPage = () => {
     if (fromPage === 'HOME') {
       setSearchingGlobal(false)
     }
-  }, [fromPage])
+  }, [fromPage, setSearchingGlobal])
 
   useEffect(() => {
     if (router.query.address && router.query.address[0] && !fromPage) {
@@ -143,7 +143,7 @@ const SearchPage = () => {
     return () => {
       document.removeEventListener('click', handleDocumentClick)
     }
-  }, [])
+  }, [getRecommendUsers])
 
   return (
     <div className=" font-dnormal">

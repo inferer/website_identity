@@ -1,4 +1,4 @@
-export default {
+const storage = {
   setStorage(key: string, value: Object) {
     let res = ''
     if (typeof value == 'object') {
@@ -23,3 +23,5 @@ export default {
           window.localStorage.removeItem(key)
   },
 }
+
+export default storage

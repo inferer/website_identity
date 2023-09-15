@@ -49,7 +49,7 @@ const LevelScore: React.FC<{
         }
       })
     }
-  }, [userId, router.query.address])
+  }, [userId, router.query.address, getTicketInfo])
 
   const handleAction = useCallback(async (action: string) => {
     if (!account) {
@@ -90,7 +90,7 @@ const LevelScore: React.FC<{
       }
     }
     
-  }, [onPrresent, account, userId, router.query.address, identityInfo])
+  }, [onPrresent, account, userId, router.query.address, identityInfo, cancelCollectTicket, collectTicket, currentId, isFav, messageApi, ticketInfo])
 
   return (
     <div className="flex justify-center">

@@ -77,7 +77,7 @@ export const RecommendItem2: React.FC<{
  }) => {
   const isActive = useMemo(() => {
     return index === arrowIndex
-  }, [index, arrowIndex, itemData])
+  }, [index, arrowIndex])
   return (
     <>
       {
@@ -214,7 +214,7 @@ const Recommend = ({
     window.globalFilterList = filterData3
     onFiLterChange && onFiLterChange(filterData3)
     setFilterList(filterData3)
-  }, [recentlyData, recommendUsers]) 
+  }, [recentlyData, recommendUsers, onFiLterChange]) 
 
   useEffect(() => {
     getRecentlyData()
@@ -225,7 +225,7 @@ const Recommend = ({
     return () => {
       document.removeEventListener('keyup', handleKeyup)
     }
-  }, [])
+  }, [getRecentlyData, getRecommendUsers])
 
 
   useImperativeHandle(ref, () => ({

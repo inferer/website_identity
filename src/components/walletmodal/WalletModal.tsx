@@ -38,7 +38,7 @@ const WalletModal: React.FC<any> = ({ onDismiss }) => {
     if (account) {
       onDismiss()
     }
-  }, [account])
+  }, [account, onDismiss])
 
   return (
     <Modal type="primary" title="Connect wallet" onDismiss={onDismiss}>

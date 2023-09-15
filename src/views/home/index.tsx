@@ -128,7 +128,7 @@ const HomePage = () => {
     return () => {
       document.removeEventListener('click', handleDocumentClick)
     }
-  }, [])
+  }, [getRecommendUsers])
 
   useEffect(() => {
     router.prefetch('/search/0x776019ec6b3dee2b8fd4232cc70395a75e0eb0d2')
