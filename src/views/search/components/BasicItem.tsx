@@ -71,11 +71,11 @@ const BasicItem: React.FC<{
         <LazyImage src={icon} className="w-[22px] mr-[6px]" />
         {title}
       </div>
-      <div className="h-[461px] px-[10px] py-[25px] basice-wrap w-[548px]">
+      <div className="px-[10px] py-[25px] basice-wrap w-[548px]">
         <div className="flex flex-wrap">
           {
             activityData.nftAsset && activityData.nftAsset.length === 0 &&
-              <div className="w-full flex justify-center">
+              <div className="w-full flex justify-center py-10">
                 <div>
                   <LazyImage src="/images/search/nodata.png" className="w-[201px] h-[140px]" />
                   <div className="text-[rgba(22,31,49,0.60)] font-dnormal text-[16px] mt-4 text-center">No result</div>

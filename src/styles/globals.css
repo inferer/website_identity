@@ -200,9 +200,9 @@ body {
 .basice-wrap {
   background-color: #FFF;
   border-radius: 0px 0px 8px 8px;
-  border-right: 1px solid rgba(63,139,230,0.3);
-  border-bottom: 1px solid rgba(63,139,230,0.3);
-  border-left: 1px solid rgba(63,139,230,0.3);
+  border-right: 1px solid rgba(63,139,230,0.2);
+  border-bottom: 1px solid rgba(63,139,230,0.2);
+  border-left: 1px solid rgba(63,139,230,0.2);
   background: #FFF;
 }
 
