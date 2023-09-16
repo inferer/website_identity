@@ -139,6 +139,8 @@ body {
 }
 .search-input.search {
   width: 670px;
+  height: 56px;
+  box-shadow: 0px 16px 20px 0px rgba(69, 111, 136, 0.04);
 }
 
 .search-input::placeholder {

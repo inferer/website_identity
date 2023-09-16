@@ -151,7 +151,7 @@ const SearchPage = () => {
       <PageHeader />
       <Wrap>
         <div className={`flex relative z-50 pt-[77px] transition-all duration-[300ms] scale-100 opacity-0 ${!isGlobalSearching ? ' scale-[1] opacity-100' : ''}`}>
-          <LazyImage src="/images/home/logo2.png" className="w-[48px] h-[48px] mr-[27px] mt-3" />
+          <LazyImage src="/images/home/logo2.png" className="w-[42px] h-[42px] mr-[12px] mt-2" />
           <div className="relative">
             <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
               <input className="search-input search-input2 search outline-none pl-6 pr-[74px] font-dnormal" placeholder="Search address identity"
