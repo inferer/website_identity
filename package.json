@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 8890",
     "build": "next build",
-    "start": "next start -p 13883",
+    "start": "next start -p 8792",
     "upload": "node scripts/upload.js",
     "lint": "next lint"
   },
