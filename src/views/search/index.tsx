@@ -23,6 +23,7 @@ const SearchPage = () => {
   const getActivityData = useSearchStore(state => state.getActivityData)
   const searchItemList = useSearchStore(state => state.searchItemList)
   const activityData = useSearchStore(state => state.activityData)
+  const activityInfo = useSearchStore(state => state.activityInfo)
   const identityInfo = useSearchStore(state => state.identityInfo)
   const labelData2 = useSearchStore(state => state.labelData)
   const setRecentlyData = useSearchStore(state => state.setRecentlyData)
@@ -398,16 +399,16 @@ const SearchPage = () => {
             </div>
             <div className="flex mt-10 flex-wrap">
               <div className="mr-[94px]">
-                <BasicItem title="PoAP" icon="/images/search/poap2.png" data={activityData.poap} activityData={activityData} />
+                <BasicItem title="PoAP" icon="/images/search/poap2.png" data={activityInfo.poap} />
               </div>
               <div className="mr-[0px]">
-                <BasicItem title="Galxe OAT" icon="/images/search/poap2.png" data={activityData.galxeOat} activityData={activityData}  />
+                <BasicItem title="Galxe OAT" icon="/images/search/poap2.png" data={activityInfo.galxeOat} activityData={activityData}  />
               </div>
               <div className="mr-[94px] mt-[110px]">
-                <BasicItem title="NFT interactors" icon="/images/search/poap2.png" data={activityData.nftInteractors} activityData={activityData}  />
+                <BasicItem title="NFT interactors" icon="/images/search/poap2.png" data={activityInfo.nftInteractors} activityData={activityData}  />
               </div>
               <div className="mt-[110px]">
-                <BasicItem title="TaskON OAT" icon="/images/search/poap2.png" data={activityData.taskOnOat} activityData={activityData}  />
+                <BasicItem title="TaskON OAT" icon="/images/search/poap2.png" data={activityInfo.taskOnOat} activityData={activityData}  />
               </div>
             </div>
             <div className="mt-[84px]">

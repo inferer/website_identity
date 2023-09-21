@@ -58,12 +58,11 @@ const BasicItem: React.FC<{
   title: string,
   icon: string,
   data: any,
-  activityData: any
+  activityData?: any
 }> = ({
   title,
   icon,
-  data,
-  activityData
+  data
 }) => {
   return (
     <div className="w-[550px] rounded-lg overflow-hidden flex flex-col justify-center items-center">
@@ -72,9 +71,9 @@ const BasicItem: React.FC<{
         {title}
       </div>
       <div className="px-[10px] py-[25px] basice-wrap w-[548px]">
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap min-h-[260px]">
           {
-            activityData.nftAsset && activityData.nftAsset.length === 0 &&
+            data.nftAsset && data.nftAsset.length === 0 &&
               <div className="w-full flex justify-center py-10">
                 <div>
                   <LazyImage src="/images/search/nodata.png" className="w-[201px] h-[140px]" />
@@ -84,7 +83,7 @@ const BasicItem: React.FC<{
 
           }
           {
-            activityData.nftAsset && activityData.nftAsset.slice(0, 5).map((nft: any) => {
+            data.nftAsset && data.nftAsset.slice(0, 5).map((nft: any) => {
               return (
                 <div key={nft.image} className="py-[23px] px-[32px]">
                   <div className=" relative flex justify-center flex-col items-center">
@@ -98,10 +97,10 @@ const BasicItem: React.FC<{
             })
           }
           {
-            activityData.nftAsset && activityData.nftAsset.length > 5 && 
+            data.nftAsset && data.nftAsset.length > 5 && 
               <div className="py-[23px] px-[32px]">
-                <div className="w-[110px] h-[110px] flex justify-center items-center text-[#161F31] font-dmedium text-[20px]">
-                  +{activityData.nftAsset.length - 5}
+                <div className="w-[60px] h-[60px] flex justify-center items-center text-[#161F31] font-dmedium text-[20px]">
+                  +{data.nftAsset.length - 5}
                 </div>
               </div>
           }

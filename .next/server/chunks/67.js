@@ -80,6 +80,36 @@ const initActivityData = {
     },
     nftAsset: []
 };
+const initActivityInfo = {
+    poap: {
+        mint: 0,
+        burn: 0,
+        send: 0,
+        receive: 0,
+        nftAsset: []
+    },
+    nftInteractors: {
+        mint: 0,
+        burn: 0,
+        send: 0,
+        receive: 0,
+        nftAsset: []
+    },
+    galxeOat: {
+        mint: 0,
+        burn: 0,
+        send: 0,
+        receive: 0,
+        nftAsset: []
+    },
+    taskOnOat: {
+        mint: 0,
+        burn: 0,
+        send: 0,
+        receive: 0,
+        nftAsset: []
+    }
+};
 const initLabelData = [];
 const levelInfo = {
     "exceptional": 5.0,
@@ -95,6 +125,7 @@ const useSearchStore = (0,zustand__WEBPACK_IMPORTED_MODULE_1__.create)()((set, g
         fromPage: "",
         searchItemList: [],
         activityData: initActivityData,
+        activityInfo: initActivityInfo,
         labelData: initLabelData,
         setFromPage: (from)=>{
             set({
@@ -110,6 +141,7 @@ const useSearchStore = (0,zustand__WEBPACK_IMPORTED_MODULE_1__.create)()((set, g
             });
             if (res2.status === 200) {
                 const identityInfo = res2.data.identityInfo || {};
+                const activityInfo = res2.data.activityInfo || {};
                 tempData.levelScore = identityInfo.level ? levelInfo[identityInfo.level.toLowerCase()] : 0;
                 tempData.level = identityInfo.level;
                 tempData.nftInteractedAddress = {
@@ -161,6 +193,12 @@ const useSearchStore = (0,zustand__WEBPACK_IMPORTED_MODULE_1__.create)()((set, g
                 });
                 set({
                     identityInfo: identityInfo
+                });
+                set({
+                    activityInfo: {
+                        ...initActivityInfo,
+                        ...activityInfo
+                    }
                 });
             }
         },

@@ -39,6 +39,7 @@ export interface SearchState {
   recentlyData: string[],
   fromPage: string,
   activityData: { [key: string]: any },
+  activityInfo: { [key: string]: any },
   labelData: { [key: string]: any }[],
   searchItemList: ISearchItem[],
   recommendUsers: IRecommendUser[],
