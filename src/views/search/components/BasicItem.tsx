@@ -74,7 +74,7 @@ const BasicItem: React.FC<{
         <div className="flex flex-wrap min-h-[260px]">
           {
             data.nftAsset && data.nftAsset.length === 0 &&
-              <div className="w-full flex justify-center py-10">
+              <div className="w-full flex justify-center py-[3rem]">
                 <div>
                   <LazyImage src="/images/search/nodata.png" className="w-[201px] h-[140px]" />
                   <div className="text-[rgba(22,31,49,0.60)] font-dnormal text-[16px] mt-4 text-center">No result</div>
