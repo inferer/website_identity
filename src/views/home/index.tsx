@@ -142,7 +142,7 @@ const HomePage = () => {
         {/* <div className={` transition-all duration-500 ${!starting ? ' scale-[0.75]' : ''} `}> */}
         <div className={` relative`}>
           <div className={`absolute flex transition-all duration-[300ms] ${startMove ? 'top-[87px] left-0 ml-0' : 'top-[161px] left-[50%] -ml-[208px]'} `}>
-            <LazyImage src="/images/home/logo2.png" className={`${startMove ? 'w-[42px] h-[42px]' : 'w-[59px] h-[59px]'}`} />
+            <LazyImage src="/images/home/logo2.png" className={`${startMove ? 'w-[34px] h-[39px]' : 'w-[59px] h-[59px]'}`} />
             <div className={`font-fmedium text-[36px] transition-all duration-[300ms] ml-5 gradient1 ${startMove ? ' opacity-0 ' : ' opacity-100 '} `}>Explore the Identity</div>
           </div>
           <div className={`absolute transition-all duration-[300ms] flex justify-center ${startMove ? ' left-[54px] top-[77px]' : ' left-[180px] top-[336px]'}`}>

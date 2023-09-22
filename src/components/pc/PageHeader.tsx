@@ -4,7 +4,7 @@ import LazyImage from "../LazyImage"
 const PageHeader = () => {
   const router = useRouter()
   return (
-    <div className=" pl-[7.8vw] mx-auto pt-[36px] relative flex">
+    <div className=" pl-[7.8vw] mx-auto pt-[36px] relative flex page-header">
       <div 
         onClick={e => {
           e.stopPropagation()

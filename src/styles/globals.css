@@ -134,7 +134,6 @@ body {
   box-shadow: 0px 16px 40px 0px rgba(69, 111, 136, 0.08);
   caret-color: rgba(78, 170, 182, 1);
   color: #3F4664;
-  font-family: DM Sans;
   font-size: 20px;
 }
 .search-input.search {
@@ -145,7 +144,6 @@ body {
 
 .search-input::placeholder {
   color: rgba(63, 70, 100, 0.50);
-  font-family: DM Sans;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -244,6 +242,12 @@ body {
 
 .label-num-1 {
   background: linear-gradient(90deg, #E3E1FF 0%, #FFF0F7 100%);
+}
+
+@media screen and (max-width: 1440px) {
+  .page-header {
+    padding-left: 1.8vw;
+  }
 }
 
 

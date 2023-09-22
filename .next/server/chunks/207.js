@@ -135,7 +135,7 @@ _LazyImage__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ?
 const PageHeader = ()=>{
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_1__.useRouter)();
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: " pl-[7.8vw] mx-auto pt-[36px] relative flex",
+        className: " pl-[7.8vw] mx-auto pt-[36px] relative flex page-header",
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
             onClick: (e)=>{
                 e.stopPropagation();
