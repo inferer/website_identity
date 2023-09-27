@@ -1,8 +1,9 @@
 import { fetcher } from '@/utils/axios'
 import { create } from 'zustand'
-import { ISearchItem, SearchState } from './types'
+import { ISearchItem, ITxHistory, SearchState } from './types'
 import { formatTime, getChainLogo, getCoinName, num2Month } from '@/utils'
 import storage from '@/utils/storage'
+import moment from 'moment'
 
 const getImageUrl = (url: string = '') => {
   if (url.indexOf('ipfs:') > -1) {
@@ -41,6 +42,11 @@ export const levelInfo = {
 } as any
 
 const useSearchStore = create<SearchState>()((set, get) => ({
+  txHistoryData: {
+    xdata: [],
+    volumeData: [],
+    total: 0
+  },
   identityInfo: {},
   recommendUsers: [],
   recentlyData: [],
@@ -101,11 +107,21 @@ const useSearchStore = create<SearchState>()((set, get) => ({
           category_path_arr: item.label_category_path_name.split('/').slice(1)
         }
       })
+      let xdata: any[] = []
+      let volumeData: any[] = []
+      let total = 0
+      const txHistory = (res2.data.txHistory || []).reverse().forEach((item: ITxHistory) => {
+        const date = moment(item.monday_date).format('MMM D')
+        xdata.push(date)
+        volumeData.push(item.transaction_num)
+        total += item.transaction_num
+      })
       set({ searchItemList: newData })
       set({ activityData: tempData })
       set({ labelData: labelData })
       set({ identityInfo: identityInfo })
       set({ activityInfo: { ...initActivityInfo, ...activityInfo } })
+      set({ txHistoryData: { xdata, volumeData, total } })
     }
 
   },

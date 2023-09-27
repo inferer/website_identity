@@ -249,6 +249,25 @@ body {
     padding-left: 1.8vw;
   }
 }
-
+.chart-tip2 {
+  background-color: rgba(51, 56, 62, 0.8);
+  border-radius: 8px;
+  font-size: 20px;
+  color: #E8EAEC;
+  font-weight: 500;
+  padding: 4px 12px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+.chart-tip {
+  position: absolute;
+  height: 100px;
+  width: 200px;
+  opacity: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
 
 

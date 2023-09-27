@@ -12,6 +12,9 @@ import { useSearchStore, useUserStore } from '@/state'
 import { toChecksumAddress } from "@/utils";
 import LevelScore from "./components/LevelScore";
 import Recommend from "../home/components/Recommend";
+import TicketInfo from "./components/TicketInfo";
+import AssetInfo from "./components/AssetInfo";
+import TxInfo from "./components/TxInfo";
 
 let currentInputValue: SetStateAction<string>
 
@@ -26,6 +29,7 @@ const SearchPage = () => {
   const activityInfo = useSearchStore(state => state.activityInfo)
   const identityInfo = useSearchStore(state => state.identityInfo)
   const labelData2 = useSearchStore(state => state.labelData)
+  const txHistoryData = useSearchStore(state => state.txHistoryData)
   const setRecentlyData = useSearchStore(state => state.setRecentlyData)
   const isGlobalSearching = useSearchStore(state => state.isGlobalSearching)
   const setSearchingGlobal = useSearchStore(state => state.setSearchingGlobal)
@@ -146,6 +150,7 @@ const SearchPage = () => {
     }
   }, [getRecommendUsers])
 
+
   return (
     <div className=" font-dnormal">
       {contextHolder}
@@ -213,7 +218,8 @@ const SearchPage = () => {
               <SubTitle2 text="Info" icon="/images/search/info.png" />
             </div>
             <div className=" mt-10">
-              <div className="flex items-center">
+              <TicketInfo dataList={searchItemList} />
+              {/* <div className="flex items-center">
                 <div className="pl-[73px] w-[378px]"><SubTitle3 text="Balance" /></div>
                 <div className="w-[301px]"><SubTitle3 text="Tx count" /></div>
                 <div className="w-[291px]"><SubTitle3 text="Birth on" /></div>
@@ -248,14 +254,17 @@ const SearchPage = () => {
                     </div>
                   )
                 })
-              }
+              } */}
             </div>
 
             <div className=" mt-[90px]">
               <div>
                 <SubTitle2 text="Transaction" icon="/images/search/tx.png" />
               </div>
-              <div className="flex items-center mt-10">
+              <div className="mt-10">
+                <TxInfo txHistoryData={txHistoryData} />
+              </div>
+              {/* <div className="flex items-center mt-10">
                 <div className="pl-[73px] w-[378px]"><SubTitle3 text="Max" /></div>
                 <div className="w-[301px]"><SubTitle3 text="Min" /></div>
                 <div className="w-[291px]"><SubTitle3 text="P80" /></div>
@@ -293,7 +302,7 @@ const SearchPage = () => {
                     </div>
                   )
                 })
-              }
+              } */}
             </div>
             <div className=" mt-[90px]">
               <div>
@@ -338,7 +347,8 @@ const SearchPage = () => {
                   <LazyImage src="/images/search/line1.png" className="w-[1px] h-[200px]" />
                 </div>
                 <div className="ml-[128px]">
-                  <div className="">
+                  <AssetInfo dataList={searchItemList} />
+                  {/* <div className="">
                     <div className="flex">
                       <div className="pl-[50px] w-[304px]">
                         <SubTitle3 text="Mint" />
@@ -387,7 +397,7 @@ const SearchPage = () => {
                         )
                       })
                     }
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -404,9 +414,9 @@ const SearchPage = () => {
               <div className="mr-[0px]">
                 <BasicItem title="Galxe OAT" icon="/images/search/poap2.png" data={activityInfo.galxeOat} activityData={activityData}  />
               </div>
-              <div className="mr-[94px] mt-[110px]">
+              {/* <div className="mr-[94px] mt-[110px]">
                 <BasicItem title="NFT interactors" icon="/images/search/poap2.png" data={activityInfo.nftInteractors} activityData={activityData}  />
-              </div>
+              </div> */}
               <div className="mt-[110px]">
                 <BasicItem title="TaskON OAT" icon="/images/search/poap2.png" data={activityInfo.taskOnOat} activityData={activityData}  />
               </div>

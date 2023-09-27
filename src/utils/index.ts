@@ -52,7 +52,8 @@ export function transformTime(timestamp: number) {
 }
 
 export function formatTime(timestamp: number) {
-  return moment(new Date(timestamp)).format('DD/MM/YYYY, HH:mm A')
+  // return moment(new Date(timestamp)).format('DD/MM/YYYY, HH:mm A')
+  return moment(new Date(timestamp)).format('D/M/YYYY, H:m A')
 }
 
 export function openBrowser(url: string) {

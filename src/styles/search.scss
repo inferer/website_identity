@@ -386,3 +386,42 @@
     }
   }
 }
+
+.text-grade1 {
+  background: linear-gradient(90deg, #55B6F4 0.15%, #4ED4C1 106.3%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.bg-grade1 {
+  border-radius: 5px;
+  background: linear-gradient(90deg, rgba(85, 182, 244, 0.05) 0.15%, rgba(78, 212, 193, 0.05) 106.3%);
+}
+.border-bg {
+  background-image: linear-gradient(90deg, rgba(63, 139, 230, 0.30) 0%, rgba(28, 152, 232, 0.30) 100%);
+  
+  
+}
+.gradient-border {
+  border-style: solid;
+  border-width: 1px;
+  border-image: linear-gradient(90deg, rgba(63, 139, 230, 0.30) 0%, rgba(28, 152, 232, 0.30) 100%);
+  border-image-slice: 1;
+  border-radius: 6px;
+}
+.asset-text {
+  background: var(--8, linear-gradient(90deg, #55B6F4 0.15%, #4ED4C1 106.3%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gradient-bg-tab {
+  background: linear-gradient(90deg, rgba(48, 230, 255, 0.05) 0.15%, rgba(106, 224, 207, 0.05) 106.3%);
+}
+.tab-tip {
+  background: linear-gradient(90deg, rgba(48, 174, 255, 0.30) 0.15%, rgba(106, 224, 207, 0.30) 106.3%);
+}
+
+.txinfo-bg {
+  background: linear-gradient(90deg, rgba(85, 182, 244, 0.03) 0.15%, rgba(78, 212, 193, 0.03) 106.3%);
+}

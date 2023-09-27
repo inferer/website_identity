@@ -28,16 +28,19 @@ const HomePage = () => {
 
   const recommendRef = useRef<any>(null)
 
-  const handleInputClick = (e: any) => {
+  const handleInputClick = useCallback((e: any) => {
+    
     e.stopPropagation()
     setInputClick(true)
     setTimeout(() => {
-      if (recommendRef.current && !inputValue) {
+      // @ts-ignore
+      const value = document.querySelector('#searchInput').value
+      if (recommendRef.current && !value) {
         recommendRef.current.handleFilter('')
       }
     }, 500)
     
-  }
+  }, [])
 
   const handleInputFocus = () => {
     setInputFocus(true)
@@ -87,7 +90,7 @@ const HomePage = () => {
           recommendRef.current.handleFilter(inputValue)
         }
         currentInputValue = inputValue
-      }
+      } 
       
     }
     
@@ -141,14 +144,14 @@ const HomePage = () => {
       <Wrap>
         {/* <div className={` transition-all duration-500 ${!starting ? ' scale-[0.75]' : ''} `}> */}
         <div className={` relative`}>
-          <div className={`absolute flex transition-all duration-[300ms] ${startMove ? 'top-[87px] left-0 ml-0' : 'top-[161px] left-[50%] -ml-[208px]'} `}>
+          <div className={`absolute flex transition-all duration-[300ms] ${startMove ? 'top-[34px] left-0 ml-0' : 'top-[161px] left-[50%] -ml-[208px]'} `}>
             <LazyImage src="/images/home/logo2.png" className={`${startMove ? 'w-[34px] h-[39px]' : 'w-[59px] h-[59px]'}`} />
             <div className={`font-fmedium text-[36px] transition-all duration-[300ms] ml-5 gradient1 ${startMove ? ' opacity-0 ' : ' opacity-100 '} `}>Explore the Identity</div>
           </div>
-          <div className={`absolute transition-all duration-[300ms] flex justify-center ${startMove ? ' left-[54px] top-[77px]' : ' left-[180px] top-[336px]'}`}>
+          <div className={`absolute transition-all duration-[300ms] flex justify-center ${startMove ? ' left-[46px] top-[26px]' : ' left-[180px] top-[336px]'}`}>
             <div>
               <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
-                <input className={`search-input transition-all duration-[300ms] outline-none pl-6 pr-[74px] font-dnormal ${startMove ? 'search' : ''}`} placeholder="Search address identity"
+                <input id="searchInput" className={`search-input transition-all duration-[300ms] outline-none pl-6 pr-[74px] font-dnormal ${startMove ? 'search' : ''}`} placeholder="Search address identity"
                   value={inputValue}
                   onFocus={handleInputFocus}
                   onBlur={handleInputBlur}

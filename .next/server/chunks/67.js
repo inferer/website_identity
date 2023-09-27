@@ -35,8 +35,11 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var zustand__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6912);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9429);
 /* harmony import */ var _utils_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9185);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2245);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_utils_axios__WEBPACK_IMPORTED_MODULE_0__, zustand__WEBPACK_IMPORTED_MODULE_1__, _utils__WEBPACK_IMPORTED_MODULE_2__]);
 ([_utils_axios__WEBPACK_IMPORTED_MODULE_0__, zustand__WEBPACK_IMPORTED_MODULE_1__, _utils__WEBPACK_IMPORTED_MODULE_2__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
 
 
 
@@ -119,6 +122,11 @@ const levelInfo = {
     "poor": 1.0
 };
 const useSearchStore = (0,zustand__WEBPACK_IMPORTED_MODULE_1__.create)()((set, get)=>({
+        txHistoryData: {
+            xdata: [],
+            volumeData: [],
+            total: 0
+        },
         identityInfo: {},
         recommendUsers: [],
         recentlyData: [],
@@ -182,6 +190,15 @@ const useSearchStore = (0,zustand__WEBPACK_IMPORTED_MODULE_1__.create)()((set, g
                         category_path_arr: item.label_category_path_name.split("/").slice(1)
                     };
                 });
+                let xdata = [];
+                let volumeData = [];
+                let total = 0;
+                const txHistory = (res2.data.txHistory || []).reverse().forEach((item)=>{
+                    const date = moment__WEBPACK_IMPORTED_MODULE_4___default()(item.monday_date).format("MMM D");
+                    xdata.push(date);
+                    volumeData.push(item.transaction_num);
+                    total += item.transaction_num;
+                });
                 set({
                     searchItemList: newData
                 });
@@ -198,6 +215,13 @@ const useSearchStore = (0,zustand__WEBPACK_IMPORTED_MODULE_1__.create)()((set, g
                     activityInfo: {
                         ...initActivityInfo,
                         ...activityInfo
+                    }
+                });
+                set({
+                    txHistoryData: {
+                        xdata,
+                        volumeData,
+                        total
                     }
                 });
             }
@@ -482,7 +506,8 @@ function transformTime(timestamp) {
     return addZero(h) + ":" + addZero(m) + " " + addZero(M) + "/" + addZero(d) + " " + y;
 }
 function formatTime(timestamp) {
-    return moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(timestamp)).format("DD/MM/YYYY, HH:mm A");
+    // return moment(new Date(timestamp)).format('DD/MM/YYYY, HH:mm A')
+    return moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(timestamp)).format("D/M/YYYY, H:m A");
 }
 function openBrowser(url) {
     window.open(url, "_blank");

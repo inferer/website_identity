@@ -175,6 +175,10 @@ const Recommend = ({
   }
 
   const handleFilter = useCallback((inputValue: string) => {
+    if (inputValue) {
+      // @ts-ignore
+      window.firstFilter = true
+    }
     let filterData: any[] = []
     let filterData2: any[] = []
     let filterData3: any[] = []
@@ -219,7 +223,6 @@ const Recommend = ({
   useEffect(() => {
     getRecentlyData()
     getRecommendUsers()
-
     document.addEventListener('keyup', handleKeyup)
 
     return () => {
@@ -231,6 +234,23 @@ const Recommend = ({
   useImperativeHandle(ref, () => ({
     handleFilter: (value: string) => handleFilter(value)
   }))
+
+  // const timerRef = useRef<any>(null)
+  // useEffect(() => {
+  //   if (!timerRef.current) {
+  //     timerRef.current = setInterval(() => {
+  //       if (filterList.length > 0) {
+  //         // @ts-ignore
+  //         if (inputValue && !window.firstFilter) {
+  //           handleFilter(inputValue)
+  //           clearInterval(timerRef.current)
+  //           timerRef.current = null
+  //         }
+  //       }
+  //     },  300)
+  //   }
+    
+  // }, [recentlyData, recommendUsers, inputValue, handleFilter])
 
   if (filterList.length === 0) {
     return null

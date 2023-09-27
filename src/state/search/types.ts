@@ -32,9 +32,19 @@ export interface IRecommendUser {
   address: string
 }
 
+export interface ITxHistory {
+  chain_name: string,
+  address: string,
+  week_num: number,
+  monday_date: string,
+  transaction_num: number,
+  rank_num: number
+}
+
 
 export interface SearchState {
   [x: string]: any;
+  txHistoryData: any,
   identityInfo: any,
   recentlyData: string[],
   fromPage: string,

@@ -321,6 +321,10 @@ const Recommend = ({ from, inputValue, onClick, onArrowChange, onFiLterChange },
         }
     };
     const handleFilter = (0,react__WEBPACK_IMPORTED_MODULE_3__.useCallback)((inputValue)=>{
+        if (inputValue) {
+            // @ts-ignore
+            window.firstFilter = true;
+        }
         let filterData = [];
         let filterData2 = [];
         let filterData3 = [];
@@ -389,6 +393,21 @@ const Recommend = ({ from, inputValue, onClick, onArrowChange, onFiLterChange },
     (0,react__WEBPACK_IMPORTED_MODULE_3__.useImperativeHandle)(ref, ()=>({
             handleFilter: (value)=>handleFilter(value)
         }));
+    // const timerRef = useRef<any>(null)
+    // useEffect(() => {
+    //   if (!timerRef.current) {
+    //     timerRef.current = setInterval(() => {
+    //       if (filterList.length > 0) {
+    //         // @ts-ignore
+    //         if (inputValue && !window.firstFilter) {
+    //           handleFilter(inputValue)
+    //           clearInterval(timerRef.current)
+    //           timerRef.current = null
+    //         }
+    //       }
+    //     },  300)
+    //   }
+    // }, [recentlyData, recommendUsers, inputValue, handleFilter])
     if (filterList.length === 0) {
         return null;
     }
