@@ -20,7 +20,7 @@ const RadarChart1: React.FC<any> = ({
     <div className='radar-chart-wrap relative mt-[150px] flex items-center mb-[100px]'>
       <div className=' relative w-[340px] h-[340px] bg-[rgba(110,98,255,0.10)] border border-[rgba(110,98,255,0.30)] rounded-full flex justify-center items-center'>
         <LazyImage src='/images/search/pol7.png' className='w-[158px]' />
-        <LazyImage src='/images/search/pol_user.png' className='w-[77px] absolute left-[131px] top-[124px]' />
+        <LazyImage src='/images/search/pol_user2.png' className='w-[77px] absolute left-[131px] top-[124px]' />
       </div>
       <div className='flex items-center'>
         <div className='label-num-1 w-[258px] h-[12px]'></div>

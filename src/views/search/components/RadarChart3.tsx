@@ -19,7 +19,7 @@ var option = {
     },
     splitLine: {
       lineStyle: {
-        color: 'rgba(110, 98, 255, 0.6)'
+        color: 'rgba(85, 182, 244, 0.3)'
       }
     },
     indicator: [
@@ -58,7 +58,7 @@ var option2 = {
     },
     splitLine: {
       lineStyle: {
-        color: 'rgba(110, 98, 255, 0.3)'
+        color: 'rgba(85, 182, 244, 0.3)'
       }
     },
     splitNumber: 2,
@@ -74,10 +74,10 @@ var option2 = {
           symbol: 'none',
           lineStyle: {
             width: 1.5,
-            color: '#6E62FF'
+            color: '#55B6F4'
           },
           areaStyle: {
-            color: 'rgba(110, 98, 255, 0.19)'
+            color: 'rgba(85, 182, 244, 0.19)'
           }
         }
       ]
@@ -130,7 +130,7 @@ const RadarChart3: React.FC<any> = ({
 
       </div>
       <div className='w-[90px] h-[90px] bg-white rounded-full absolute left-[50%] top-[50%] -ml-[45px] -mt-[45px] z-10 flex justify-center items-center'>
-        <LazyImage src='/images/search/pol_user.png' className='w-[52px]' />
+        <LazyImage src='/images/search/pol_user2.png' className='w-[52px]' />
       </div>
       {
         labelList.map((item, index) => {

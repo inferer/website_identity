@@ -46,9 +46,9 @@ const ChainTab: React.FC<{
 
   useEffect(() => {
     let tempList: any[] = []
-    chainIds.forEach(id => {
-      const tab = tabsConfig.find(tab => tab.id === id)
-      if (tab) {
+    tabsConfig.forEach(tab => {
+      const tabInfo = chainIds.find(id => tab.id === id)
+      if (tabInfo) {
         tempList.push(tab)
       }
     })

@@ -22,6 +22,8 @@ body {
 .wap-root {
   padding-left: calc(100vw - 100%);
 }
+
+
 @font-face {
   font-family: Poppins;
   src: url('https://website-1315068501.cos.ap-nanjing.myqcloud.com/Poppins-Regular.ttf');
@@ -219,25 +221,25 @@ body {
   border-left: 1px solid rgba(236, 128, 226, 0.50);
 }
 .label-data-bg-1 {
-  background: linear-gradient(180deg, rgba(255, 220, 97, 0.05) 0%, rgba(250, 181, 45, 0.05) 100%), #FFF;
+  background: linear-gradient(180deg, rgba(255, 139, 2, 1) 0%, rgba(255, 201, 3, 1) 100%), #FFF;
 }
 .label-data-bg-2 {
-  background: linear-gradient(127deg, rgba(53, 85, 255, 0.05) 15.65%, rgba(161, 87, 255, 0.05) 77.85%), #FFF;
+  background: linear-gradient(127deg, rgba(53, 85, 255, 1) 15.65%, rgba(161, 87, 255, 1) 77.85%), #FFF;
 }
 .label-data-bg-3 {
-  background: linear-gradient(133deg, rgba(67, 106, 254, 0.05) 18.39%, rgba(1, 196, 255, 0.05) 70.71%);
+  background: linear-gradient(133deg, rgba(63, 139, 230, 1) 18.39%, rgba(28, 152, 232, 1) 70.71%);
 }
-.label-data-bg-3 {
+/* .label-data-bg-3 {
   background: linear-gradient(133deg, rgba(67, 106, 254, 0.05) 18.39%, rgba(1, 196, 255, 0.05) 70.71%);
-}
+} */
 .label-data-bg-4 {
-  background: linear-gradient(275deg, rgba(246, 59, 71, 0.05) 0%, rgba(255, 126, 53, 0.05) 100%);
+  background: linear-gradient(275deg, rgba(255, 96, 96, 1) 0%, rgba(255, 46, 46, 1) 100%);
 }
 .label-data-bg-5 {
-  background: linear-gradient(133deg, rgba(255, 139, 2, 0.05) 18.39%, rgba(255, 201, 3, 0.05) 70.71%);
+  background: linear-gradient(133deg, rgba(246, 59, 71, 1) 18.39%, rgba(255, 126, 53, 1) 70.71%);
 }
 .label-data-bg-6 {
-  background: linear-gradient(270deg, rgba(214, 64, 184, 0.05) 0%, rgba(251, 106, 171, 0.05) 100%);
+  background: linear-gradient(270deg, rgba(214, 64, 184, 1) 0%, rgba(251, 106, 171, 1) 100%);
 }
 
 .label-num-1 {
@@ -245,8 +247,9 @@ body {
 }
 
 @media screen and (max-width: 1440px) {
-  .page-header {
-    padding-left: 1.8vw;
+
+  .wap-root {
+    max-width: 1140px;
   }
 }
 .chart-tip2 {

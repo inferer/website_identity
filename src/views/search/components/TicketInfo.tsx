@@ -13,9 +13,9 @@ const TicketInfo: React.FC<{
   const [currentData, setCurrentData] = useState<any>({})
   useEffect(() => {
     let tempIds: string[] = []
-    dataList.reverse().forEach((data, index) => {
+    dataList.forEach((data, index) => {
       tempIds.push(data.chain_id)
-      if (index === 0) {
+      if (data.chain_id === '1') {
         setCurrentData(data)
       }
     })

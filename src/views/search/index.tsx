@@ -408,7 +408,7 @@ const SearchPage = () => {
               <SubTitle2 text="Basic" icon="/images/search/info.png" />
             </div>
             <div className="flex mt-10 flex-wrap">
-              <div className="mr-[94px]">
+              <div className="mr-[100px] xl1:mr-[94px] activity-mr">
                 <BasicItem title="PoAP" icon="/images/search/poap2.png" data={activityInfo.poap} />
               </div>
               <div className="mr-[0px]">
