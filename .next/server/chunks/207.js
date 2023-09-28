@@ -65,7 +65,8 @@ const LazyImage3 = ({ src, className, ...others })=>{
         alt: "",
         onError: function() {
             if (imgSrc) {
-            // setImgSrc('https://ipfs.io/ipfs/QmbJueCqTx2uRquib9XzxmJbWFDP9BYwTFGrAzMZnbKjZ6')
+                const errorPng = "/images/search/default.png";
+                setImgSrc(isDev ? errorPng : `https://website-1315068501.cos.ap-nanjing.myqcloud.com/website_identity${errorPng}`);
             }
         }
     });

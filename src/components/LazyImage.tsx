@@ -39,7 +39,8 @@ export const LazyImage3: React.FC<LazyImageProps> = ({ src, className, ...others
   return (
     <img referrerPolicy="no-referrer" ref={inViewRef} src={imgSrc} className={ `transition-all ${!imgSrc ? 'opacity-0 ' : 'opacity-100 '} ${className}` } { ...others } alt="" onError={function() {
       if (imgSrc) {
-        // setImgSrc('https://ipfs.io/ipfs/QmbJueCqTx2uRquib9XzxmJbWFDP9BYwTFGrAzMZnbKjZ6')
+        const errorPng = '/images/search/default.png'
+        setImgSrc(isDev ? errorPng : `https://website-1315068501.cos.ap-nanjing.myqcloud.com/website_identity${errorPng}`)
       }
     }} />
   )

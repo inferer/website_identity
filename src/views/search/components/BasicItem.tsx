@@ -25,12 +25,12 @@ export const BasicNftItem: React.FC<{
   data
 }) => {
   return (
-    <div className="w-[550px] h-[481px] rounded-lg overflow-hidden flex flex-col justify-center items-center">
+    <div className="w-[512px] xl1:w-[550px] rounded-lg overflow-hidden flex flex-col justify-center items-center">
       <div className="flex items-center h-[60px] basic-nft-gradient text-[#161F31] text-[26px] font-dbold px-5 w-full">
         <LazyImage src={icon} className="w-[22px] mr-[6px]" />
         {title}
       </div>
-      <div className="basic-nft-gradient2 px-[40px] py-[20px] w-[549px]">
+      <div className="basic-nft-gradient2 px-[40px] py-[20px] w-[510px] xl1:w-[548px]">
         <div className="flex justify-center items-baseline">
             <div className="text-[#ED7FDD] text-[64px] font-dbold">{ data.count }</div>
             <div className="text-[rgba(63,70,100,0.60)] font-dmedium text-[16px] ml-2">contacts</div>
@@ -86,7 +86,7 @@ const BasicItem: React.FC<{
           {
             data.nftAsset && data.nftAsset.slice(0, 5).map((nft: any, index: number) => {
               return (
-                <div key={nft.image + index} className="py-[23px] px-[32px]">
+                <div key={nft.image + index} className="py-[23px] px-[24px] xl1:px-[32px]">
                   <div className=" relative flex justify-center flex-col items-center">
                     <LazyImage3 src={nft.image} className="w-[60px] h-[60px] rounded-[9px]" />
                     <Tooltip
@@ -112,7 +112,7 @@ const BasicItem: React.FC<{
           }
           
         </div>
-        <div className="pt-[25px] pb-[30px] px-[32px]">
+        <div className="pt-[25px] pb-[30px] px-[24px] xl1:px-[32px]">
           <LazyImage src="/images/search/line2.png" className="w-[466px] h-[1px]" />
         </div>
         <div className=" flex justify-between items-center px-[64px]">
