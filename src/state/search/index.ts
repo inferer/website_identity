@@ -45,7 +45,8 @@ const useSearchStore = create<SearchState>()((set, get) => ({
   txHistoryData: {
     xdata: [],
     volumeData: [],
-    total: 0
+    total: 0,
+    xdata2: []
   },
   identityInfo: {},
   recommendUsers: [],
@@ -108,10 +109,13 @@ const useSearchStore = create<SearchState>()((set, get) => ({
         }
       })
       let xdata: any[] = []
+      let xdata2: any[] = []
       let volumeData: any[] = []
       let total = 0
       const txHistory = (res2.data.txHistory || []).reverse().forEach((item: ITxHistory) => {
         const date = moment(item.monday_date).format('MMM D')
+        const date2 = moment(item.monday_date).add(7, 'days').format('MMM D')
+        xdata2.push(date2)
         xdata.push(date)
         volumeData.push(item.transaction_num)
         total += item.transaction_num
@@ -121,7 +125,7 @@ const useSearchStore = create<SearchState>()((set, get) => ({
       set({ labelData: labelData })
       set({ identityInfo: identityInfo })
       set({ activityInfo: { ...initActivityInfo, ...activityInfo } })
-      set({ txHistoryData: { xdata, volumeData, total } })
+      set({ txHistoryData: { xdata, volumeData, total, xdata2 } })
     }
 
   },

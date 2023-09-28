@@ -5,7 +5,8 @@ var option;
 
 const LineChartT = ({
   lineData,
-  id
+  id,
+  xdata2
 }) => {
   const [serieData, setSerieData] = useState({ name: '', value: 0 })
   const [tipPos, setTipPos] = useState({ left: 0, top: 0, opacity: 0 })
@@ -27,7 +28,7 @@ const LineChartT = ({
       },
       xAxis: {
         type: 'category',
-        data: ['Jan', 'Fab', 'Mar', 'Apr', 'May', 'Jun'],
+        data: [],
         axisLine: {
           show: false
         },
@@ -59,7 +60,7 @@ const LineChartT = ({
         !chartInsRef.current && (chartInsRef.current = echarts.init(chartDom));
         option && chartInsRef.current.setOption({
           ...option,
-          ...{ xAxis: { ...option.xAxis, data: lineData?.xAxis?.data || ['Jan', 'Fab', 'Mar', 'Apr', 'May', 'Jun'] } },
+          ...{ xAxis: { ...option.xAxis, data: lineData?.xAxis?.data || [] } },
           ...{ yAxis: { ...option.yAxis, min: 0}},
           series: lineData.series
         });
@@ -70,7 +71,7 @@ const LineChartT = ({
           const originEvent = params.event?.event
           setEventPos({ clientX: originEvent.clientX, clientY: originEvent.clientY })
           setdataIndex(params.dataIndex)
-          setSerieData({ name: params.name, value: Number(params.value) })
+          setSerieData({ name: params.name + '-' + xdata2[params.dataIndex], value: Number(params.value) })
           const tipDom = chartTipRef.current
           const rect = tipDom?.getBoundingClientRect();
           const chartDom = chartWrapRef.current
@@ -90,7 +91,7 @@ const LineChartT = ({
       }
     }
 
-  }, [lineData, overTip, id])
+  }, [lineData, overTip, id, xdata2])
 
   return (
     <div
@@ -107,7 +108,7 @@ const LineChartT = ({
         className='chart-tip'
         style={{ left: tipPos.left, top: tipPos.top, opacity: tipPos.opacity }}>
           <div className='chart-tip2'>
-            {`${serieData.name}: ${serieData.value} $`}
+            {`${serieData.name} ${serieData.value} txs`}
           </div>
         
       </div>

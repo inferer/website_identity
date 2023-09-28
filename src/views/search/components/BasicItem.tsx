@@ -1,6 +1,7 @@
 import LazyImage, { LazyImage3 } from "@/components/LazyImage"
 import { Text1 } from "./SubTitle"
 import CopyClipboard from "@/components/CopyClipboard"
+import { Tooltip } from "antd"
 
 export const SubTitle: React.FC<{
   text: string
@@ -70,7 +71,7 @@ const BasicItem: React.FC<{
         <LazyImage src={icon} className="w-[22px] mr-[6px]" />
         {title}
       </div>
-      <div className="px-[10px] py-[25px] basice-wrap w-[548px]">
+      <div className="px-[10px] py-[25px] basice-wrap w-[510px] xl1:w-[548px]">
         <div className="flex flex-wrap min-h-[260px]">
           {
             data.nftAsset && data.nftAsset.length === 0 &&
@@ -88,9 +89,14 @@ const BasicItem: React.FC<{
                 <div key={nft.image + index} className="py-[23px] px-[32px]">
                   <div className=" relative flex justify-center flex-col items-center">
                     <LazyImage3 src={nft.image} className="w-[60px] h-[60px] rounded-[9px]" />
-                    <div className="text-[rgba(63,70,100,0.90)] text-[16px] font-dnormal mt-[10px] max-w-[110px] line-clamp-1">
-                      {nft.name}
-                    </div>
+                    <Tooltip
+                        placement="top"
+                        title={nft.name}
+                      >
+                      <div className=" cursor-pointer text-[rgba(63,70,100,0.90)] text-[16px] font-dnormal mt-[10px] max-w-[110px] line-clamp-1">
+                        {nft.name}
+                      </div>
+                    </Tooltip>
                   </div>
                 </div>
               )

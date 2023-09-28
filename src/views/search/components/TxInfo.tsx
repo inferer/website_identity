@@ -40,6 +40,7 @@ const TxInfo: React.FC<any> = ({
       <div className="mt-6 px-3">
         <LineChartS 
             id={"pricedata"}
+            xdata2={txHistoryData.xdata2}
             lineData={{
               xAxis: {
                 data: txHistoryData.xdata

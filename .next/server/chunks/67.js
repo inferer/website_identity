@@ -125,7 +125,8 @@ const useSearchStore = (0,zustand__WEBPACK_IMPORTED_MODULE_1__.create)()((set, g
         txHistoryData: {
             xdata: [],
             volumeData: [],
-            total: 0
+            total: 0,
+            xdata2: []
         },
         identityInfo: {},
         recommendUsers: [],
@@ -191,10 +192,13 @@ const useSearchStore = (0,zustand__WEBPACK_IMPORTED_MODULE_1__.create)()((set, g
                     };
                 });
                 let xdata = [];
+                let xdata2 = [];
                 let volumeData = [];
                 let total = 0;
                 const txHistory = (res2.data.txHistory || []).reverse().forEach((item)=>{
                     const date = moment__WEBPACK_IMPORTED_MODULE_4___default()(item.monday_date).format("MMM D");
+                    const date2 = moment__WEBPACK_IMPORTED_MODULE_4___default()(item.monday_date).add(7, "days").format("MMM D");
+                    xdata2.push(date2);
                     xdata.push(date);
                     volumeData.push(item.transaction_num);
                     total += item.transaction_num;
@@ -221,7 +225,8 @@ const useSearchStore = (0,zustand__WEBPACK_IMPORTED_MODULE_1__.create)()((set, g
                     txHistoryData: {
                         xdata,
                         volumeData,
-                        total
+                        total,
+                        xdata2
                     }
                 });
             }

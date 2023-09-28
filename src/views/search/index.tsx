@@ -2,7 +2,7 @@ import LazyImage, { LazyImage3 } from "@/components/LazyImage"
 import Wrap from "@/components/Wrap"
 import PageHeader from "@/components/pc/PageHeader"
 import { SetStateAction, useEffect, useRef, useState } from "react"
-import { message } from 'antd';
+import { Tooltip, message } from 'antd';
 import SubTitle, { SubTitle2, SubTitle3, Text1 } from "./components/SubTitle"
 import BasicItem, { BasicNftItem } from "./components/BasicItem"
 import LabelData from "./components/LabelData"
@@ -325,10 +325,15 @@ const SearchPage = () => {
                     activityData.nftAsset.slice(0, 5).map((nft: any) => {
                       return (
                         <div key={nft.image} className="py-[23px] pr-[73px]">
-                          <div className=" relative">
-                            <LazyImage3 src={nft.image} className="w-[60px] h-[60px] rounded-[9px]" />
-                            <LazyImage src="/images/search/eth.png" className="w-[18px] h-[18px] absolute bottom-0 right-0 z-10" />
-                          </div>
+                          <Tooltip
+                            placement="top"
+                            title={nft.name}
+                          >
+                            <div className=" relative cursor-pointer">
+                              <LazyImage3 src={nft.image} className="w-[60px] h-[60px] rounded-[9px]" />
+                              <LazyImage src="/images/search/eth.png" className="w-[18px] h-[18px] absolute bottom-0 right-0 z-10" />
+                            </div>
+                          </Tooltip>
                         </div>
                       )
                     })
