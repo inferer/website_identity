@@ -1,5 +1,5 @@
 import LazyImage, { LazyImage3 } from "@/components/LazyImage"
-import { Text1 } from "./SubTitle"
+import { Text1, Text2 } from "./SubTitle"
 import CopyClipboard from "@/components/CopyClipboard"
 import { Tooltip } from "antd"
 
@@ -122,7 +122,7 @@ const BasicItem: React.FC<{
                 <SubTitle text="Send" />
               </div>
               <div className="mt-2">
-                <Text1 text={data.send || '0'} />
+                <Text2 text={data.send || '0'} />
               </div>
             </div>
             <div className="flex justify-between items-center">
@@ -130,7 +130,7 @@ const BasicItem: React.FC<{
                 <SubTitle text="Receive" />
               </div>
               <div className="mt-2">
-                <Text1 text={data.receive || '0'} />
+                <Text2 text={data.receive || '0'} />
               </div>
             </div>
           </div>
@@ -143,7 +143,7 @@ const BasicItem: React.FC<{
                 <SubTitle text="Mint" />
               </div>
               <div className="mt-2">
-                <Text1 text={data.mint || '0'} />
+                <Text2 text={data.mint || '0'} />
               </div>
             </div>
             <div className="flex justify-between items-center">
@@ -151,7 +151,7 @@ const BasicItem: React.FC<{
                 <SubTitle text="Burn" />
               </div>
               <div className="mt-2">
-                <Text1 text={data.burn || '0'} />
+                <Text2 text={data.burn || '0'} />
               </div>
             </div>
           </div>

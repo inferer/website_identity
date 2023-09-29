@@ -85,4 +85,20 @@ export const Text1: React.FC<{
   )
 }
 
+export const Text2: React.FC<{
+  text?: string,
+  className?: string,
+  children?: React.ReactNode
+}> = ({
+  text,
+  className,
+  children
+}) => {
+  return (
+    <div className={` asset-text font-dbold text-[16px] ${className}`}>
+      { children || text }
+    </div>
+  )
+}
+
 export default SubTitle
