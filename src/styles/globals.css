@@ -137,6 +137,7 @@ body {
   caret-color: rgba(78, 170, 182, 1);
   color: #3F4664;
   font-size: 20px;
+  
 }
 .search-input.search {
   width: 670px;
@@ -161,15 +162,17 @@ body {
 }
 .search-wrap.focus {
   background-image: linear-gradient(90deg, #4380A7 0%, #5AD8C6 100%);
+  
+  
 }
 .recommend-wrap {
   width: 840px;
-  max-height: 388px;
   flex-shrink: 0;
   border-radius: 8px;
   background: #FFF;
   box-shadow: 0px 16px 40px 0px rgba(69, 111, 136, 0.08);
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .recommend-wrap.recommend-wrap-search {
   width: 100%;

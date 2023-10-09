@@ -257,7 +257,7 @@ const Recommend = ({
   }
 
   return (
-    <div className={`px-3 py-[20px] recommend-wrap ${from === 'search' ? 'recommend-wrap-search' : ''}`}
+    <div className={`px-3 max-h-[308px] xl1:max-h-[338px] py-[20px] recommend-wrap ${from === 'search' ? 'recommend-wrap-search' : ''}`}
       ref={wrapRef}
       onClick={e => {
         e.stopPropagation()

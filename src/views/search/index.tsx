@@ -40,6 +40,10 @@ const SearchPage = () => {
   const [searchIng, setSearchIng] = useState(false)
   const [inputClick, setInputClick] = useState(false)
 
+  const [startMove, setStartmove] = useState(false)
+  const [hasAddress, setHasAddress] = useState(true)
+  const [isMounted, setIsMounted] = useState(false)
+
   const recommendRef = useRef<any>(null)
 
   const handleInputClick = (e: any) => {
@@ -67,7 +71,7 @@ const SearchPage = () => {
       return
     }
     setFromPage('')
-    router.push({ pathname: `/search/${address || inputValue}` })
+    router.push({ pathname: `/${address || inputValue}` })
   }
   const handleSearch = async (address?: string) => {
     if (searchIng) {
@@ -77,6 +81,9 @@ const SearchPage = () => {
     let newAddress = toChecksumAddress(searchAddress)
     if (newAddress) {
       newAddress = newAddress.toLowerCase()
+      setStartmove(true)
+      setSearchingGlobal(true)
+      setInputClick(false)
       setSearchIng(true)
       await searchByAddress(newAddress)
       setRecentlyData(newAddress)
@@ -124,10 +131,20 @@ const SearchPage = () => {
   }
 
   useEffect(() => {
-    if (fromPage === 'HOME') {
+    setTimeout(() => {
+      setIsMounted(true)
+      setHasAddress(false)
+    }, 500)
+    if (!router.query.address || !router.query.address[0]) {
+      setStartmove(false)
+      // 
       setSearchingGlobal(false)
+      setInputValue('')
+      setTimeout(() => {
+        
+      }, 300)
     }
-  }, [fromPage, setSearchingGlobal])
+  }, [router])
 
   useEffect(() => {
     if (router.query.address && router.query.address[0] && !fromPage) {
@@ -156,294 +173,180 @@ const SearchPage = () => {
       {contextHolder}
       <PageHeader />
       <Wrap>
-        <div className={`flex relative z-50 pt-[26px] transition-all duration-[300ms] scale-100 opacity-0 ${!isGlobalSearching ? ' scale-[1] opacity-100' : ''}`}>
-          <LazyImage src="/images/home/logo2.png" className="w-[42px] h-[42px] mr-[12px] mt-2" />
-          <div className="relative">
-            <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
-              <input className="search-input search-input2 search outline-none pl-6 pr-[74px] font-dnormal" placeholder="Search address identity"
-                value={inputValue}
-                onFocus={handleInputFocus}
-                onBlur={handleInputBlur}
-                onKeyUp={handleInputKeyUp}
-                onClick={handleInputClick}
-                onPaste={handleInputPaste}
-                onChange={e => {
-                  setInputValue(e.target.value)
-                }}
-                disabled={searchIng}
-              />
-              <div className=" absolute top-[20px] right-[25px]"
-                onClick={() => handleSearch2()}
-              >
-                <LazyImage src="/images/home/search.png" className="w-[24px] h-[24px] cursor-pointer" />
-              </div>
-              
-            </div>
-            {
-              inputClick && !searchIng && 
-              <div className=" absolute top-[80px] left-0 w-full z-50">
-                <Recommend
-                  from="search"
-                  ref={recommendRef}
-                  inputValue={inputValue}
-                  onClick={handleRecommendClick}
-                  onArrowChange={hanleArrowChange}
-                />
-              </div>
-            }
+        <div className={` relative z-50 ${!searchIng ? ' -top-[30px]' : ' ' } ${isMounted ? ' opacity-100' : ' opacity-0'} `}>
+        <div className={`absolute flex transition-all ${hasAddress ? ' duration-[0ms]' : ' duration-[300ms]'}  ${startMove ? 'top-[34px] left-0 ml-0 opacity-100' : 'top-[100px] xl1:top-[161px] left-[50%] -ml-[208px]'} `}>
+            <LazyImage src="/images/home/logo2.png" className={`${startMove ? 'w-[42px] h-[42px]' : 'w-[59px] h-[59px]'}`} />
+            <div className={`font-fmedium text-[36px] transition-all duration-[300ms] ml-5 gradient1 ${startMove ? ' opacity-0 ' : ' opacity-100 '} `}>Explore the Identity</div>
           </div>
-        </div>
-        <div className=" w-full border-t border-[rgba(22,31,49,0.05);] mt-[30px] mb-[22px]"></div>
-        {
-          searchIng && 
-          <div className="mt-[72px] flex justify-center min-h-[600px]">
-            <LazyImage src="/images/home/loading.gif" className="w-[400px] h-[300px]" />
-          </div>
-        }
-        <div className={`relative transition-all duration-[300ms] ${!isGlobalSearching ? 'opacity-100 top-[0px]' : ' opacity-0 top-[100px]'}`}>
-
-        
-        {
-          !searchIng && 
-          <div>
-            <div className="flex items-center">
-              <LazyImage src="/images/search/ticket.png" className="w-[20px] h-[20px]" />
-              <div className="text-[rgba(22,31,49,0.60)] text-[20px] ml-[5px]">Search identity ticket</div>
-            </div>
-            <LevelScore levelScore={activityData.levelScore} identityInfo={identityInfo} />
-            <div className="mt-[170px] mb-[90px]">
-              <SubTitle text="Ticket" />
-            </div>
+          <div className={`absolute transition-all ${hasAddress ? ' duration-[0ms]' : ' duration-[300ms]'} flex justify-center ${startMove ? ' left-[46px] top-[26px]' : ' left-[180px] top-[230px] xl1:top-[336px]'}`}>
             <div>
-              <SubTitle2 text="Info" icon="/images/search/info.png" />
-            </div>
-            <div className=" mt-10">
-              <TicketInfo dataList={searchItemList} />
-              {/* <div className="flex items-center">
-                <div className="pl-[73px] w-[378px]"><SubTitle3 text="Balance" /></div>
-                <div className="w-[301px]"><SubTitle3 text="Tx count" /></div>
-                <div className="w-[291px]"><SubTitle3 text="Birth on" /></div>
-                <div className=""><SubTitle3 text="Active since" /></div>
+              <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
+                <input type="text" aria-autocomplete="none" autoComplete="off" id="searchInput" className={`search-input transition-all ${hasAddress ? ' duration-[0ms]' : ' duration-[300ms]'} outline-none pl-6 pr-[74px] font-dnormal ${startMove ? 'search' : ''}`} placeholder="Search address identity"
+                  value={inputValue}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
+                  onKeyUp={handleInputKeyUp}
+                  onClick={handleInputClick}
+                  onPaste={handleInputPaste}
+                  disabled={searchIng}
+                  onChange={e => {
+                    setInputValue(e.target.value)
+                  }}
+                />
+                <div className=" absolute top-[20px] right-[25px]"
+                  onClick={e => {
+                    e.stopPropagation()
+                    handleSearch()
+                  }}
+                >
+                  <LazyImage src="/images/home/search.png" className="w-[24px] h-[24px] cursor-pointer" />
+                </div>
+                
               </div>
               {
-                searchItemList.map(item => {
-                  return (
-                    <div key={item.chain_id} className="flex items-center mt-[15px]">  
-                      <div className="flex items-center w-[378px]">
-                        <div className="w-[73px] pl-[30px] shrink-0 ">
-                          <LazyImage src={item.chainLogo} className="w-[18px] h-[18px]" />
-                        </div>
-                        <div className="w-full flex items-center">
-                          <div>
-                            <Text1 text={item.balance} />
-                          </div>
-                          <div className=" ml-[8px]">
-                            <Text1 text={item.coinName} className="text-[14px]" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="w-[301px]">
-                        <Text1 text={item.txcount} />
-                      </div>
-                      <div className="w-[291px]">
-                        <Text1>{item.tx_firstLabel}</Text1>
-                      </div>
-                      <div className="">
-                        <Text1>{item.tx_lastLabel}</Text1>
-                      </div>
-                    </div>
-                  )
-                })
-              } */}
-            </div>
-
-            <div className=" mt-[90px]">
-              <div>
-                <SubTitle2 text="Transaction" icon="/images/search/tx.png" />
-              </div>
-              <div className="mt-10">
-                <TxInfo txHistoryData={txHistoryData} />
-              </div>
-              {/* <div className="flex items-center mt-10">
-                <div className="pl-[73px] w-[378px]"><SubTitle3 text="Max" /></div>
-                <div className="w-[301px]"><SubTitle3 text="Min" /></div>
-                <div className="w-[291px]"><SubTitle3 text="P80" /></div>
-                <div className=""><SubTitle3 text="Median (P50)" /></div>
-              </div>
-              {
-                searchItemList.map(item => {
-                  return (
-                    <div key={item.chain_id} className="flex items-center mt-[15px]">
-                      <div className="flex items-center w-[378px]">
-                        <div className="w-[73px] pl-[30px] shrink-0 ">
-                          <LazyImage src={item.chainLogo} className="w-[18px] h-[18px]" />
-                        </div>
-                        <div className="w-full flex items-center">
-                          <div>
-                            <Text1 text={String(item.value_max)} />
-                          </div>
-                          <div className=" ml-[8px]">
-                            <Text1 text={item.coinName} className="text-[14px]" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center w-[301px]">
-                        <Text1 text={String(item.value_min)} />
-                        <Text1 text={item.coinName} className="text-[14px] ml-2" />
-                      </div>
-                      <div className="flex items-center w-[291px]">
-                        <Text1 text={String(item.value_p80)} />
-                        <Text1 text={item.coinName} className="text-[14px] ml-2" />
-                      </div>
-                      <div className="flex items-center">
-                        <Text1 text={String(item.value_p50)} />
-                        <Text1 text={item.coinName} className="text-[14px] ml-2" />
-                      </div>
-                    </div>
-                  )
-                })
-              } */}
-            </div>
-            <div className=" mt-[90px]">
-              <div>
-                <SubTitle2 text="Asset" icon="/images/search/asset.png" />
-              </div>
-              <div className="mt-10 flex items-center">
-                <div className="pl-[30px] w-[430px] flex flex-wrap">
-                  {
-                    activityData.nftAsset.length === 0 &&
-                      <div className="w-full flex justify-center">
-                        <div>
-                         <LazyImage src="/images/search/nodata.png" className="w-[201px] h-[140px]" />
-                         <div className="text-[rgba(22,31,49,0.60)] font-dnormal text-[16px] mt-4 text-center">No result</div>
-                        </div>
-                        
-                      </div>
-
-                  }
-                  {
-                    activityData.nftAsset.slice(0, 5).map((nft: any) => {
-                      return (
-                        <div key={nft.image} className="py-[23px] pr-[73px]">
-                          <Tooltip
-                            placement="top"
-                            title={nft.name}
-                          >
-                            <div className=" relative cursor-pointer">
-                              <LazyImage3 src={nft.image} className="w-[60px] h-[60px] rounded-[9px]" />
-                              <LazyImage src="/images/search/eth.png" className="w-[18px] h-[18px] absolute bottom-0 right-0 z-10" />
-                            </div>
-                          </Tooltip>
-                        </div>
-                      )
-                    })
-                  }
-                  {
-                    activityData.nftAsset.length > 5 && 
-                      <div className="py-[23px] pr-[73px]">
-                        <div className="w-[60px] h-[60px] flex justify-center items-center text-[#161F31] font-dmedium text-[20px]">
-                          +{activityData.nftAsset.length - 5}
-                        </div>
-                      </div>
-                  }
-                  
+                inputClick && !searchIng && 
+                <div className="mt-3 ">
+                  <Recommend
+                    from={isGlobalSearching ? 'search': ''}
+                    ref={recommendRef}
+                    inputValue={inputValue}
+                    onClick={handleRecommendClick}
+                    onArrowChange={hanleArrowChange}
+                  />
                 </div>
-                <div className=" ml-[88px]">
-                  <LazyImage src="/images/search/line1.png" className="w-[1px] h-[200px]" />
-                </div>
-                <div className="ml-[128px]">
-                  <AssetInfo dataList={searchItemList} />
-                  {/* <div className="">
-                    <div className="flex">
-                      <div className="pl-[50px] w-[304px]">
-                        <SubTitle3 text="Mint" />
-                      </div>
-                      <div className="pl-[20px]">
-                        <SubTitle3 text="Send" />
-                      </div>
-                    </div>
-                    {
-                      searchItemList.map(item => {
-                        return (
-                          <div key={item.chain_id} className="flex items-center mt-[18px]">
-                            <div className="pl-[0px] w-[304px] flex items-center">
-                              <LazyImage src={item.chainLogo} className="w-[18px] h-[18px] mr-[30px]" />
-                              <Text1>{item.nft_mint_txcount}</Text1>
-                            </div>
-                            <div className="pl-[20px]">
-                              <Text1>{item.nft_send_txcount}</Text1>
-                            </div>
-                          </div>
-                        )
-                      })
-                    }
-                  </div>
-                  <div className="mt-10">
-                    <div className="flex">
-                      <div className="pl-[50px] w-[304px]">
-                        <SubTitle3 text="Burn" />
-                      </div>
-                      <div className="pl-[20px]">
-                        <SubTitle3 text="Receive" />
-                      </div>
-                    </div>
-                    {
-                      searchItemList.map(item => {
-                        return (
-                          <div key={item.chain_id} className="flex items-center mt-[18px]">
-                            <div className="pl-[0px] w-[304px] flex items-center">
-                              <LazyImage src={item.chainLogo} className="w-[18px] h-[18px] mr-[30px]" />
-                              <Text1>{item.nft_burn_txcount}</Text1>
-                            </div>
-                            <div className="pl-[20px]">
-                              <Text1>{item.nft_receive_txcount}</Text1>
-                            </div>
-                          </div>
-                        )
-                      })
-                    }
-                  </div> */}
-                </div>
-              </div>
-            </div>
-            <div className="mt-[150px] mb-[90px]">
-              <SubTitle text="Activity" />
-            </div>
-            <div className="">
-              <SubTitle2 text="Basic" icon="/images/search/info.png" />
-            </div>
-            <div className="flex mt-10 flex-wrap">
-              <div className="mr-[100px] xl1:mr-[94px] activity-mr">
-                <BasicItem title="PoAP" icon="/images/search/poap2.png" data={activityInfo.poap} />
-              </div>
-              <div className="mr-[0px]">
-                <BasicItem title="Galxe OAT" icon="/images/search/poap2.png" data={activityInfo.galxeOat} activityData={activityData}  />
-              </div>
-              {/* <div className="mr-[94px] mt-[110px]">
-                <BasicItem title="NFT interactors" icon="/images/search/poap2.png" data={activityInfo.nftInteractors} activityData={activityData}  />
-              </div> */}
-              <div className="mt-[110px]">
-                <BasicItem title="TaskON OAT" icon="/images/search/poap2.png" data={activityInfo.taskOnOat} activityData={activityData}  />
-              </div>
-            </div>
-            <div className="mt-[84px]">
-              <SubTitle2 text="Advance" icon="/images/search/info.png" />
-              <div className="mt-[50px]">
-                <BasicNftItem title="Contacts" icon="/images/search/nft2.png" data={activityData.nftInteractedAddress} />
-              </div>
+              }
+              
               
             </div>
-            {
-              labelData2.length > 0 && <LabelData data={labelData2} />
-            }
-            
           </div>
-        }
+          <div className={` absolute top-[150px] left-[400px] transition-all duration-[300ms] delay-200 ${startMove ? ' opacity-100 ' : ' opacity-0 '}`}>
+            {
+              searchIng && 
+              <div className="mt-[72px] flex justify-center min-h-[600px]">
+                <LazyImage src="/images/home/loading.gif" className="w-[400px] h-[300px]" />
+              </div>
+            }
+          </div>
+        </div> 
+        <div className={`relative transition-all duration-[300ms] ${(searchIng || !isGlobalSearching) ? 'opacity-0 top-[208px]' : ' opacity-100 top-[108px]'}`}>
+          {
+            !searchIng && isGlobalSearching &&  <>
+            <div className=" w-full border-t border-[rgba(22,31,49,0.05);] mt-[30px] mb-[22px]"></div>
+            <div>
+              <div className="flex items-center">
+                <LazyImage src="/images/search/ticket.png" className="w-[20px] h-[20px]" />
+                <div className="text-[rgba(22,31,49,0.60)] text-[20px] ml-[5px]">Search identity ticket</div>
+              </div>
+              <LevelScore levelScore={activityData.levelScore} identityInfo={identityInfo} />
+              <div className="mt-[170px] mb-[90px]">
+                <SubTitle text="Ticket" />
+              </div>
+              <div>
+                <SubTitle2 text="Info" icon="/images/search/info.png" />
+              </div>
+              <div className=" mt-10">
+                <TicketInfo dataList={searchItemList} />
+
+              </div>
+
+              <div className=" mt-[90px]">
+                <div>
+                  <SubTitle2 text="Transaction" icon="/images/search/tx.png" />
+                </div>
+                <div className="mt-10">
+                  <TxInfo txHistoryData={txHistoryData} />
+                </div>
+              </div>
+              <div className=" mt-[90px]">
+                <div>
+                  <SubTitle2 text="Asset" icon="/images/search/asset.png" />
+                </div>
+                <div className="mt-10 flex items-center">
+                  <div className="pl-[30px] w-[430px] flex flex-wrap">
+                    {
+                      activityData.nftAsset.length === 0 &&
+                        <div className="w-full flex justify-center">
+                          <div>
+                          <LazyImage src="/images/search/nodata.png" className="w-[201px] h-[140px]" />
+                          <div className="text-[rgba(22,31,49,0.60)] font-dnormal text-[16px] mt-4 text-center">No result</div>
+                          </div>
+                          
+                        </div>
+
+                    }
+                    {
+                      activityData.nftAsset.slice(0, 5).map((nft: any) => {
+                        return (
+                          <div key={nft.image} className="py-[23px] pr-[73px]">
+                            <Tooltip
+                              placement="top"
+                              title={nft.name}
+                            >
+                              <div className=" relative cursor-pointer">
+                                <LazyImage3 src={nft.image} className="w-[60px] h-[60px] rounded-[9px]" />
+                                <LazyImage src="/images/search/eth.png" className="w-[18px] h-[18px] absolute bottom-0 right-0 z-10" />
+                              </div>
+                            </Tooltip>
+                          </div>
+                        )
+                      })
+                    }
+                    {
+                      activityData.nftAsset.length > 5 && 
+                        <div className="py-[23px] pr-[73px]">
+                          <div className="w-[60px] h-[60px] flex justify-center items-center text-[#161F31] font-dmedium text-[20px]">
+                            +{activityData.nftAsset.length - 5}
+                          </div>
+                        </div>
+                    }
+                    
+                  </div>
+                  <div className=" ml-[88px]">
+                    <LazyImage src="/images/search/line1.png" className="w-[1px] h-[200px]" />
+                  </div>
+                  <div className="ml-[128px]">
+                    <AssetInfo dataList={searchItemList} />
+                    
+                  </div>
+                </div>
+              </div>
+              <div className="mt-[150px] mb-[90px]">
+                <SubTitle text="Activity" />
+              </div>
+              <div className="">
+                <SubTitle2 text="Basic" icon="/images/search/info.png" />
+              </div>
+              <div className="flex mt-10 flex-wrap">
+                <div className="mr-[100px] xl1:mr-[94px] activity-mr">
+                  <BasicItem title="PoAP" icon="/images/search/poap2.png" data={activityInfo.poap} />
+                </div>
+                <div className="mr-[0px]">
+                  <BasicItem title="Galxe OAT" icon="/images/search/poap2.png" data={activityInfo.galxeOat} activityData={activityData}  />
+                </div>
+                
+                <div className="mt-[110px]">
+                  <BasicItem title="TaskON OAT" icon="/images/search/poap2.png" data={activityInfo.taskOnOat} activityData={activityData}  />
+                </div>
+              </div>
+              <div className="mt-[84px]">
+                <SubTitle2 text="Advance" icon="/images/search/info.png" />
+                <div className="mt-[50px]">
+                  <BasicNftItem title="Contacts" icon="/images/search/nft2.png" data={activityData.nftInteractedAddress} />
+                </div>
+                
+              </div>
+              {
+                labelData2.length > 0 && <LabelData data={labelData2} />
+              }
+              
+            </div>
+            </>
+          }
+          
         </div>
-        
       </Wrap>
       {
-        !searchIng && <H5Footer white={true} />
+        !searchIng && isGlobalSearching && <div className={` relative ${!isGlobalSearching ? 'top-0' : 'top-[108px]'}`}> <H5Footer white={true} /></div>
       }
       
     </div>
