@@ -413,7 +413,7 @@ const Recommend = ({ from, inputValue, onClick, onArrowChange, onFiLterChange },
         return null;
     }
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: `px-3 max-h-[308px] xl1:max-h-[338px] py-[20px] recommend-wrap ${from === "search" ? "recommend-wrap-search" : ""}`,
+        className: `px-3 max-h-[338px] xl1:max-h-[338px] py-[20px] recommend-wrap ${from === "search" ? "recommend-wrap-search" : ""}`,
         ref: wrapRef,
         onClick: (e)=>{
             e.stopPropagation();

@@ -5,50 +5,50 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/s2LnbHq8UU7JVehGlCLyY/_buildManifest.js",
-    "static/s2LnbHq8UU7JVehGlCLyY/_ssgManifest.js"
+    "static/ml2NM2UgJOLSwcG_7_jgF/_buildManifest.js",
+    "static/ml2NM2UgJOLSwcG_7_jgF/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
     "/404": [
-      "static/chunks/webpack-403b7f857f4cbc2a.js",
+      "static/chunks/webpack-c006797c67dd60d3.js",
       "static/chunks/framework-305cb810cde7afac.js",
       "static/chunks/main-3508abe40d19650f.js",
       "static/chunks/pages/404-a1e6dff5c336be69.js"
     ],
     "/[[...address]]": [
-      "static/chunks/webpack-403b7f857f4cbc2a.js",
+      "static/chunks/webpack-c006797c67dd60d3.js",
       "static/chunks/framework-305cb810cde7afac.js",
       "static/chunks/main-3508abe40d19650f.js",
       "static/chunks/166-f7e178239bf1f1c0.js",
-      "static/chunks/19-4e49ffe19f7b06f3.js",
+      "static/chunks/19-823584ac64f5db5a.js",
       "static/chunks/pages/[[...address]]-19fc467eaf2c175f.js"
     ],
     "/_app": [
-      "static/chunks/webpack-403b7f857f4cbc2a.js",
+      "static/chunks/webpack-c006797c67dd60d3.js",
       "static/chunks/framework-305cb810cde7afac.js",
       "static/chunks/main-3508abe40d19650f.js",
-      "static/css/a5d437b2d89f7570.css",
+      "static/css/d429738fccd80d8f.css",
       "static/chunks/pages/_app-776258d28bc4516a.js"
     ],
     "/_error": [
-      "static/chunks/webpack-403b7f857f4cbc2a.js",
+      "static/chunks/webpack-c006797c67dd60d3.js",
       "static/chunks/framework-305cb810cde7afac.js",
       "static/chunks/main-3508abe40d19650f.js",
       "static/chunks/pages/_error-54de1933a164a1ff.js"
     ],
     "/index copy": [
-      "static/chunks/webpack-403b7f857f4cbc2a.js",
+      "static/chunks/webpack-c006797c67dd60d3.js",
       "static/chunks/framework-305cb810cde7afac.js",
       "static/chunks/main-3508abe40d19650f.js",
-      "static/chunks/pages/index copy-1323220cb4085ec6.js"
+      "static/chunks/pages/index copy-8bf5605325caede4.js"
     ],
     "/search/[...address]": [
-      "static/chunks/webpack-403b7f857f4cbc2a.js",
+      "static/chunks/webpack-c006797c67dd60d3.js",
       "static/chunks/framework-305cb810cde7afac.js",
       "static/chunks/main-3508abe40d19650f.js",
       "static/chunks/166-f7e178239bf1f1c0.js",
-      "static/chunks/19-4e49ffe19f7b06f3.js",
+      "static/chunks/19-823584ac64f5db5a.js",
       "static/chunks/pages/search/[...address]-f695ef2100548a1a.js"
     ]
   },

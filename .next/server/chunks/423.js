@@ -3132,7 +3132,7 @@ const SearchPage = ()=>{
                         className: ` relative z-50 ${!searchIng ? " -top-[30px]" : " "} ${isMounted ? " opacity-100" : " opacity-0"} `,
                         children: [
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                className: `absolute flex transition-all ${hasAddress ? " duration-[0ms]" : " duration-[300ms]"}  ${startMove ? "top-[34px] left-0 ml-0 opacity-100" : "top-[100px] xl1:top-[161px] left-[50%] -ml-[208px]"} `,
+                                className: `absolute flex transition-all ${hasAddress ? " duration-[0ms]" : " duration-[300ms]"}  ${startMove ? "top-[34px] left-0 ml-0 opacity-100" : "top-[76px] xl1:top-[161px] left-[50%] -ml-[208px]"} `,
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_LazyImage__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .ZP, {
                                         src: "/images/home/logo2.png",
@@ -3145,7 +3145,7 @@ const SearchPage = ()=>{
                                 ]
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: `absolute transition-all ${hasAddress ? " duration-[0ms]" : " duration-[300ms]"} flex justify-center ${startMove ? " left-[46px] top-[26px]" : " left-[180px] top-[230px] xl1:top-[336px]"}`,
+                                className: `absolute transition-all ${hasAddress ? " duration-[0ms]" : " duration-[300ms]"} flex justify-center ${startMove ? " left-[46px] top-[26px]" : " left-[180px] top-[200px] xl1:top-[336px]"}`,
                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                     children: [
                                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
