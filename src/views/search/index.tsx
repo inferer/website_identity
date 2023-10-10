@@ -174,11 +174,11 @@ const SearchPage = () => {
       <PageHeader />
       <Wrap>
         <div className={` relative z-50 ${!searchIng ? ' -top-[30px]' : ' ' } ${isMounted ? ' opacity-100' : ' opacity-0'} `}>
-        <div className={`absolute flex transition-all ${hasAddress ? ' duration-[0ms]' : ' duration-[300ms]'}  ${startMove ? 'top-[34px] left-0 ml-0 opacity-100' : 'top-[76px] xl1:top-[161px] left-[50%] -ml-[208px]'} `}>
+        <div className={`absolute flex transition-all ${hasAddress ? ' duration-[0ms]' : ' duration-[300ms]'}  ${startMove ? 'top-[34px] left-0 ml-0 opacity-100' : 'top-[130px] xl1:top-[161px] left-[50%] -ml-[208px]'} `}>
             <LazyImage src="/images/home/logo2.png" className={`${startMove ? 'w-[42px] h-[42px]' : 'w-[59px] h-[59px]'}`} />
             <div className={`font-fmedium text-[36px] transition-all duration-[300ms] ml-5 gradient1 ${startMove ? ' opacity-0 ' : ' opacity-100 '} `}>Explore the Identity</div>
           </div>
-          <div className={`absolute transition-all ${hasAddress ? ' duration-[0ms]' : ' duration-[300ms]'} flex justify-center ${startMove ? ' left-[46px] top-[26px]' : ' left-[180px] top-[200px] xl1:top-[336px]'}`}>
+          <div className={`absolute transition-all ${hasAddress ? ' duration-[0ms]' : ' duration-[300ms]'} flex justify-center ${startMove ? ' left-[46px] top-[26px]' : ' left-[180px] top-[300px] xl1:top-[336px]'}`}>
             <div>
               <div className={`relative search-wrap ${inputFocus ? 'focus' : ''} `}>
                 <input type="text" aria-autocomplete="none" autoComplete="off" id="searchInput" className={`search-input transition-all ${hasAddress ? ' duration-[0ms]' : ' duration-[300ms]'} outline-none pl-6 pr-[74px] font-dnormal ${startMove ? 'search' : ''}`} placeholder="Search address identity"
@@ -219,7 +219,7 @@ const SearchPage = () => {
               
             </div>
           </div>
-          <div className={` absolute top-[150px] left-[400px] transition-all duration-[300ms] delay-200 ${startMove ? ' opacity-100 ' : ' opacity-0 '}`}>
+          <div className={` absolute top-[130px] xl1:top-[150px] left-[400px] transition-all duration-[300ms] delay-200 ${startMove ? ' opacity-100 ' : ' opacity-0 '}`}>
             {
               searchIng && 
               <div className="mt-[72px] flex justify-center min-h-[600px]">

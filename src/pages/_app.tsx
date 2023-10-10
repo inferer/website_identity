@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <title>Inferer Identity - user identity analysis service in web3</title>
       </Head>
       <Providers>
         <Component {...pageProps} />
